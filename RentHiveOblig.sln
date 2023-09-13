@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentHiveOblig", "RentHiveOblig\RentHiveOblig.csproj", "{E26EC00B-15EC-4C38-B8ED-401B93A14E41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E26EC00B-15EC-4C38-B8ED-401B93A14E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E26EC00B-15EC-4C38-B8ED-401B93A14E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E26EC00B-15EC-4C38-B8ED-401B93A14E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E26EC00B-15EC-4C38-B8ED-401B93A14E41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B58876BC-909A-4DAB-8A98-7496D5E4DCC5}
+	EndGlobalSection
+EndGlobal
