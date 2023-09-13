@@ -36,7 +36,7 @@ namespace RentHiveOblig.Controllers
             }
 
             var bruker = await _context.Bruker
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.BrukerID == id);
             if (bruker == null)
             {
                 return NotFound();
@@ -90,7 +90,7 @@ namespace RentHiveOblig.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,BrukerNavn,BrukerEpost")] Bruker bruker)
         {
-            if (id != bruker.Id)
+            if (id != bruker.BrukerID)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace RentHiveOblig.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BrukerExists(bruker.Id))
+                    if (!BrukerExists(bruker.BrukerID))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace RentHiveOblig.Controllers
             }
 
             var bruker = await _context.Bruker
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.BrukerID == id);
             if (bruker == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace RentHiveOblig.Controllers
 
         private bool BrukerExists(int id)
         {
-          return (_context.Bruker?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Bruker?.Any(e => e.BrukerID == id)).GetValueOrDefault();
         }
     }
 }
