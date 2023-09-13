@@ -36,7 +36,7 @@ namespace RentHiveOblig.Controllers
             }
 
             var eiendom = await _context.Eiendom
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.EiendomID == id);
             if (eiendom == null)
             {
                 return NotFound();
@@ -90,7 +90,7 @@ namespace RentHiveOblig.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,EiendomName,EiendomDescription")] Eiendom eiendom)
         {
-            if (id != eiendom.Id)
+            if (id != eiendom.EiendomID)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace RentHiveOblig.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EiendomExists(eiendom.Id))
+                    if (!EiendomExists(eiendom.EiendomID))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace RentHiveOblig.Controllers
             }
 
             var eiendom = await _context.Eiendom
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.EiendomID == id);
             if (eiendom == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace RentHiveOblig.Controllers
 
         private bool EiendomExists(int id)
         {
-          return (_context.Eiendom?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Eiendom?.Any(e => e.EiendomID == id)).GetValueOrDefault();
         }
     }
 }
