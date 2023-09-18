@@ -23,6 +23,7 @@ namespace RentHiveOblig.Models
         public ICollection<Wishlist> Wishlist { get; set; }
         public ICollection<Conversation> Conversations { get; set; }
 
+        public ICollection<Booking> Bookings { get; set; }
 
 
         public Bruker() { }
