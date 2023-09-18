@@ -6,7 +6,7 @@
         public int PropertyId { get; set; } //Foreign key
         public int GuestId { get; set; } //Foreign key 
         public decimal Rating { get; set; }
-        public string Comment { get; set; }
+        public string ?Comment { get; set; }
         public DateTime DatePosted { get; set; }   
         public string ?ReviewImage { get; set; }
         public string ?ReviewImage2 { get; set; }
