@@ -21,6 +21,8 @@
 
         public ICollection<Review> Reviews { get; set; }  //Allows Entity Frameowrk load related reviews. 
 
+        public ICollection<WishlistEiendom> WishlistEiendom { get; set; }//Allows Entity Frameowrk load related reviews. 
+
         public Eiendom() { }
    
     }

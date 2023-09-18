@@ -9,6 +9,7 @@
 
         public ICollection<Review> Reviews { get; set; } //Allows Entity Frameowrk load related reviews. 
 
+        public ICollection<Wishlist> Wishlist { get; set; }
         public Bruker() { }
     }
 }
