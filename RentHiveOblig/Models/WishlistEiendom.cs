@@ -8,6 +8,7 @@ namespace RentHiveOblig.Models
 
     public class WishlistEiendom
     {
+        public int WishListEiendomId { get; set; }
         public int WishlistId { get; set; }
         public int EiendomId { get; set; }
 
