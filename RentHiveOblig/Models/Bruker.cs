@@ -5,6 +5,10 @@
         public int BrukerID { get; set; }
         public string BrukerNavn { get; set; }
         public string BrukerEpost { get; set; }
+
+
+        public ICollection<Review> Reviews { get; set; } //Allows Entity Frameowrk load related reviews. 
+
         public Bruker() { }
     }
 }

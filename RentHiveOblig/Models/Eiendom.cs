@@ -17,6 +17,10 @@
         public string Image1 { get; set; }
         public string Image2 { get; set; }
         public string Image3 { get; set; }
+
+
+        public ICollection<Review> Reviews { get; set; }  //Allows Entity Frameowrk load related reviews. 
+
         public Eiendom() { }
    
     }
