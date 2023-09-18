@@ -21,6 +21,8 @@ namespace RentHiveOblig.Models
         public ICollection<Review> Reviews { get; set; } //Allows Entity Frameowrk load related reviews. 
 
         public ICollection<Wishlist> Wishlist { get; set; }
+        public ICollection<Conversation> Conversations { get; set; }
+
 
 
         public Bruker() { }
