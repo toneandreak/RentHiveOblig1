@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
+
 namespace RentHiveOblig.Models
 {
     public class Message
@@ -22,10 +23,9 @@ namespace RentHiveOblig.Models
         // Navigation property for the sender
         public Bruker Sender { get; set; }
 
-        /// <summary>
-        /// The text of the message.
-        /// </summary>
+        
 
+        // The text of the message.
         [MaxLength(500, ErrorMessage ="Content cannot exceed 500 characters.")]
         [Required(ErrorMessage = "Content is required to send a message.")]
         public string Content { get; set; }
