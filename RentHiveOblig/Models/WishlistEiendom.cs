@@ -14,5 +14,6 @@ namespace RentHiveOblig.Models
 
         public Wishlist Wishlist { get; set; }
         public Eiendom Eiendom { get; set; }
+        public WishlistEiendom() { }
     }
 }
