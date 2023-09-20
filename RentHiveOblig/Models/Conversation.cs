@@ -17,8 +17,8 @@ namespace RentHiveOblig.Models
 
 
         //The participating users
-      //  public Bruker User1 { get; set; }
-        //public Bruker User2 { get; set; }
+        public Bruker User1 { get; set; }
+        public Bruker User2 { get; set; }
 
         // Navigation property for the messages in this conversation
 
