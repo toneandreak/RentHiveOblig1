@@ -13,7 +13,5 @@ namespace RentHiveOblig.Data
         public DbSet<RentHiveOblig.Models.Eiendom>? Eiendom { get; set; }
         public DbSet<RentHiveOblig.Models.Bruker>? Bruker { get; set; }
 
-        public DbSet<Message>? Message { get; set; }
-        public DbSet<Conversation>? Conversation { get; set; }
     }
 }
