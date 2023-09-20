@@ -8,6 +8,11 @@ namespace RentHiveOblig.Models
         [Key]
         public int MessageId { get; set; }
 
+        //kommentert ut fordi jeg ikke skjønner hva problemet er, men tror det er her
+        //[ForeignKey("Conversation")]
+        // public int ConversationId { get; set; }
+        // Navigation property for the conversation
+        // public Conversation Conversation { get; set; }
 
         // Foreign key for the sender
         [ForeignKey("Sender")]
