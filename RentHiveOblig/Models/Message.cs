@@ -8,11 +8,6 @@ namespace RentHiveOblig.Models
         [Key]
         public int MessageId { get; set; }
 
-        [ForeignKey("Conversation")]
-        public int ConversationId { get; set; }
-
-        // Navigation property for the conversation
-        public Conversation Conversation { get; set; }
 
         // Foreign key for the sender
         [ForeignKey("Sender")]
