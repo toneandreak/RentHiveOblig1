@@ -19,7 +19,7 @@ namespace RentHiveOblig.Models
         public int SenderId { get; set; } //Needed to identify who the sender of the message is. Does not need a Receiver here because it is determined by the Conversation. 
 
         // Navigation property for the sender
-        public Bruker Sender { get; set; }
+        //public Bruker Sender { get; set; }
 
 
 
