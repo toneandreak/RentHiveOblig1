@@ -14,6 +14,9 @@ namespace RentHiveOblig.Data
         public DbSet<RentHiveOblig.Models.Bruker>? Bruker { get; set; }
         public DbSet<RentHiveOblig.Models.Message>? Message { get; set; }
         public DbSet<RentHiveOblig.Models.Conversation>? Conversation { get; set; }
+        public DbSet<RentHiveOblig.Models.Review>? Review { get; set; }
+        public DbSet<RentHiveOblig.Models.Wishlist>? Wishlist { get; set; }
+        public DbSet<RentHiveOblig.Models.WishlistEiendom>? WishlistEiendom { get; set; }
 
     }
 }
