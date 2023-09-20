@@ -14,10 +14,10 @@ namespace RentHiveOblig.Models
         public int PropertyId { get; set; } //Foreign key
         
         [Required(ErrorMessage = "StartDate is required.")]
-        public DateOnly StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         
         [Required(ErrorMessage = "EndDate is required.")]
-        public DateOnly EndDate { get; set; }
+        public DateTime EndDate { get; set; }
         
         [Required(ErrorMessage = "TotalPrice is required.")]
         [Range(0, double.MaxValue, ErrorMessage =("The value of Totalprice must be positive."))]
