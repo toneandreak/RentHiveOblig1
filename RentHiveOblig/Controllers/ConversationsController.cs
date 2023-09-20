@@ -19,33 +19,6 @@ namespace RentHiveOblig.Controllers
             _context = context;
         }
 
-        // GET: Conversations
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Conversation.Include(c => c.User1).Include(c => c.User2);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Conversations/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Conversation == null)
-            {
-                return NotFound();
-            }
-
-            var conversation = await _context.Conversation
-                .Include(c => c.User1)
-                .Include(c => c.User2)
-                .FirstOrDefaultAsync(m => m.ConversationId == id);
-            if (conversation == null)
-            {
-                return NotFound();
-            }
-
-            return View(conversation);
-        }
-
         // GET: Conversations/Create
         public IActionResult Create()
         {
@@ -127,25 +100,6 @@ namespace RentHiveOblig.Controllers
             return View(conversation);
         }
 
-        // GET: Conversations/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Conversation == null)
-            {
-                return NotFound();
-            }
-
-            var conversation = await _context.Conversation
-                .Include(c => c.User1)
-                .Include(c => c.User2)
-                .FirstOrDefaultAsync(m => m.ConversationId == id);
-            if (conversation == null)
-            {
-                return NotFound();
-            }
-
-            return View(conversation);
-        }
 
         // POST: Conversations/Delete/5
         [HttpPost, ActionName("Delete")]

@@ -24,6 +24,7 @@ namespace RentHiveOblig.Models
 
         public ICollection<Booking> Booking { get; set; } //Allows Entity Frameowrk load related reviews. 
 
+        public ICollection<BrukerConversation> BrukerConversations { get; set; }
 
         public Bruker() { }
     }

@@ -19,5 +19,8 @@ namespace RentHiveOblig.Data
         public DbSet<RentHiveOblig.Models.WishlistEiendom>? WishlistEiendom { get; set; }
         public DbSet<RentHiveOblig.Models.Booking>? Booking { get; set; }
 
+
+
+
     }
 }

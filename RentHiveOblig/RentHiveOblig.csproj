@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Conversations\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
