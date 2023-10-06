@@ -1,13 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to RentHive!</h1>
+    <h2>Rent a Hive here!</h2>
 </div>
 
-<div id="carouselImages" class="carousel slide" data-bs-ride="true">
+<div class="text-center">
+    <h1>Where is your next destination? Buzzzz</h1>
+    <form>
+        <input type="text" id="destination" placeholder="Your destination" />
+        <input type="datetime-local" id="date" placeholder="Select date">
+        <button>
+            search
+        </button>
+
+    </form>
+    <div class="bee-container">
+    <div class="wing"></div>
+    <div class="bee">
+    </div>
+</div>
+</div>
+
+
+
+<!--
+    <div id="carouselImages" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -25,3 +47,5 @@
         </div>
     </div>
 </div>
+
+-->
