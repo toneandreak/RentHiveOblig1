@@ -42,7 +42,7 @@ h1 {
     line-height: 1;
     list-style: none;
     overflow: hidden;
-    position: fixed;
+    position: absolute;
     text-align: left;
     text-decoration: none;
     transition: box-shadow .15s,transform .15s;
@@ -84,10 +84,9 @@ h1 {
 @media (max-width: 470px) {
     .button-search {
         position: absolute;
-        display:block;
-        align-self: center;
+        display: block;
         left: 40%;
-        right:60%;
+        right: 60%;
     }
 
 
@@ -215,5 +214,6 @@ h1 {
             font-size: 1.2em;
         }
     }
+}
 
 
