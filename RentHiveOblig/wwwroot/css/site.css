@@ -19,11 +19,11 @@ body {
 }
 
 .bee-container {
-    height:15vh;
-    width:15vh;
-    position:relative;
-    margin: auto;
-    margin-top:3.25em;
+    height: 15em;
+    width: 15em;;
+    position: relative;
+    margin:auto;
+    margin-top: 5em;
     left: 0;
     right: 0;
     top: 0;
@@ -33,7 +33,7 @@ body {
 
 @keyframes fly {
     50% {
-        transform: translateY(3.12em);
+        transform: translateY(-3.12em);
     }
 }
 
@@ -71,8 +71,38 @@ body {
         left: 11.87em;
     }
 
+.wings {
+    position: absolute;
+    height: 5em;
+    width: 5em;
+    background-color: #ea92b9;
+    border-radius: 5em 5em 0 5em;
+    top: 7.5em;
+    left: 11.25em;
+}
 
-    .shine {
+    .wings:before {
+        position: absolute;
+        content: "";
+        height: 5em;
+        width: 5em;
+        background-color: #ea92b9;
+        border-radius: 5em 5em 5em 0;
+        left: 4.68em;
+    }
+
+    .wings:after {
+        height: 3.75em;
+        width: 3.75em;
+        position: absolute;
+        content: "";
+        box-shadow: -0.62em -0.62em #f2c7c9;
+        border-radius: 50%;
+        top: 1.12em;
+        left: 1.12em;
+    }
+
+.shine {
     position: absolute;
     height: 1.25em;
     width: 7.5em;
@@ -101,6 +131,4 @@ body {
     }
 }
 
-.footer {
-    background-color: white;
-}
+
