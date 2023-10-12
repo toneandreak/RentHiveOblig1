@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Aladin&family=Tilt+Neon&display=swap');
+
 
 html {
   font-size: 14px;
 }
+
 
 @media (min-width: 768px) {
   html {
@@ -19,6 +20,9 @@ body {
   margin-bottom: 60px;
   background-color:lightpink;
 }
+h1 {
+    font-family: "Comfortaa";
+}
 
 
 
@@ -33,7 +37,7 @@ body {
     color: #36395A;
     cursor: pointer;
     display: inline-flex;
-    font-family: "JetBrains Mono",monospace;
+    font-family: "Comfortaa",monospace;
     height: 48px;
     justify-content: center;
     line-height: 1;
