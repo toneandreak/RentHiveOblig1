@@ -13,7 +13,10 @@
 <h1>Properties</h1>
 
 <h3>
-    <a asp-action="Create">Create New</a>
+    <form>
+        <button asp-controller="Category" asp-action="Create" type="submit" class="button-search">Create</button>
+    </form>
+    <a class="button-search" asp-action="Create">Create New</a>
 </h3>
 <table class="table">
     <thead>
