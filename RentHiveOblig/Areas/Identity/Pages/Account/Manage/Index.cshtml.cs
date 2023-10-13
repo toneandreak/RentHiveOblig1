@@ -59,18 +59,34 @@ namespace RentHiveOblig.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+
+            [Display(Name = "Firstname")]
+            public string Firstname { get; set; }
+
+
+            [Display(Name = "Lastname")]
+            public string Lastname { get; set; }
+
+
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var firstName = user.Firstname;
+            var lastName = user.Lastname;
+
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Firstname = firstName,
+                Lastname = lastName
+
             };
         }
 
@@ -100,6 +116,8 @@ namespace RentHiveOblig.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -107,6 +125,29 @@ namespace RentHiveOblig.Areas.Identity.Pages.Account.Manage
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
+                    return RedirectToPage();
+                }
+            }
+
+            // Update First Name and Last Name
+            bool userChanged = false;
+            if (Input.Firstname != user.Firstname)
+            {
+                user.Firstname = Input.Firstname;
+                userChanged = true;
+            }
+            if (Input.Lastname != user.Lastname)
+            {
+                user.Lastname = Input.Lastname;
+                userChanged = true;
+            }
+
+            if (userChanged)
+            {
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to update profile. Please try again later.";
                     return RedirectToPage();
                 }
             }
