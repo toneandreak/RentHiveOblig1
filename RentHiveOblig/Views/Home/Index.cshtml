@@ -8,11 +8,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 
+<div id="carouselImages" class="carousel slide mainCarousel" data-bs-ride="true" style="">
+    <div class="carousel-inner mainCarousel">
+        <div class="carousel-item active mainCarouselImage">
+            <img src="~/images/house_2_s1.jpg" class="d-block w-100" alt="Fried Chicken Leg" style="height:100%;">
+        </div>
+    </div>
+</div>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome to RentHive!</h1>
+    <h1 class="display-4 mainText">Welcome to RentHive!</h1>
 </div>
 <!--Div classes using Bootstrap library-->
-<div class="text-center">
+
+<div class="text-center mainText">
     <h1>Buzz off to your next destination.</h1>
     <!--Using a form for inputs-->
     <!--Search button inspired by : https://getcssscan.com/css-buttons-examples-->
@@ -23,18 +32,7 @@
     </form>
 </div>
 
-<!--Div classes for "Bee animation" using css-->
-<div class="bee-container">
-    <div class="bee">
-    <div class="shine"></div>
-    </div>
-</div>
-
-
-
-
-
-<div id="carouselImages" class="carousel slide" data-bs-ride="true" style="">
+<div id="carouselImages" class="carousel slide listingCarousel" data-bs-ride="true" style="">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -52,6 +50,12 @@
         </div>
     </div>
 </div>
+
+<!--Div classes for "Bee animation" using css-->
+<div class="bee-container">
+    <div class="bee">
+    <div class="shine"></div>
+    </div>
 </div>
 
 
