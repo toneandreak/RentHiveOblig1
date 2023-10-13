@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RentHiveOblig.Data.Migrations;
+using RentHiveOblig.Models; 
 
 namespace RentHiveOblig.Areas.Identity.Pages.Account.Manage
 {
