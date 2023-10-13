@@ -4,14 +4,13 @@ using RentHiveOblig.Models;
 
 namespace RentHiveOblig.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
         public DbSet<RentHiveOblig.Models.Eiendom>? Eiendom { get; set; }
-        public DbSet<RentHiveOblig.Models.Bruker>? Bruker { get; set; }
         public DbSet<RentHiveOblig.Models.Message>? Message { get; set; }
         public DbSet<RentHiveOblig.Models.Conversation>? Conversation { get; set; }
         public DbSet<RentHiveOblig.Models.Review>? Review { get; set; }
@@ -20,6 +19,10 @@ namespace RentHiveOblig.Data
         public DbSet<RentHiveOblig.Models.Booking>? Booking { get; set; }
 
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
 
 
     }

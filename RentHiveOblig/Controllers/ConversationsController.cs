@@ -22,8 +22,8 @@ namespace RentHiveOblig.Controllers
         // GET: Conversations/Create
         public IActionResult Create()
         {
-            ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
-            ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
+    //        ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
+    //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
             return View();
         }
 
@@ -40,8 +40,8 @@ namespace RentHiveOblig.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
-            ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
+     //       ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
+    //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
             return View(conversation);
         }
 
@@ -58,8 +58,8 @@ namespace RentHiveOblig.Controllers
             {
                 return NotFound();
             }
-            ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
-            ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
+   //         ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
+   //         ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
             return View(conversation);
         }
 
@@ -95,8 +95,8 @@ namespace RentHiveOblig.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
-            ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
+    //        ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
+    //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
             return View(conversation);
         }
 

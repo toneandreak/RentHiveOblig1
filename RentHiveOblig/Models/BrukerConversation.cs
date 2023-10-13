@@ -6,7 +6,7 @@ namespace RentHiveOblig.Models
     {
         [Key] public int BrukerConversationId { get; set; }
         public int BrukerId { get; set; }
-        public Bruker Bruker { get; set; }
+   //     public Bruker Bruker { get; set; }
 
         public int ConversationId { get; set; }
         public Conversation Conversation { get; set; }

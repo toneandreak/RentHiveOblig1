@@ -24,8 +24,6 @@ namespace RentHiveOblig.Models
         public double TotalPrice { get; set; }
 
 
-
-        public Bruker Bruker { get; set; }
         public Eiendom Eiendom { get; set; }
 
         //Not sure what other attributes are needed atm...

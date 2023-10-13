@@ -19,7 +19,6 @@ namespace RentHiveOblig.Models
 
 
         //Navigation property for the sender
-        public Bruker Sender { get; set; }
 
         // Navigation property for the conversation
         public Conversation Conversation { get; set; }

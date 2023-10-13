@@ -28,7 +28,6 @@ namespace RentHiveOblig.Models
         public string? ReviewImage3 { get; set; } //Images is optional. 
 
 
-        public Bruker Bruker { get; set; }   //Many-to-one relationship with "Bruker".
         public Eiendom Eiendom { get; set; } //Many-to-one relationship with "Eiendom".
 
 

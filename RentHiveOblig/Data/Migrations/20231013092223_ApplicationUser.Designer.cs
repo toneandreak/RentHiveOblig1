@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentHiveOblig.Data;
 
@@ -11,9 +12,10 @@ using RentHiveOblig.Data;
 namespace RentHiveOblig.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231013092223_ApplicationUser")]
+    partial class ApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,10 +104,12 @@ namespace RentHiveOblig.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -142,10 +146,12 @@ namespace RentHiveOblig.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -239,6 +245,9 @@ namespace RentHiveOblig.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 1L, 1);
 
+                    b.Property<int>("BrukerID")
+                        .HasColumnType("int");
+
                     b.Property<int>("EiendomID")
                         .HasColumnType("int");
 
@@ -259,9 +268,27 @@ namespace RentHiveOblig.Data.Migrations
 
                     b.HasKey("BookingId");
 
+                    b.HasIndex("BrukerID");
+
                     b.HasIndex("EiendomID");
 
                     b.ToTable("Booking");
+                });
+
+            modelBuilder.Entity("RentHiveOblig.Models.Bruker", b =>
+                {
+                    b.Property<int>("BrukerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrukerID"), 1L, 1);
+
+                    b.Property<DateTime>("DateJoined")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("BrukerID");
+
+                    b.ToTable("Bruker");
                 });
 
             modelBuilder.Entity("RentHiveOblig.Models.BrukerConversation", b =>
@@ -272,10 +299,15 @@ namespace RentHiveOblig.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrukerConversationId"), 1L, 1);
 
+                    b.Property<int>("BrukerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
 
                     b.HasKey("BrukerConversationId");
+
+                    b.HasIndex("BrukerId");
 
                     b.HasIndex("ConversationId");
 
@@ -378,6 +410,8 @@ namespace RentHiveOblig.Data.Migrations
 
                     b.HasIndex("ConversationId");
 
+                    b.HasIndex("SenderId");
+
                     b.ToTable("Message");
                 });
 
@@ -388,6 +422,9 @@ namespace RentHiveOblig.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"), 1L, 1);
+
+                    b.Property<int>("BrukerID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
@@ -418,6 +455,8 @@ namespace RentHiveOblig.Data.Migrations
 
                     b.HasKey("ReviewId");
 
+                    b.HasIndex("BrukerID");
+
                     b.HasIndex("EiendomID");
 
                     b.ToTable("Review");
@@ -431,6 +470,9 @@ namespace RentHiveOblig.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WishlistId"), 1L, 1);
 
+                    b.Property<int>("BrukerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 
@@ -442,6 +484,8 @@ namespace RentHiveOblig.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WishlistId");
+
+                    b.HasIndex("BrukerID");
 
                     b.ToTable("Wishlist");
                 });
@@ -522,22 +566,38 @@ namespace RentHiveOblig.Data.Migrations
 
             modelBuilder.Entity("RentHiveOblig.Models.Booking", b =>
                 {
+                    b.HasOne("RentHiveOblig.Models.Bruker", "Bruker")
+                        .WithMany("Booking")
+                        .HasForeignKey("BrukerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RentHiveOblig.Models.Eiendom", "Eiendom")
                         .WithMany("Bookings")
                         .HasForeignKey("EiendomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Bruker");
+
                     b.Navigation("Eiendom");
                 });
 
             modelBuilder.Entity("RentHiveOblig.Models.BrukerConversation", b =>
                 {
+                    b.HasOne("RentHiveOblig.Models.Bruker", "Bruker")
+                        .WithMany("BrukerConversations")
+                        .HasForeignKey("BrukerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RentHiveOblig.Models.Conversation", "Conversation")
                         .WithMany("BrukerConversations")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Bruker");
 
                     b.Navigation("Conversation");
                 });
@@ -550,18 +610,45 @@ namespace RentHiveOblig.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RentHiveOblig.Models.Bruker", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Conversation");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("RentHiveOblig.Models.Review", b =>
                 {
+                    b.HasOne("RentHiveOblig.Models.Bruker", "Bruker")
+                        .WithMany("Reviews")
+                        .HasForeignKey("BrukerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RentHiveOblig.Models.Eiendom", "Eiendom")
                         .WithMany("Reviews")
                         .HasForeignKey("EiendomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Bruker");
+
                     b.Navigation("Eiendom");
+                });
+
+            modelBuilder.Entity("RentHiveOblig.Models.Wishlist", b =>
+                {
+                    b.HasOne("RentHiveOblig.Models.Bruker", "Bruker")
+                        .WithMany("Wishlist")
+                        .HasForeignKey("BrukerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bruker");
                 });
 
             modelBuilder.Entity("RentHiveOblig.Models.WishlistEiendom", b =>
@@ -579,6 +666,17 @@ namespace RentHiveOblig.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Eiendom");
+
+                    b.Navigation("Wishlist");
+                });
+
+            modelBuilder.Entity("RentHiveOblig.Models.Bruker", b =>
+                {
+                    b.Navigation("Booking");
+
+                    b.Navigation("BrukerConversations");
+
+                    b.Navigation("Reviews");
 
                     b.Navigation("Wishlist");
                 });
