@@ -227,7 +227,8 @@ h2 {
 
     .shine h1{
         color:white;
-        font-size:80px;
+        position:relative;
+        font-size:4.25em;
     }
 
         .shine:before {
