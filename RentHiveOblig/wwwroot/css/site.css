@@ -225,6 +225,11 @@ h2 {
         left: 3.12em;
     }
 
+    .shine h1{
+        color:white;
+        font-size:80px;
+    }
+
         .shine:before {
             position: absolute;
             content: "";
