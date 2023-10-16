@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Control";
+    var userId = UserManager.GetUserId(User);
+    var user = UserManager.FindByIdAsync(userId).Result; 
+}
+
+@{
+ 
+}
+
+<h1>Welcome back @user.Firstname</h1>
+
+<!--Should be able to see the users published listings -->
+<!--Should be able to go in a published listing and configure-->
+<!--If no listings is set on the user, then give different text something like "You do currently not have any listings-->
+
+<h2>Your listings</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <!---For each here -->
+    <tbody>
+        <td>TestTitle</td>
+        <td>TestDescription</td>
+
+
+    <!--Buttons to edit/delete the listing-->
+    <td><a asp-action="Edit" asp-route-id="">Edit</a></td>
+    <td><a asp-action="Delete" asp-route-id="">Delete</a></td>
+
+    </tbody>
+</table>
+
+<!--Need a button to create listing-->
+
+<button class="">Create a New Listing</button>
+
+
+<!--Should be able to control reservations/bookings-->
+
+<br /><br />
+
+<h2>Pending reservations:</h2>
+
+<!--Get a good overview over status of the different listings-->

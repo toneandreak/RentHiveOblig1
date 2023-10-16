@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RentHiveOblig.Data;
 
 namespace RentHiveOblig.Controllers
 {
@@ -9,17 +10,25 @@ namespace RentHiveOblig.Controllers
     {
         private UserManager<ApplicationUser> userManager;
         private IPasswordHasher<ApplicationUser> passwordHasher;
+        private readonly ApplicationDbContext _context;
 
-        public AdminController(UserManager<ApplicationUser> usrMgr, IPasswordHasher<ApplicationUser> passwordHasher)
+        public AdminController(UserManager<ApplicationUser> usrMgr, IPasswordHasher<ApplicationUser> passwordHasher, ApplicationDbContext context)
         {
             userManager = usrMgr;
             this.passwordHasher = passwordHasher;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             return View(userManager.Users);
         }
+
+        public IActionResult IndexProperties()
+        {
+            return View(_context.Eiendom); 
+        }
+
 
         public ViewResult Create() => View();
 
