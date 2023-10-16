@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<RentHiveOblig.Models.Eiendom>
 @inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Control";
@@ -23,21 +24,32 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
+
+            <!--For the buttons-->
             <th></th>
             <th></th>
         </tr>
     </thead>
 
-    <!---For each here -->
+
     <tbody>
-        <td>TestTitle</td>
-        <td>TestDescription</td>
+    @foreach(var item in Model)
+    {
+        <tr>
+           <td>@Html.DisplayFor(modelItem => item.Tittel)</td>
+
+           <td>@Html.DisplayFor(modelItem => item.Beskrivelse)</td>
+
+                <!--Buttons to edit/delete the listing-->
+           <td><a asp-action="Edit" asp-route-id="">Edit</a></td>
+           <td><a asp-action="Delete" asp-route-id="">Delete</a></td>
+
+        </tr>
+    }
 
 
-    <!--Buttons to edit/delete the listing-->
-    <td><a asp-action="Edit" asp-route-id="">Edit</a></td>
-    <td><a asp-action="Delete" asp-route-id="">Delete</a></td>
 
+            
     </tbody>
 </table>
 
