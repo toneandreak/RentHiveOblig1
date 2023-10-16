@@ -9,5 +9,11 @@ namespace RentHiveOblig.Models
         public string Lastname { get; set; }
 
         public string? ProfilePicture { get; set; }
+
+        public virtual ICollection<Eiendom> Eiendoms { get; set; }
+
     }
+
+
+
 }

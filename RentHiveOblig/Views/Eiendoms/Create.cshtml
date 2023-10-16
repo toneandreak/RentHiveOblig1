@@ -1,4 +1,4 @@
-﻿@model RentHiveOblig.Models.Eiendom
+﻿@model RentHiveOblig.ViewModels.EiendomViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -11,41 +11,74 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 
-<h1>Add a new property</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Tittel" class="control-label"></label>
-                <input asp-for="Tittel" class="form-control" />
-                <span asp-validation-for="Tittel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Beskrivelse" class="control-label"></label>
-                <input asp-for="Beskrivelse" class="form-control" />
-                <span asp-validation-for="Beskrivelse" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="button-search" />
-            </div>
-        </form>
+
+<h2>Create a new Listing</h2>
+
+<form asp-action="Create" method="post">
+
+
+    <div class="form-group">
+        <label for="Tittel">Tittel</label>
+        <input asp-for="Tittel" class="form-control" id="Tittel">
+        <span asp-validation-for="Tittel" class="text-danger"></span>
     </div>
-</div>
-<br>
 
-<div>
-    
-        <form>
-            <button asp-controller="Category" asp-action="Index" type="submit" class="button-search">Back to list</button>
-        </form>
-    <a class="button-search" asp-action="Index">Back to List</a>
-    
-  
-</div>
+    <div class="form-group">
+        <label for="Beskrivelse">Beskrivelse</label>
+        <textarea asp-for="Beskrivelse" class="form-control" id="Beskrivelse"></textarea>
+        <span asp-validation-for="Beskrivelse" class="text-danger"></span>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <div class="form-group">
+        <label for="Street">Street</label>
+        <input asp-for="Street" class="form-control" id="Street">
+        <span asp-validation-for="Street" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="City">City</label>
+        <input asp-for="City" class="form-control" id="City">
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Country">Country</label>
+        <input asp-for="Country" class="form-control" id="Country">
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ZipCode">Zip Code</label>
+        <input asp-for="ZipCode" class="form-control" id="ZipCode">
+        <span asp-validation-for="ZipCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="State">State (Optional)</label>
+        <input asp-for="State" class="form-control" id="State">
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label for="Bad">Bad</label>
+        <input asp-for="Bad" type="number" class="form-control" id="Bad">
+        <span asp-validation-for="Bad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Soverom">Soverom</label>
+        <input asp-for="Soverom" type="number" class="form-control" id="Soverom">
+        <span asp-validation-for="Soverom" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="PrisPerNatt">Pris Per Natt</label>
+        <input asp-for="PrisPerNatt" class="form-control" id="PrisPerNatt">
+        <span asp-validation-for="PrisPerNatt" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
