@@ -1,12 +1,21 @@
 ﻿@{
+    ViewData["UseCustomHeader"] = true;
     ViewData["Title"] = "Home Page";
 }
+
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<!-----
+
+                        OLD CODE - GETS REMOVED VERY SOON.                 
+
 
 <div id="carouselImages" class="carousel slide mainCarousel" data-bs-ride="true" style="">
     <div class="carousel-inner mainCarousel">
@@ -16,21 +25,193 @@
     </div>
 </div>
 
-<div class="text-center">
-    <h1 class="display-4 mainText">Welcome to RentHive!</h1>
-</div>
-<!--Div classes using Bootstrap library-->
+---->
 
-<div class="text-center mainText">
-    <h1>Buzz off to your next destination.</h1>
-    <!--Using a form for inputs-->
-    <!--Search button inspired by : https://getcssscan.com/css-buttons-examples-->
-    <form>
-        <input type="text" id="destination" placeholder="Your destination" />
-        <input type="datetime-local" id="date" placeholder="Select date">
-        <button class="button-search" role="button"> SEARCH</button>
-    </form>
-</div>
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-image: url('/images/cabin2.png');
+    background-size: cover;
+    text-align: center;
+    padding: 20px 20px;
+    height: 70vh; 
+}
+
+#search-section {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+#destination {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+}
+
+#date{
+
+        padding: 10px;
+        font-size: 16px;
+        width: 200px;
+}
+#featured-listings .listing {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    float: left; /* This allows horizontal scrolling */
+}
+
+#featured-listings .listing img {
+    width: 100%;
+    height: auto;
+}
+
+#mainCenterText{
+    padding: 10rem 0 0 0; 
+    color: #fff; 
+}
+
+
+
+    .navbar {
+ 
+     /*background-color: transparent !important;*/
+        border: none !important; 
+    }
+
+
+    .nav-link {
+        color: #fff !important;
+    }
+
+        /* Changing the link color to a lighter shade when hovered */
+        .nav-link:hover {
+            color: #ddd !important;
+        }
+
+    /* Styling the navbar brand (website name/logo) */
+    .navbar-brand {
+        color: #fff !important;
+        font-weight: bold;
+    }
+
+    /* Changing the color of the navbar-toggler icon (for mobile view) */
+    .navbar-toggler-icon {
+        filter: invert(100%) !important; /* Inverting the colors to make it white */
+    }
+
+</style>
+
+
+@section CustomHeader {
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
+
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RentHive</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+    
+
+
+        <div class="text-center" id="mainCenterText" >
+            <h1 class="display-4 mainText">Welcome to RentHive</h1>
+            <h2>Buzz off to your next destination.</h2>
+        </div>
+
+
+        <section id="search-section">
+            <form>
+                <!--Using a form for inputs-->
+                <!--Search button inspired by : https://getcssscan.com/css-buttons-examples-->
+                <input type="text" id="destination" placeholder="Your destination" />
+                <input type="datetime-local" id="date" placeholder="Select date">
+                <button class="button-search" role="button"> SEARCH</button>
+            </form>
+
+        </section>
+    </header>
+
+    }
+
+    <div class="container">
+
+        <!---Maybe new listings will be the "featured listings" just to showcase that it works.
+            Otherwise, it would make sense that listings with higher rating gets shown here. 
+        --->
+
+                <section id="featured-listings">
+            <!--NEED TO ADD FOR LOOP HERE!-->
+            <!--THIS IS JUST FOR TEST--->
+
+            <!-----NEED TO IMPLEMENT HOW MANY LISTINGS TO SHOW PER VIEWPORT.----->
+
+            <div class="listing">
+                <img src="~/images/house_1_s1.jpg" alt="Listing Image">
+            <p class="listing-description">Short title Lorum Ipsum</p>
+                <p class="listing-price">$100/night</p>
+                <p class="listing-rating">⭐⭐</p>
+            </div>
+
+            <div class="listing">
+                <img src="~/images/house_2_s1.jpg" alt="Listing Image">
+            <p class="listing-description">Short title Lorum Ipsume</p>
+                <p class="listing-price">$100/night</p>
+                <p class="listing-rating">⭐⭐⭐</p>
+            </div>
+
+            <div class="listing">
+                <img src="~/images/house_4_s1.jpg" alt="Listing Image">
+            <p class="listing-description">Short title Lorum Ipsum</p>
+                <p class="listing-price">$100/night</p>
+                <p class="listing-rating">⭐⭐⭐⭐</p>
+            </div>
+
+            <div class="listing">
+                <img src="~/images/house_5_s1.jpg" alt="Listing Image">
+                <p class="listing-description">Short title Lorum Ipsum</p>
+                <p class="listing-price">$100/night</p>
+                <p class="listing-rating">⭐⭐⭐⭐</p>
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+<!----
+
+                            THE OLD CODE. Gets removed very soon. 
+
+
+
 
 <div id="carouselImages" class="carousel slide listingCarousel" data-bs-ride="true" style="">
     <div class="carousel-indicators">
@@ -51,12 +232,16 @@
     </div>
 </div>
 
+----->
+
+
 <!--Div classes for "Bee animation" using css-->
+<!--------
+
 <div class="bee-container">
     <div class="bee">
     <div class="shine">
     </div>
     </div>
 </div>
-
-
+--->
