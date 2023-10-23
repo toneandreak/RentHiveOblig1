@@ -181,22 +181,23 @@
     </div>
 
     <div class="tab">
-        <img src="~/icons/bathroom_icon.svg" />
 
-        <div class="wrapper">
-            <span class="minus">-</span>
-            <span class="number">1</span>
-            <span class="plus">+</span>
-        </div>
-
-
-
+        <img src="~/icons/bathroom_icon.svg"/>
 
 
         <div class="form-group">
+
+            <input asp-for="Bad" type="hidden" class="form-control" id="BathroomHidden" value="1">
+
             <label for="Bad">Bathrooms</label>
-            <input asp-for="Bad" type="number" class="form-control" id="Bad">
+        <div class="wrapper">
+            <span class="minus-bathroom">-</span>
+                <span class="number-bathroom" id="Bad">1</span>
+                <span class="plus-bathroom">+</span>
             <span asp-validation-for="Bad" class="text-danger"></span>
+        </div>
+
+
         </div>
 
     </div>
@@ -204,12 +205,21 @@
 
     <div class="tab">
         <div class="form-group">
-            <label for="Soverom">Bedrooms</label>
-            <input asp-for="Soverom" type="number" class="form-control" id="Soverom">
-            <span asp-validation-for="Soverom" class="text-danger"></span>
-        </div>
 
+            <img src="JUSTATESTFORNOW" alt="Bedroom icon"/>
+
+            <label for="Soverom">Bedrooms</label>
+            <div class="wrapper">
+                <span class="minus-bedroom">-</span>
+                <span class="number-bedroom" id="Soverom">1</span>
+                <span class="plus-bedroom">+</span>
+                <span asp-validation-for="Soverom" class="text-danger"></span>
+            </div>
+            <input asp-for="Soverom" type="hidden" class="form-control" id="BedroomHidden" value="1">
+        </div>
     </div>
+
+
 
     <div class="tab">
 
@@ -220,9 +230,6 @@
         </div>
 
     </div>
-
-
-
 
 
 
@@ -242,29 +249,60 @@
 <script>
 
 
-    const plus = document.querySelector(".plus");
-    const minus = document.querySelector(".minus");
-    const number = document.querySelector(".number");
-    
-    let a = 1; 
-    plus.addEventListener("click", () => {
+    //FOR THE BATHROOM INPUT
+
+    const plusBathroom = document.querySelector(".plus-bathroom");
+    const minusBathroom = document.querySelector(".minus-bathroom");
+    const numberBathroom = document.querySelector(".number-bathroom");
+    const hiddenBathroom = document.getElementById("BathroomHidden");
+
+    let a = 1;
+    plusBathroom.addEventListener("click", () => {
         a++;
-        number.innerText = a; 
-    })
+        numberBathroom.innerText = a;
+        hiddenBathroom.value = a;  
+    });
 
-    minus.addEventListener("click", () => {
-
-        if (a == 0) {
+    minusBathroom.addEventListener("click", () => {
+        if (a === 0) {
             a = 0;
-            number.innerText = 0; 
+            numberBathroom.innerText = 0;
         } else {
             a--;
-            number.innerText = a;
+            numberBathroom.innerText = a;
         }
+        hiddenBathroom.value = a; 
+    });
+
+    //FOR THE BEDROOM INPUT
+
+    const plusBedroom = document.querySelector(".plus-bedroom");
+    const minusBedroom = document.querySelector(".minus-bedroom");
+    const numberBedroom = document.querySelector(".number-bedroom");
+    const hiddenBedroom = document.getElementById("BedroomHidden");
+
+    let b = 1;
+
+    plusBedroom.addEventListener("click", () => {
+        b++;
+        numberBedroom.innerText = b;
+        hiddenBedroom.value = b;
+    });
+
+    minusBedroom.addEventListener("click", () => {
+        if (b === 0) {
+            b = 0;
+            numberBedroom.innerText = 0;
+        } else {
+            b--;
+            numberBedroom.innerText = b;
+        }
+        hiddenBedroom.value = b;
+    });
 
 
-    })
 
+    // Again code for MultiStep - form inspired from W3Schools: https://www.w3schools.com/howto/howto_js_form_steps.asp
 
         var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab

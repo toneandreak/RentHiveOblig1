@@ -40,6 +40,15 @@
 
            <td>@Html.DisplayFor(modelItem => item.Beskrivelse)</td>
 
+
+
+           <!--**       debugging code          **-->
+                <td>@Html.DisplayFor(modelItem => item.Bad)</td>
+                <td>@Html.DisplayFor(modelItem => item.Soverom)</td>
+
+
+
+
                 <!--Buttons to edit/delete the listing-->
            <td><a asp-action="Edit" asp-route-id="">Edit</a></td>
            <td><a asp-action="Delete" asp-route-id="">Delete</a></td>

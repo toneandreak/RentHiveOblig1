@@ -124,7 +124,7 @@ namespace RentHiveOblig.Controllers
                 //Need to return something here too. 
             }
 
-                return View();
+                return RedirectToAction("Index", "Hosting");
 
         }
 
