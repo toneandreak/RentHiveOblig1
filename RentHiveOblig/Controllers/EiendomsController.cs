@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +22,18 @@ namespace RentHiveOblig.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<EiendomsController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EiendomsController(ApplicationDbContext context, ILogger<EiendomsController> logger)
+
+        public EiendomsController(ApplicationDbContext context, ILogger<EiendomsController> logger, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
+
+
+
 
         // GET: Eiendoms
         public async Task<IActionResult> Index()
@@ -162,6 +169,19 @@ namespace RentHiveOblig.Controllers
             {
                 return NotFound();
             }
+
+
+
+            //EXTRA CONTROL TO PREVENT OTHER USERS BEING ABLE TO EDIT/SEE OTHER'S LISTINGS.
+
+            var userId = _userManager.GetUserId(User);
+
+            if(userId == null || userId != eiendom.ApplicationUserId) {
+
+                return Forbid(); 
+            }
+
+
             return View(eiendom);
         }
 

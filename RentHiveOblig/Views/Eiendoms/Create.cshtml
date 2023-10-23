@@ -131,14 +131,14 @@
 
         <div class="form-group">
             <label for="Tittel">Title</label>
-            <input asp-for="Tittel" class="form-control" id="Tittel">
+            <input asp-for="Tittel" class="form-control" id="Tittel" placeholder="Enter a catchy title here" title="Your title will be displayed along with the picture and serves as a first impression.">
             <span asp-validation-for="Tittel" class="text-danger"></span>
         </div>
 
 
         <div class="form-group">
             <label for="Beskrivelse">Description</label>
-            <textarea asp-for="Beskrivelse" class="form-control" id="Beskrivelse" rows="6" cols="7"></textarea>
+            <textarea asp-for="Beskrivelse" class="form-control" id="Beskrivelse" placeholder="Describe your apartment" title="The description provides potential renters with more details about your apartment." rows="6" cols="7"></textarea>
             <span asp-validation-for="Beskrivelse" class="text-danger"></span>
         </div>
 
@@ -148,27 +148,29 @@
 
     <div class="tab">
 
+        <h3>Address Details</h3>
+
         <div class="form-group">
             <label for="Street">Street</label>
-            <input asp-for="Street" class="form-control" id="Street">
+            <input asp-for="Street" class="form-control" placeholder="e.g., Pilestredet 35" id="Street">
             <span asp-validation-for="Street" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="City">City</label>
-            <input asp-for="City" class="form-control" id="City">
+            <input asp-for="City" class="form-control" id="City" placeholder="e.g., Oslo">
             <span asp-validation-for="City" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="Country">Country</label>
-            <input asp-for="Country" class="form-control" id="Country">
+            <input asp-for="Country" class="form-control" placeholder="e.g., Norway" id="Country">
             <span asp-validation-for="Country" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label for="ZipCode">Zip Code</label>
-            <input asp-for="ZipCode" class="form-control" id="ZipCode">
+            <input asp-for="ZipCode" class="form-control" placeholder="e.g., 0176 "id="ZipCode">
             <span asp-validation-for="ZipCode" class="text-danger"></span>
         </div>
 
@@ -182,6 +184,8 @@
 
     <div class="tab">
 
+        <h3>How many bathrooms does your apartment have?</h3>
+
         <img src="~/icons/bathroom_icon.svg"/>
 
 
@@ -189,7 +193,6 @@
 
             <input asp-for="Bad" type="hidden" class="form-control" id="BathroomHidden" value="1">
 
-            <label for="Bad">Bathrooms</label>
         <div class="wrapper">
             <span class="minus-bathroom">-</span>
                 <span class="number-bathroom" id="Bad">1</span>
@@ -206,9 +209,10 @@
     <div class="tab">
         <div class="form-group">
 
-            <img src="JUSTATESTFORNOW" alt="Bedroom icon"/>
+            <h3>How many bedrooms does your apartment have?</h3>
 
-            <label for="Soverom">Bedrooms</label>
+            <img src="/Icons/bedroom.svg" alt="Bedroom icon"/>
+
             <div class="wrapper">
                 <span class="minus-bedroom">-</span>
                 <span class="number-bedroom" id="Soverom">1</span>
@@ -223,9 +227,10 @@
 
     <div class="tab">
 
+        <h3>Finally, how much would you charge for a stay in your apartment?</h3>
+
         <div class="form-group">
-            <label for="PrisPerNatt">Pris Per Natt</label>
-            <input asp-for="PrisPerNatt" class="form-control" id="PrisPerNatt">
+            <input asp-for="PrisPerNatt" class="form-control" placeholder="Enter price per night" title="It might be a good idea to check what other renters are charging for similar properties." id="PrisPerNatt">
             <span asp-validation-for="PrisPerNatt" class="text-danger"></span>
         </div>
 
@@ -241,7 +246,8 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <!-----button type="submit" class="btn btn-primary">Create</button>--->
+
 </form>
 
 
@@ -379,6 +385,7 @@
         }
         return valid; // return the valid status
     }
+
 
     function fixStepIndicator(n) {
         // This function removes the "active" class of all steps...

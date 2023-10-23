@@ -50,8 +50,8 @@
 
 
                 <!--Buttons to edit/delete the listing-->
-           <td><a asp-action="Edit" asp-route-id="">Edit</a></td>
-           <td><a asp-action="Delete" asp-route-id="">Delete</a></td>
+                <td><a asp-action="Edit" asp-controller="Eiendoms" asp-route-id="@item.EiendomID">Edit</a></td>
+                <td><a asp-action="Delete" asp-controller="Eiendoms" asp-route-id="@item.EiendomID">Delete</a></td>
 
         </tr>
     }    
