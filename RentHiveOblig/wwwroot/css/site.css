@@ -18,7 +18,7 @@ html {
 
 body {
   margin-bottom: 60px;
-  background-color:lightpink;
+  background-color:#fff;
 }
 h1 {
     font-family: "Comfortaa";
@@ -226,6 +226,12 @@ h2 {
         border-radius: 1.25em;
         top: 1.25em;
         left: 3.12em;
+    }
+
+    .shine h1{
+        color:white;
+        position:relative;
+        font-size:4.25em;
     }
 
         .shine:before {
