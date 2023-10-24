@@ -32,6 +32,24 @@ namespace RentHiveOblig.Controllers
             _userManager = userManager;
         }
 
+        public async Task<IActionResult> Index(string searchString)
+        {
+            if (_context.Eiendom == null)
+            {
+                return Problem("Entity set 'MvcEiendomContext.Eiendom'  is null.");
+            }
+
+            var eiendom = from m in _context.Eiendom
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                eiendom = eiendom.Where(s => s.Tittel!.Contains(searchString));
+            }
+
+            return View(await eiendom.ToListAsync());
+        }
+
 
 
 
@@ -262,4 +280,5 @@ namespace RentHiveOblig.Controllers
           return (_context.Eiendom?.Any(e => e.EiendomID == id)).GetValueOrDefault();
         }
     }
+
 }
