@@ -4,23 +4,27 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Eiendom</h4>
+<h1>Edit your listing</h1>
+<br />
 <hr />
-<div class="row">
+
+<div class="container">
+
+    <div class="row">
+
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EiendomID" />
+
             <div class="form-group">
-                <label asp-for="Tittel" class="control-label"></label>
+                <label asp-for="Tittel" class="control-label">Title</label>
                 <input asp-for="Tittel" class="form-control" />
                 <span asp-validation-for="Tittel" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Beskrivelse" class="control-label"></label>
-                <input asp-for="Beskrivelse" class="form-control" />
+                <label asp-for="Beskrivelse" class="control-label">Description</label>
+                <textarea asp-for="Beskrivelse" class="form-control"></textarea>
                 <span asp-validation-for="Beskrivelse" class="text-danger"></span>
             </div>
 
@@ -55,13 +59,13 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Soverom" class="control-label"></label>
+                <label asp-for="Soverom" class="control-label">Bedrooms</label>
                 <input asp-for="Soverom" type="number" class="form-control" />
                 <span asp-validation-for="Soverom" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Bad" class="control-label"></label>
+                <label asp-for="Bad" class="control-label">Bathrooms</label>
                 <input asp-for="Bad" type="number" class="form-control" />
                 <span asp-validation-for="Bad" class="text-danger"></span>
             </div>
@@ -72,11 +76,57 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+
+     </div>
+
+
+        <!---------FILE INPUT-------------->
+        <!--Maybe a loop that checks if there are no images to the listing, warn the user or something similar?---->
+        <div class="col-md-6">
+            <h3>Upload photos of your property</h3>
+            <br />
+            <h4>Why good photos matter</h4>
+            <p>
+                <br />
+                <strong>First Impressions:</strong> Clear photos grab attention and make your listing stand out.
+                <br />
+                <strong>Builds Trust:</strong> Transparently showcasing your property eases potential renters' concerns.
+                <br />
+                <strong>Highlights Features:</strong> Use images to show off your apartment's best attributes.
+                <br />
+                <strong> Speeds Up Decisions:</strong> Visuals help potential tenants quickly gauge if it's the right fit.
+            </p>
+
+
+            <br />
+            <br />
+
+            <form enctype="multipart/form-data" method="post" asp-controller="Eiendoms" asp-action="uploadImage">
+                <div class="form-group">
+                    <label for="file">Choose image</label>
+                    <input type="file" name="file" id="file" accept="image/*" required />
+                    <span class="text-danger" id="fileError" style="display:none;">Please select an image to upload.</span>
+                </div>
+                <!---Using a hidden input to pass the EiendomID-->
+                <input type="hidden" name="EiendomID" value="@Model.EiendomID" />
+
+                <button type="submit">Upload image</button>
+            </form>
+        </div>
+
     </div>
+
+
+
+
+
+
 </div>
 
+
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Hosting" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

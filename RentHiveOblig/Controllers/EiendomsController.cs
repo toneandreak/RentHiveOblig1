@@ -139,6 +139,62 @@ namespace RentHiveOblig.Controllers
 
 
 
+        //IMAGE UPLOAD
+
+        [HttpPost]
+        public async Task <IActionResult> UploadImage(IFormFile file, int EiendomID)
+        {
+
+            //First we need to check if the file is null 
+
+            if(file == null)
+            {
+                return Content("File not selected");
+            }
+
+            //if it does not retrieve eiendomID then return NotFound. 
+
+            if (EiendomID == 0)
+            {
+                return NotFound();
+            }
+
+            //We check if the ID matches an Eiendom model. However, dont think this is necessary.
+
+
+            var eiendom = await _context.Eiendom.FindAsync(EiendomID);
+            if(eiendom == null)
+            {
+                return NotFound(); 
+
+            }
+
+
+            //We set the path where we want to store the file. 
+
+            var path = Path.Combine("wwwroot/Images", file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+
+
+            eiendom.Image1 = path;
+            _context.Update(eiendom);
+            await _context.SaveChangesAsync(); 
+
+
+            //Not sure where to return yet. 
+            return RedirectToAction("Index", "Hosting");
+        }
+
+
+
+
+
+
 
 
         /* THE OLD CREATE: 
