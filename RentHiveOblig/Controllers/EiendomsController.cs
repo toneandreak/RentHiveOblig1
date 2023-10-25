@@ -32,10 +32,10 @@ namespace RentHiveOblig.Controllers
             _userManager = userManager;
         }
 
+
+
         
-
-
-
+       
 
         // GET: Eiendoms
         public async Task<IActionResult> Index()
@@ -44,6 +44,44 @@ namespace RentHiveOblig.Controllers
                           View(await _context.Eiendom.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
         }
+
+        // GET: Eiendoms/Search
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // PoST: Eiendoms/ShowSearchResults
+
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return _context.Eiendom != null ?
+                          View("Index", await _context.Eiendom.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
+        }
+        
+
+
+
+        /* SEARCH (returns double controller error)
+         public async Task<IActionResult> Index(string searchString)
+         {
+           if (_context.Eiendom == null)
+         {
+           return Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
+              }
+
+         var eiendom = from m in _context.Eiendom
+         select m;
+        
+            if (!String.IsNullOrEmpty(searchString))
+           {
+         eiendom = eiendom.Where(s => s.Tittel!.Contains(searchString));
+         }
+
+            return View(await eiendom.ToListAsync());
+         }
+        */
 
         // GET: Eiendoms/Details/5
         public async Task<IActionResult> Details(int? id)
