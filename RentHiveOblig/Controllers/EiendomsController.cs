@@ -56,7 +56,7 @@ namespace RentHiveOblig.Controllers
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
             return _context.Eiendom != null ?
-                          View("Index", await _context.Eiendom.ToListAsync()) :
+                          View("Index", await _context.Eiendom.Where( j => j.Tittel.Contains(SearchPhrase)).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
         }
         
@@ -64,7 +64,7 @@ namespace RentHiveOblig.Controllers
 
 
         /* SEARCH (returns double controller error)
-         public async Task<IActionResult> Index(string searchString)
+         public async Task<IActionResult> ShowSearchResults(string searchString)
          {
            if (_context.Eiendom == null)
          {
