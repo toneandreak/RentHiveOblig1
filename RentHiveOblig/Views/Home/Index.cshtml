@@ -152,6 +152,26 @@ header {
                 <input type="text" id="destination" placeholder="Your destination" />
                 <input type="datetime-local" id="date" placeholder="Select date">
                 <button class="button-search" role="button"> SEARCH</button>
+
+                <!-- Prøver å få searchen til å searche riktig, WORK IN PROGRESS
+                    <form id="frmsearch" action="~/Catalog/Search" method="get">
+                    <input id="q" name="q" value="@q" style="width:275px;" />
+                    <input id="submit" name="submit" type="submit" style="font-weight:bold;" value="Search" />
+                </form>
+
+                <form asp-action="ShowSearchResults">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label for="SearchPhrase" class="control-label"></label>
+                        <input name="SearchPhrase" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <button id="button-search" input type="submit" value="Search" class="w-100 btn btn-lg btn-primary" />
+
+                    </div>
+                </form> -->
             </form>
 
         </section>
