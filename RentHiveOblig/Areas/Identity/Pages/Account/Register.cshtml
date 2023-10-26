@@ -4,7 +4,7 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 style="margin-top: 5%; font-size: 2.4em;">Welcome to RentHive</h1>
 
 <div class="row">
     <div class="col-md-4">
@@ -16,36 +16,36 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-floating">
+            <div class="form-floating" style="margin-bottom: 5%;">
                 <input asp-for="Input.Firstname" class="form-control" autocomplete="firstname" aria-required="true" />
                 <label asp-for="Input.Firstname"></label>
                 <span asp-validation-for="Input.Firstname" class="text-danger"></span>
             </div>
 
-            <div class="form-floating">
+            <div class="form-floating" style="margin-bottom: 5%;">
                 <input asp-for="Input.Lastname" class="form-control" autocomplete="surname" aria-required="true" />
                 <label asp-for="Input.Lastname"></label>
                 <span asp-validation-for="Input.Lastname" class="text-danger"></span>
             </div>
 
-            <div class="form-floating">
+            <div class="form-floating" style="margin-bottom: 5%;">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
 
-            <div class="form-floating">
+            <div class="form-floating" style="margin-bottom: 5%;">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating" style="margin-bottom: 5%;">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="background-color: black; border-color: black;">Register</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
