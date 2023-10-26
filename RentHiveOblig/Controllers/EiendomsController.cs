@@ -23,13 +23,15 @@ namespace RentHiveOblig.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ILogger<EiendomsController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
 
-        public EiendomsController(ApplicationDbContext context, ILogger<EiendomsController> logger, UserManager<ApplicationUser> userManager)
+        public EiendomsController(ApplicationDbContext context, ILogger<EiendomsController> logger, UserManager<ApplicationUser> userManager, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _logger = logger;
             _userManager = userManager;
+            _hostEnvironment = hostEnvironment;
         }
 
 
@@ -183,7 +185,10 @@ namespace RentHiveOblig.Controllers
 
         //IMAGE UPLOAD
 
+        // CODE (IMAGE UPLOAD) INSPIRED FROM https://www.codaffection.com/asp-net-core-article/asp-net-core-mvc-image-upload-and-retrieve/
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task <IActionResult> UploadImage(IFormFile file, int EiendomID)
         {
 
@@ -212,18 +217,36 @@ namespace RentHiveOblig.Controllers
             }
 
 
-            //We set the path where we want to store the file. 
+            //We set the path where we want to store the file to wwwroot/Images
 
-            var path = Path.Combine("wwwroot/Images", file.FileName);
+            //For some reason it only works with forwardSlash so we cannot use the path combine to set the path in the model.
+            //We therefore use a pathFowardSlash which will be the input for the model.
+       
+            var pathForwardSlash = "/Images/" + file.FileName;
 
-            using (var stream = new FileStream(path, FileMode.Create))
+            var webPath = "Images" + Path.DirectorySeparatorChar + file.FileName;
+            var fullPath = Path.Combine(_hostEnvironment.WebRootPath, webPath);
+
+            /*
+            
+            Some debugging code to find the issue.
+
+            _logger.LogInformation("webpath is: " + webPath);
+            _logger.LogInformation("fullpath is: " + fullPath);
+
+            _logger.LogInformation("hostEnvironment webrootpath: " + _hostEnvironment.WebRootPath);
+            
+             
+             */
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
 
-
-            eiendom.Image1 = path;
+            //Insertion
+            eiendom.Image1 = pathForwardSlash;
             _context.Update(eiendom);
             await _context.SaveChangesAsync(); 
 

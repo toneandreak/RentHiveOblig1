@@ -4,6 +4,13 @@
     ViewData["Title"] = "Edit";
 }
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+
 <h1>Edit your listing</h1>
 <br />
 <hr />
@@ -80,7 +87,12 @@
      </div>
 
 
+
+
+
+
         <!---------FILE INPUT-------------->
+        <!--CODE (IMAGE UPLOAD) INSPIRED FROM https://www.codaffection.com/asp-net-core-article/asp-net-core-mvc-image-upload-and-retrieve/-->
         <!--Maybe a loop that checks if there are no images to the listing, warn the user or something similar?---->
         <div class="col-md-6">
             <h3>Upload photos of your property</h3>
@@ -112,6 +124,29 @@
 
                 <button type="submit">Upload image</button>
             </form>
+
+
+            <!--Showcasing the uploaded images-->
+            <h2>Uploaded images</h2>
+
+            @if(Model.Image1 != null || Model.Image2 != null || Model.Image3 != null)
+            {
+
+
+                <img decoding="async" src="@Model.Image1" asp-append-version="true" width="250" height="250" alt="Missing image1"/>
+
+                <img decoding="async" src="@Model.Image2" asp-append-version="true" width="250" height="250" alt="Missing image2"/>
+
+                <img decoding="async" src="@Model.Image3" asp-append-version="true" width="250" height="250" alt="Missing image3"/>
+
+                
+            }
+            else
+            {
+                <p class="text-danger">There are no images uploaded for your listing yet.</p>
+            }
+
+
         </div>
 
     </div>
