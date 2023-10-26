@@ -15,6 +15,60 @@
 <br />
 <hr />
 
+
+
+<!----Inspired drag and drop styling from Codepen: https://codepen.io/TheLukasWeb/pen/kOrJmR---->
+<style>
+    .image-upload-wrapper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 20px 10px; 
+    }
+
+    .image-box {
+        box-sizing: border-box;
+        position: relative;
+        width: 30%; /* width of each box; adjust as needed */
+        height: 200px; /* fixed height; adjust as needed */
+        border: 4px dashed #1e1e1e;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f5f5; 
+        overflow: hidden;
+    }
+
+        .image-box img {
+            max-width: calc(100% - 8px); 
+            max-height: calc(100% - 8px); 
+            display: block;
+            margin: auto;
+            transition: 0.2s;
+        }
+
+        .image-box input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+
+
+
+</style>
+
+
+
 <div class="container">
 
     <div class="row">
@@ -93,67 +147,60 @@
 
         <!---------FILE INPUT-------------->
         <!--CODE (IMAGE UPLOAD) INSPIRED FROM https://www.codaffection.com/asp-net-core-article/asp-net-core-mvc-image-upload-and-retrieve/-->
-        <!--Maybe a loop that checks if there are no images to the listing, warn the user or something similar?---->
         <div class="col-md-6">
             <h3>Upload photos of your property</h3>
             <br />
-            <h4>Why good photos matter</h4>
-            <p>
-                <br />
-                <strong>First Impressions:</strong> Clear photos grab attention and make your listing stand out.
-                <br />
-                <strong>Builds Trust:</strong> Transparently showcasing your property eases potential renters' concerns.
-                <br />
-                <strong>Highlights Features:</strong> Use images to show off your apartment's best attributes.
-                <br />
-                <strong> Speeds Up Decisions:</strong> Visuals help potential tenants quickly gauge if it's the right fit.
-            </p>
+            <h4>Three points on why good photos matter</h4>
+
+            <ul>
+                <li>First Impressions</li>
+                <li>Builds Trust</li>
+                <li>Highlights Features</li>
+            </ul>
 
 
             <br />
             <br />
 
-            <form enctype="multipart/form-data" method="post" asp-controller="Eiendoms" asp-action="uploadImage">
-                <div class="form-group">
-                    <label for="file">Choose image</label>
-                    <input type="file" name="file" id="file" accept="image/*" required />
-                    <span class="text-danger" id="fileError" style="display:none;">Please select an image to upload.</span>
+
+            <p>Click or drag the images here</p>
+
+            <form enctype="multipart/form-data" method="post" asp-controller="Eiendoms" asp-action="UploadImage">
+                <div class="image-upload-wrapper">
+                    <div class="image-box">
+                        <img id="preview1" src="@Model.Image1"  />
+                        <input type="file" name="file1" id="file1" accept="image/*"  onchange="previewImage(this, 'preview1');" />
+
+                    </div>
+                    <div class="image-box">
+                        <img id="preview2" src="@Model.Image2" />
+                        <input type="file" name="file2" id="file2" accept="image/*"  onchange="previewImage(this, 'preview2');" />
+                        
+                    </div>
+                    <div class="image-box">
+                        <img id="preview3" src="@Model.Image3" />
+                        <input type="file" name="file3" id="file3" accept="image/*"  onchange="previewImage(this, 'preview3');" />
+
+                    </div>
                 </div>
-                <!---Using a hidden input to pass the EiendomID-->
-                <input type="hidden" name="EiendomID" value="@Model.EiendomID" />
 
-                <button type="submit">Upload image</button>
+                <input type="hidden" name="EiendomID" value="@Model.EiendomID" />
+                <button class="btn btn-primary" type="submit">Upload Images</button>
             </form>
 
-
-            <!--Showcasing the uploaded images-->
-            <h2>Uploaded images</h2>
-
-            @if(Model.Image1 != null || Model.Image2 != null || Model.Image3 != null)
+            <!---Warns the user if there are no images uploaded--->
+            @if(Model.Image1 == null && Model.Image2 == null && Model.Image3 != null)
             {
 
-
-                <img decoding="async" src="@Model.Image1" asp-append-version="true" width="250" height="250" alt="Missing image1"/>
-
-                <img decoding="async" src="@Model.Image2" asp-append-version="true" width="250" height="250" alt="Missing image2"/>
-
-                <img decoding="async" src="@Model.Image3" asp-append-version="true" width="250" height="250" alt="Missing image3"/>
-
-                
-            }
-            else
-            {
                 <p class="text-danger">There are no images uploaded for your listing yet.</p>
+
             }
+
 
 
         </div>
 
     </div>
-
-
-
-
 
 
 </div>
@@ -163,6 +210,25 @@
 <div>
     <a asp-controller="Hosting" asp-action="Index">Back to List</a>
 </div>
+
+
+
+<!----Inspired preview from Codepen: https://codepen.io/mobifreaks/pen/AMjEKw---->
+<script>
+    function previewImage(input, previewId) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById(previewId).setAttribute('src', e.target.result);
+
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
