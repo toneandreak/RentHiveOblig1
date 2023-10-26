@@ -36,10 +36,6 @@ namespace RentHiveOblig.Controllers
         }
 
 
-
-        
-       
-
         // GET: Eiendoms
         public async Task<IActionResult> Index()
         {
@@ -329,7 +325,13 @@ namespace RentHiveOblig.Controllers
 
             var userId = _userManager.GetUserId(User);
 
-            if(userId == null || userId != eiendom.ApplicationUserId) {
+            _logger.LogInformation("userId = " + userId);
+            _logger.LogInformation("Property Application user Id = " + eiendom.ApplicationUserId);
+
+            if (userId == null || userId != eiendom.ApplicationUserId) {
+
+
+                _logger.LogError("userId is not equal to 'eiendom.ApplicationUserId or is null'"); 
 
                 return Forbid(); 
             }
@@ -338,28 +340,62 @@ namespace RentHiveOblig.Controllers
             return View(eiendom);
         }
 
+
+
+
+
+
         // POST: Eiendoms/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EiendomName,EiendomDescription")] Eiendom eiendom)
+        public async Task<IActionResult> Edit(int id, [Bind("ApplicationUserId, PrisPerNatt, Tittel, Beskrivelse, Street, City, Country, ZipCode, State, Soverom, Bad")] Eiendom eiendom)
         {
-            if (id != eiendom.EiendomID)
+            var existingEiendom = await _context.Eiendom.FindAsync(id);
+
+            if (existingEiendom == null)
             {
-                return NotFound();
+                return NotFound("The EiendomID could not be found.");
             }
 
-            if (ModelState.IsValid)
+            var userId = _userManager.GetUserId(User);
+
+            if (userId == null || userId != existingEiendom.ApplicationUserId)
+            {
+                _logger.LogError($"Not-Authorized user tried to edit property ID {id}. The user was: {userId}. The user for the listing is: {existingEiendom.ApplicationUserId}");
+                return Forbid();
+            }
+
+
+            //For some reason, the ApplicationUser is invalid in Modelstate, so I had to remove it from the modelState, however I am doing the control manually. 
+            //https://www.appsloveworld.com/entity-framework/100/61/modelstate-errors-for-all-navigation-properties?expand_article=1
+            ModelState.Remove("ApplicationUser");
+
+            if (ModelState.IsValid && userId == existingEiendom.ApplicationUserId)
             {
                 try
                 {
-                    _context.Update(eiendom);
+                    existingEiendom.Tittel = eiendom.Tittel;
+                    existingEiendom.Beskrivelse = eiendom.Beskrivelse;
+                    existingEiendom.PrisPerNatt = eiendom.PrisPerNatt;
+                    existingEiendom.Street = eiendom.Street;
+                    existingEiendom.City = eiendom.City;
+                    existingEiendom.Country = eiendom.Country;
+                    existingEiendom.ZipCode = eiendom.ZipCode;
+                    existingEiendom.State = eiendom.State;
+                    existingEiendom.Soverom = eiendom.Soverom;
+                    existingEiendom.Bad = eiendom.Bad;
+
+                    _context.Update(existingEiendom);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EiendomExists(eiendom.EiendomID))
+                    if (!EiendomExists(existingEiendom.EiendomID))
                     {
                         return NotFound();
                     }
@@ -368,10 +404,20 @@ namespace RentHiveOblig.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Hosting");
             }
-            return View(eiendom);
+
+            return View(existingEiendom);
         }
+
+
+
+
+
+
+
+
+
 
         // GET: Eiendoms/Delete/5
         public async Task<IActionResult> Delete(int? id)

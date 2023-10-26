@@ -1,0 +1,88 @@
+﻿@model RentHiveOblig.Models.Eiendom
+
+
+@{
+    ViewData["Title"] = Model.Tittel; 
+}
+
+
+
+<!---------
+
+                                Code Plan: 
+
+How it will look: 
+
+Title
+Address
+
+Pictures (one bigger than the other two)
+
+
+Name and some information about the host?
+
+The property description.
+
+Information about the property, bathroom, bedrooms and etc. 
+
+
+//Calender maybe? 
+
+//Reviews mayube
+
+----->
+
+
+
+
+
+<container>
+
+
+    <div>
+        <!--Title & Address--->
+
+        <h1>@Model.Tittel</h1>
+        <p>@Model.City + ", " + @Model.Country</p>
+
+
+    </div>
+
+
+    <div>
+        <!-- Pictures --->
+       
+        <img src="/@Model.Image1"/>
+        <img src="/@Model.Image2" />
+        <img src="/@Model.Image3" />
+
+    </div>
+
+
+
+    <div>
+        <h4>Hosted by</h4>
+        <p>@Model.ApplicationUser.Firstname + " " + @Model.ApplicationUser.Lastname </p>
+       
+        <!--Maybe some information about the person listing the property?--->
+
+    </div>
+
+
+
+    <div>
+
+        <h4>More about the property</h4>
+
+        <p>@Model.Beskrivelse</p>
+
+    </div>
+
+</container>
+
+
+
+
+
+
+

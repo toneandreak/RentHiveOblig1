@@ -76,7 +76,11 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <input type="hidden" asp-for="EiendomID" />
+            <input asp-for="ApplicationUserId" type="hidden" class="form-control" />
+               
+
 
             <div class="form-group">
                 <label asp-for="Tittel" class="control-label">Title</label>
@@ -85,9 +89,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Beskrivelse" class="control-label">Description</label>
-                <textarea asp-for="Beskrivelse" class="form-control"></textarea>
+                <textarea asp-for="Beskrivelse" rows="8" class="form-control"></textarea>
                 <span asp-validation-for="Beskrivelse" class="text-danger"></span>
             </div>
+
+                <div class="form-group">
+                    <label asp-for="PrisPerNatt" class="control-label">Price per night </label>
+                    <input asp-for="PrisPerNatt" class="form-control"></>
+                    <span asp-validation-for="PrisPerNatt" class="text-danger"></span>
+                </div>
 
             <div class="form-group">
                 <label asp-for="Street" class="control-label"></label>

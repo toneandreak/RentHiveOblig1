@@ -6,7 +6,6 @@ namespace RentHiveOblig.Models
     {
         public int EiendomID { get; set; }
 
-        [Required(ErrorMessage ="A userId is needed to create the listing.")]
         public string ApplicationUserId { get; set; }
 
         [Required(ErrorMessage = "Required to fill out the price of the listing")]
@@ -44,13 +43,11 @@ namespace RentHiveOblig.Models
 
         public virtual ApplicationUser ApplicationUser { get; set; } //Enables lazyloading. 
 
+        public ICollection<Review>? Reviews { get; set; }  //Allows Entity Frameowrk load related reviews. 
 
+        public ICollection<WishlistEiendom>? WishlistEiendom { get; set; }//Allows Entity Frameowrk load related reviews. 
 
-        public ICollection<Review> Reviews { get; set; }  //Allows Entity Frameowrk load related reviews. 
-
-        public ICollection<WishlistEiendom> WishlistEiendom { get; set; }//Allows Entity Frameowrk load related reviews. 
-
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<Booking>? Bookings { get; set; }
 
         
 
