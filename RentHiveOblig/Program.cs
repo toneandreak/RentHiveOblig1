@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
-using RentHiveOblig.Models; 
+using RentHiveOblig.Models;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -74,8 +76,19 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SameSite = SameSiteMode.None; 
 });
 
+// Logging configuration.
+var loggerConfiguration = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.File($"Loggs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
 
+// Creates logger.
+var logger = loggerConfiguration.CreateLogger();
+builder.Logging.AddSerilog(logger);
 
+// Makes logging less verbos.
+loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceContext", out var value) &&
+e.Level == LogEventLevel.Information &&
+e.MessageTemplate.Text.Contains("Executed DbCommand"));
 
 var app = builder.Build();
 

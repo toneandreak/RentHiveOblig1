@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -23,19 +24,21 @@ namespace RentHiveOblig.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ILogger<EiendomsController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
 
-        public EiendomsController(ApplicationDbContext context, ILogger<EiendomsController> logger, UserManager<ApplicationUser> userManager)
+        public EiendomsController(ApplicationDbContext context, ILogger<EiendomsController> logger, UserManager<ApplicationUser> userManager, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _logger = logger;
             _userManager = userManager;
+            _hostEnvironment = hostEnvironment;
         }
 
+
+
         
-
-
-
+       
 
         // GET: Eiendoms
         public async Task<IActionResult> Index()
@@ -44,6 +47,48 @@ namespace RentHiveOblig.Controllers
                           View(await _context.Eiendom.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
         }
+
+        // GET: Eiendoms/Search
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // PoST: Eiendoms/ShowSearchResults
+
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return _context.Eiendom != null ?
+                          View("Index", await _context.Eiendom.Where( j => j.Tittel.Contains(SearchPhrase)).ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
+        }
+
+
+
+
+        // SEARCH (returns double controller error)
+        /* public async Task<IActionResult> ShowSearchResults(string searchString)
+          {
+            if (_context.Eiendom == null)
+          {
+            return Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
+               }
+
+          var eiendom = from m in _context.Eiendom
+          select m;
+
+             if (!String.IsNullOrEmpty(searchString))
+            {
+          eiendom = eiendom.Where(s => s.Tittel!.Contains(searchString));
+                 eiendom = eiendom.Where(s => s.Country!.Contains(searchString));
+                 eiendom = eiendom.Where(s => s.Beskrivelse!.Contains(searchString));
+                 eiendom = eiendom.Where(s => s.City!.Contains(searchString));
+                 eiendom = eiendom.Where(s => s.ZipCode!.Contains(searchString));
+             }
+
+             return View(await eiendom.ToListAsync());
+          }
+         */
 
         // GET: Eiendoms/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -139,21 +184,127 @@ namespace RentHiveOblig.Controllers
 
 
 
+        //IMAGE UPLOAD
 
+        // CODE (IMAGE UPLOAD) INSPIRED FROM https://www.codaffection.com/asp-net-core-article/asp-net-core-mvc-image-upload-and-retrieve/
 
-        /* THE OLD CREATE: 
-         
-        public async Task<IActionResult> Create([Bind("Id,EiendomName,EiendomDescription")] Eiendom eiendom)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task <IActionResult> UploadImage(IFormFile? file1, IFormFile? file2, IFormFile? file3, int EiendomID)
         {
-            if (ModelState.IsValid)
+
+
+            //if it does not retrieve eiendomID then return NotFound. 
+
+            if (EiendomID == 0)
             {
-                _context.Add(eiendom);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return NotFound("The Property ID does not exist.");
             }
-            return View(eiendom);
+
+
+            var eiendom = await _context.Eiendom.FindAsync(EiendomID);
+            if(eiendom == null)
+            {
+                return NotFound("The property cannot be found."); 
+
+            }
+
+            /*
+
+            if(file1 == null && file2 == null && file3 == null)
+            {
+                _logger.LogWarning("No files has been selected -> Everything is null.");
+                
+                return (IActionResult) BadRequest();
+
+            }
+            */
+
+
+            //We set the path where we want to store the file to wwwroot/Images
+
+            //For some reason it only works with forwardSlash so we cannot use the path combine to set the path in the model.
+            //We therefore use a pathFowardSlash which will be the input for the model.
+
+            //We check if the input is null for each file with a if-statment
+            //There are probably ways to do this better, but it works - and might not be so bad since it is only three images at max. 
+      
+
+            if(file1 != null)
+            {
+                var pathForwardSlash1 = "/Images/" + file1.FileName;
+
+                var webPath1 = "Images" + Path.DirectorySeparatorChar + file1.FileName;
+                var fullPath1 = Path.Combine(_hostEnvironment.WebRootPath, webPath1);
+
+                //Some logging used for debugging on earlier issues
+                _logger.LogInformation("webpath is: " + webPath1);
+                _logger.LogInformation("fullpath is: " + fullPath1);
+                _logger.LogInformation("hostEnvironment webrootpath: " + _hostEnvironment.WebRootPath);
+
+                using (var stream = new FileStream(fullPath1, FileMode.Create))
+                {
+                    await file1.CopyToAsync(stream);
+                }
+
+                eiendom.Image1 = pathForwardSlash1;
+                _context.Update(eiendom);
+
+            }
+            if(file2 != null)
+            {
+                var pathForwardSlash2 = "/Images/" + file2.FileName;
+
+                var webPath2 = "Images" + Path.DirectorySeparatorChar + file2.FileName;
+                var fullPath2 = Path.Combine(_hostEnvironment.WebRootPath, webPath2);
+
+                //Some logging used for debugging on earlier issues
+                _logger.LogInformation("webpath is: " + webPath2);
+                _logger.LogInformation("fullpath is: " + fullPath2);
+                _logger.LogInformation("hostEnvironment webrootpath: " + _hostEnvironment.WebRootPath);
+
+                using (var stream = new FileStream(fullPath2, FileMode.Create))
+                {
+                    await file2.CopyToAsync(stream);
+                }
+
+                eiendom.Image2 = pathForwardSlash2;
+                _context.Update(eiendom);
+
+            }
+
+            if(file3 != null)
+            {
+
+                var pathForwardSlash3 = "/Images/" + file3.FileName;
+
+                var webPath3 = "Images" + Path.DirectorySeparatorChar + file3.FileName;
+                var fullPath3 = Path.Combine(_hostEnvironment.WebRootPath, webPath3);
+
+                //Some logging used for debugging on earlier issues
+                _logger.LogInformation("webpath is: " + webPath3);
+                _logger.LogInformation("fullpath is: " + fullPath3);
+                _logger.LogInformation("hostEnvironment webrootpath: " + _hostEnvironment.WebRootPath);
+
+                using (var stream = new FileStream(fullPath3, FileMode.Create))
+                {
+                    await file3.CopyToAsync(stream);
+                }
+                eiendom.Image3 = pathForwardSlash3;
+                _context.Update(eiendom);
+            }
+
+
+
+
+            //Finally save the changes.
+
+            await _context.SaveChangesAsync(); 
+
+
+            //Not sure where to return yet. 
+            return RedirectToAction("Index", "Hosting");
         }
-        */
 
 
 

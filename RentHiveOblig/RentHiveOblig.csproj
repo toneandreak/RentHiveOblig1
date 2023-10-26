@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Conversations\**" />
     <Compile Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="Views\Conversations\**" />
     <Content Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="Views\Conversations\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <None Remove="Views\Conversations\**" />
     <None Remove="wwwroot\NewFolder1\**" />
   </ItemGroup>
 
@@ -27,10 +31,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Conversations\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
 
 </Project>

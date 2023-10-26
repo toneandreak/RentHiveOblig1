@@ -16,9 +16,39 @@ html {
   min-height: 100%;
 }
 
+.navbar {
+    /*background-color: transparent !important;*/
+    border: none !important;
+}
+
+
+.nav-link {
+    color: #000 !important;
+}
+
+/* Changing the link color to a lighter shade when hovered */
+.nav-link:hover {
+    color: #ddd !important;
+}
+
+/* Styling the navbar brand (website name/logo) */
+.navbar-brand {
+    color: #000 !important;
+    font-weight: bold;
+}
+
+/* Changing the color of the navbar-toggler icon (for mobile view) */
+.navbar-toggler-icon {
+    filter: invert(100%) !important; /* Inverting the colors to make it white */
+}
+
+
 body {
-  margin-bottom: 60px;
-  background-color:#fff;
+    margin-bottom: 60px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 h1 {
     font-family: "Comfortaa";
@@ -134,6 +164,7 @@ h2 {
 }
 
 
+/* Delete this soon if not used
     .bee-container {
         height: 15em;
         width: 15em;
@@ -246,7 +277,7 @@ h2 {
             left: 1.87em;
             box-shadow: 2.5em 1.25em #0b2b35;
         }
-
+     */
     .slideshow-container {
         max-width: 1000px;
         position: relative;
@@ -263,6 +294,6 @@ h2 {
             font-size: 1.2em;
         }
     }
-}
+
 
 
