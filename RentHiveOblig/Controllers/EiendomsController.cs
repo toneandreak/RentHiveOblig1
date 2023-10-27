@@ -86,6 +86,38 @@ namespace RentHiveOblig.Controllers
           }
          */
 
+
+
+        //GET: Eiendoms/ListingDetails/X
+
+        public async Task<IActionResult>ListingDetails(int? id)
+        {
+
+            _logger.LogInformation($"Trying to access ListingDetails for 'eiendom' IO {id}. ");
+            if (id == null)
+            {
+                _logger.LogError($"ListingDetails for 'eiendom' IO {id} not found. ");
+                return NotFound();
+
+            }
+
+            var eiendom = await _context.Eiendom.Include(e => e.ApplicationUser)
+                                                .FirstOrDefaultAsync(m => m.EiendomID == id);
+
+            if(eiendom == null)
+            {
+                _logger.LogError($"Eiendom with ID {id} not found.");
+                return NotFound(); 
+            }
+
+
+            _logger.LogInformation($"Access to ListingDetails with {id} is successfull.");
+            return View(eiendom);
+        }
+
+
+
+
         // GET: Eiendoms/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -341,10 +373,6 @@ namespace RentHiveOblig.Controllers
         }
 
 
-
-
-
-
         // POST: Eiendoms/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -415,10 +443,7 @@ namespace RentHiveOblig.Controllers
 
 
 
-
-
-
-
+        [Authorize]
         // GET: Eiendoms/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -427,8 +452,33 @@ namespace RentHiveOblig.Controllers
                 return NotFound();
             }
 
-            var eiendom = await _context.Eiendom
+
+
+
+
+
+                var eiendom = await _context.Eiendom
                 .FirstOrDefaultAsync(m => m.EiendomID == id);
+
+
+
+            //EXTRA CONTROL TO PREVENT OTHER USERS BEING ABLE TO EDIT/SEE OTHER'S LISTINGS.
+            var userId = _userManager.GetUserId(User);
+
+            _logger.LogInformation("userId = " + userId);
+            _logger.LogInformation("Property Application user Id = " + eiendom.ApplicationUserId);
+
+            if (userId == null || userId != eiendom.ApplicationUserId)
+            {
+
+
+                _logger.LogError("userId is not equal to 'eiendom.ApplicationUserId or is null'");
+
+                return Forbid();
+            }
+
+
+
             if (eiendom == null)
             {
                 return NotFound();
@@ -437,6 +487,7 @@ namespace RentHiveOblig.Controllers
             return View(eiendom);
         }
 
+        [Authorize]
         // POST: Eiendoms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -446,7 +497,27 @@ namespace RentHiveOblig.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
             }
+
+
             var eiendom = await _context.Eiendom.FindAsync(id);
+
+
+            //EXTRA CONTROL TO PREVENT OTHER USERS BEING ABLE TO EDIT/SEE OTHER'S LISTINGS.
+            var userId = _userManager.GetUserId(User);
+
+            _logger.LogInformation("userId = " + userId);
+            _logger.LogInformation("Property Application user Id = " + eiendom.ApplicationUserId);
+
+            if (userId == null || userId != eiendom.ApplicationUserId)
+            {
+
+
+                _logger.LogError("userId is not equal to 'eiendom.ApplicationUserId or is null'");
+
+                return Forbid();
+            }
+
+
             if (eiendom != null)
             {
                 _context.Eiendom.Remove(eiendom);
