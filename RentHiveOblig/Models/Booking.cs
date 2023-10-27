@@ -15,7 +15,7 @@ namespace RentHiveOblig.Models
 
         [ForeignKey("ApplicationUser")]
         [Required(ErrorMessage ="GuestId is required.")]
-        public int GuestId { get; set; } //Foreign key
+        public string GuestId { get; set; } //Foreign key
 
 
 
