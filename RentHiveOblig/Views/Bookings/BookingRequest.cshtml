@@ -16,8 +16,10 @@
 
 <!------         PAGE OVERVIEW     
 
+To come to this form: You have to fill out the dates in Eiendoms > ListingDetails and then click a submit button for booking.
 
-A form to confirm the booking for the selected property
+
+A form to request the booking for the selected property
 
 
 Should consist of: 
@@ -49,17 +51,21 @@ A button to send the booking request to the host.
 
 
 
-<h1>Request your booking</h1>
 
-<p>Confirm your selection below. The booking request will be sent to your host.</p>
-<p>Once the host confirms the booking and payment is finished, then you are allowed to stay at their home!</p>
+
+<div class="container">
+
+
+    <h1>Request Booking</h1>
+
+    <p>Confirm your selection below. The booking request will be sent to your host.</p>
+    <p>Once the host confirms the booking and payment is finished, then you are allowed to stay at their home!</p>
 
 
 
 <form asp-action="Book" method="post">
 
 
-    <div class="container">
 
 
         <div class="row">
@@ -85,7 +91,6 @@ A button to send the booking request to the host.
             </div>
 
 
-
             <!----  Right column ---->
             <div class="col-md-4" id="listDetails">
 
@@ -105,18 +110,15 @@ A button to send the booking request to the host.
 
             </div>
 
-
-
-
         </div>
 
 
-
-
-    </div>
 
 
 
 
 
 </form>
+
+
+</div>

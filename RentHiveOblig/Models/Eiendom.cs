@@ -57,7 +57,7 @@ namespace RentHiveOblig.Models
         //Optional images - We should rather add a image class and make a one-to-many relationship.
         //Not a scaleable option. 
 
-        public string? Image1 { get; set; } = "/Images/PlaceholderApartmentImage"; //Adding a default image to the first image. 
+        public string? Image1 { get; set; } = "/Images/PlaceholderApartmentImage.png"; //Adding a default image to the first image. 
         public string? Image2 { get; set; } 
         public string? Image3 { get; set; } 
 
