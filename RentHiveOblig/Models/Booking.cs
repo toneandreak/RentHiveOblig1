@@ -46,10 +46,8 @@ namespace RentHiveOblig.Models
 
 
         //This will change when the host accepts the booking.
-        public Boolean accepted { get; set; } = false; 
 
-
-
+        public Boolean BookingAccepted { get; set; } = false; 
 
 
         //NAV. PROP.

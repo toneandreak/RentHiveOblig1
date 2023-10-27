@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model RentHiveOblig.Models.Booking;
+@inject UserManager<ApplicationUser> UserManager
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Confirm Booking";
+
+    var userId = UserManager.GetUserId(User);
+    var user = UserManager.FindByIdAsync(userId).Result;
+}
+
+
+
+<!------         PAGE OVERVIEW     
+
+
+A form to confirm the booking for the selected property
+
+
+Should consist of: 
+
+The property title. A small image
+
+Days selected for the booking. Should also be able to change it from here. 
+
+
+
+A button to send the booking request to the host. 
+
+-------->
+
+<style>
+
+    #tripDetails{
+        border: 2px solid #1e1e1e; 
+    }
+
+
+    #listDetails{
+        border: 2px solid red;
+    }
+
+
+
+</style>
+
+
+
+<h1>Request your booking</h1>
+
+<p>Confirm your selection below. The booking request will be sent to your host.</p>
+<p>Once the host confirms the booking and payment is finished, then you are allowed to stay at their home!</p>
+
+
+
+<form asp-action="Book" method="post">
+
+
+    <div class="container">
+
+
+        <div class="row">
+
+
+            <!----  Left column ---->
+            <div class="col-md-4" id="tripDetails">
+
+                <h2>Trip Details</h2>
+
+                <p>Dates</p>
+                <p>@Model.StartDate - @Model.EndDate</p>
+
+
+
+                <p>Information about you </p>
+
+                <p>Name: @(user.Firstname + user.Lastname) </p>
+                <p>Email: @user.Email</p>
+                <p> @user.</p>
+
+
+            </div>
+
+
+
+            <!----  Right column ---->
+            <div class="col-md-4" id="listDetails">
+
+
+                <img src="@Model.Eiendom.Image1"/>
+                <p>@Model.Eiendom.Tittel</p>
+                <hr />
+                <h3>Price</h3>
+                <p>@Model.Eiendom.PrisPerNatt NOK  X  (QuantityNightFormula) nights</p>
+
+                <hr />
+
+                <p>Total (NOK) @Model.TotalPrice</p>
+
+
+                <button type="submit" class="btn btn-primary">Request Booking</button>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+</form>
