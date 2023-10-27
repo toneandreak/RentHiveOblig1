@@ -14,7 +14,7 @@
 
 <!-----
 
-                        OLD CODE - GETS REMOVED VERY SOON.                 
+                        OLD CODE - GETS REMOVED VERY SOON.
 
 
 <div id="carouselImages" class="carousel slide mainCarousel" data-bs-ride="true" style="">
@@ -26,66 +26,85 @@
 </div>
 
 ----->
-
 <!----- This CSS is outside the stylesheet for a reason ---->
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-header {
-    background-image: url('/images/cabin2.png');
-    background-size: cover;
-    text-align: center;
-    padding: 20px 20px;
-    height: 70vh; 
-}
+    header {
+        background-image: url('/images/cabin2.png');
+        background-size: cover;
+        text-align: center;
+        padding: 20px 20px;
+        height: 70vh;
+    }
 
-#search-section {
-    display: flex;
-    justify-content: center;
-    padding: 5rem 0;
-}
+    #search-section {
+        display: flex;
+        justify-content: center;
+        padding: 5rem 0;
+    }
 
-#destination {
-    padding: 10px;
-    font-size: 16px;
-    width: 300px;
-}
+    #destination {
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+    }
 
-#date{
-
+    #date {
         padding: 10px;
         font-size: 16px;
         width: 200px;
-}
-#featured-listings .listing {
-    border: 1px solid #e0e0e0;
-    padding: 10px;
-    margin: 10px;
-    width: 250px;
-    float: left; /* This allows horizontal scrolling */
-}
+    }
 
-#featured-listings .listing img {
-    width: 100%;
-    height: auto;
-}
+    #featured-listings {
+        display: flex;
+        justify-content: center;
+    }
 
-#mainCenterText{
-    color: #fff; 
-    
-}
+        #featured-listings .listing {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            margin: 10px;
+            max-height: 400px;
+            width: 250px;
+            float: left; /* This allows horizontal scrolling */
+        }
+
+        #featured-listings .listing-description { 
+            font-size: 16px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* number of lines to show */
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        #featured-listings .listing-price { 
+            font-size: 18px;
+        }
+
+
+        #featured-listings .listing img {
+            height: 195px;
+            width: 225px;
+            object-fit: cover;
+        }
+
+
+    #mainCenterText {
+        color: #fff;
+    }
 
 
 
     .navbar {
- 
-     /*background-color: transparent !important;*/
-        border: none !important; 
+        /*background-color: transparent !important;*/
+        border: none !important;
     }
 
 
@@ -138,7 +157,7 @@ header {
             </div>
         </nav>
 
-        <div class="text-center" id="mainCenterText" >
+        <div class="text-center" id="mainCenterText">
             <h1 class="display-4 mainText">Welcome to RentHive</h1>
             <h2>Buzz off to your next destination.</h2>
         </div>
@@ -177,55 +196,54 @@ header {
     </header>
     }
 
-    <div class="container">
+<div class="container">
 
-        <!---Maybe new listings will be the "featured listings" just to showcase that it works.
-            Otherwise, it would make sense that listings with higher rating gets shown here. 
-        --->
+    <!---Maybe new listings will be the "featured listings" just to showcase that it works.
+        Otherwise, it would make sense that listings with higher rating gets shown here.
+    --->
 
-                <section id="featured-listings">
-            <!--NEED TO ADD FOR LOOP HERE!-->
-            <!--THIS IS JUST FOR TEST--->
+    <section id="featured-listings">
+        <!--NEED TO ADD FOR LOOP HERE!-->
+        <!--THIS IS JUST FOR TEST--->
+        <!-----NEED TO IMPLEMENT HOW MANY LISTINGS TO SHOW PER VIEWPORT.----->
 
-            <!-----NEED TO IMPLEMENT HOW MANY LISTINGS TO SHOW PER VIEWPORT.----->
+        <div class="listing">
+            <img src="~/images/house_1_s1.jpg" alt="Listing Image">
+            <p class="listing-description">Short title Lorum Ipsum Short title Lorum IpsumShort title Lorum IpsumShort title Lorum Ipsum</p>
+            <p class="listing-price">$100/night</p>
+            <p class="listing-rating">⭐⭐</p>
+        </div>
 
-            <div class="listing">
-                <img src="~/images/house_1_s1.jpg" alt="Listing Image">
-            <p class="listing-description">Short title Lorum Ipsum</p>
-                <p class="listing-price">$100/night</p>
-                <p class="listing-rating">⭐⭐</p>
-            </div>
-
-            <div class="listing">
-                <img src="~/images/house_2_s1.jpg" alt="Listing Image">
+        <div class="listing">
+            <img src="~/images/house_2_s1.jpg" alt="Listing Image">
             <p class="listing-description">Short title Lorum Ipsume</p>
-                <p class="listing-price">$100/night</p>
-                <p class="listing-rating">⭐⭐⭐</p>
-            </div>
+            <p class="listing-price">$100/night</p>
+            <p class="listing-rating">⭐⭐⭐</p>
+        </div>
 
-            <div class="listing">
-                <img src="~/images/house_4_s1.jpg" alt="Listing Image">
+        <div class="listing">
+            <img src="~/images/house_4_s1.jpg" alt="Listing Image">
             <p class="listing-description">Short title Lorum Ipsum</p>
-                <p class="listing-price">$100/night</p>
-                <p class="listing-rating">⭐⭐⭐⭐</p>
-            </div>
+            <p class="listing-price">$100/night</p>
+            <p class="listing-rating">⭐⭐⭐⭐</p>
+        </div>
 
-            <div class="listing">
-                <img src="~/images/house_5_s1.jpg" alt="Listing Image">
-                <p class="listing-description">Short title Lorum Ipsum</p>
-                <p class="listing-price">$100/night</p>
-                <p class="listing-rating">⭐⭐⭐⭐</p>
-            </div>
+        <div class="listing">
+            <img src="~/images/house_5_s1.jpg" alt="Listing Image">
+            <p class="listing-description">Short title Lorum Ipsum</p>
+            <p class="listing-price">$100/night</p>
+            <p class="listing-rating">⭐⭐⭐⭐</p>
+        </div>
 
-        </section>
+    </section>
 
-    </div>
+</div>
 
 
 
 <!----
 
-                            THE OLD CODE. Gets removed very soon. 
+                            THE OLD CODE. Gets removed very soon.
 
 
 
@@ -250,8 +268,6 @@ header {
 </div>
 
 ----->
-
-
 <!--Div classes for "Bee animation" using css-->
 <!--------
 

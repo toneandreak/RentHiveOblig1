@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -22,9 +17,9 @@ namespace RentHiveOblig.Controllers
         // GET: Messages
         public async Task<IActionResult> Index()
         {
-              return _context.Message != null ? 
-                          View(await _context.Message.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Message'  is null.");
+            return _context.Message != null ?
+                        View(await _context.Message.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Message'  is null.");
         }
 
         // GET: Messages/Details/5
@@ -150,14 +145,14 @@ namespace RentHiveOblig.Controllers
             {
                 _context.Message.Remove(message);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MessageExists(int id)
         {
-          return (_context.Message?.Any(e => e.MessageId == id)).GetValueOrDefault();
+            return (_context.Message?.Any(e => e.MessageId == id)).GetValueOrDefault();
         }
     }
 }

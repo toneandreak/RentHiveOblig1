@@ -5,7 +5,7 @@ namespace RentHiveOblig.ViewModels
     public class EiendomViewModel
     {
 
-        [Range(0,(double)decimal.MaxValue,
+        [Range(0, (double)decimal.MaxValue,
                ErrorMessage = "Please enter valid number")]
         public double PrisPerNatt { get; set; }
 

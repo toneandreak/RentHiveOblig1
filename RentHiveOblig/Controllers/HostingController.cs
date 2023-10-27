@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
-using RentHiveOblig.Data.Migrations;
-using SQLitePCL;
 using System.Security.Claims;
 
 namespace RentHiveOblig.Controllers
@@ -24,7 +22,7 @@ namespace RentHiveOblig.Controllers
 
 
 
-        public async Task <IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

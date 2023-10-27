@@ -1,8 +1,7 @@
-﻿using RentHiveOblig.Models; 
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RentHiveOblig.Data;
+using RentHiveOblig.Models;
 
 namespace RentHiveOblig.Controllers
 {
@@ -26,7 +25,7 @@ namespace RentHiveOblig.Controllers
 
         public IActionResult IndexProperties()
         {
-            return View(_context.Eiendom); 
+            return View(_context.Eiendom);
         }
 
 

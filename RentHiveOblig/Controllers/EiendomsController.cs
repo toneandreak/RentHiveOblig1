@@ -1,11 +1,11 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
 using RentHiveOblig.ViewModels;
+using System.Security.Claims;
 
 namespace RentHiveOblig.Controllers
 {
@@ -29,9 +29,9 @@ namespace RentHiveOblig.Controllers
         // GET: Eiendoms
         public async Task<IActionResult> Index()
         {
-              return _context.Eiendom != null ? 
-                          View(await _context.Eiendom.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
+            return _context.Eiendom != null ?
+                        View(await _context.Eiendom.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
         }
 
         // GET: Eiendoms/Search
@@ -45,7 +45,7 @@ namespace RentHiveOblig.Controllers
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
             return _context.Eiendom != null ?
-                          View("Index", await _context.Eiendom.Where( j => j.Tittel.Contains(SearchPhrase)).ToListAsync()) :
+                          View("Index", await _context.Eiendom.Where(j => j.Tittel.Contains(SearchPhrase)).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
         }
 
@@ -80,7 +80,7 @@ namespace RentHiveOblig.Controllers
 
         //GET: Eiendoms/ListingDetails/X
 
-        public async Task<IActionResult>ListingDetails(int? id)
+        public async Task<IActionResult> ListingDetails(int? id)
         {
 
             _logger.LogInformation($"Trying to access ListingDetails for 'eiendom' IO {id}. ");
@@ -94,10 +94,10 @@ namespace RentHiveOblig.Controllers
             var eiendom = await _context.Eiendom.Include(e => e.ApplicationUser)
                                                 .FirstOrDefaultAsync(m => m.EiendomID == id);
 
-            if(eiendom == null)
+            if (eiendom == null)
             {
                 _logger.LogError($"Eiendom with ID {id} not found.");
-                return NotFound(); 
+                return NotFound();
             }
 
 
@@ -141,7 +141,7 @@ namespace RentHiveOblig.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EiendomViewModel model)
-       {
+        {
 
             //Check if it finds userId. 
 
@@ -164,39 +164,41 @@ namespace RentHiveOblig.Controllers
             }
 
 
-                //Try to create the model.
-            
-            try{
+            //Try to create the model.
 
-                Eiendom eiendom = new Eiendom
-                    {
-                        ApplicationUserId = userId,
-                        PrisPerNatt = model.PrisPerNatt,
-                        Tittel = model.Tittel,
-                        Beskrivelse = model.Beskrivelse,
-                        Street = model.Street,
-                        City = model.City,
-                        Country = model.Country,
-                        ZipCode = model.ZipCode,
-                        State = model.State,
-                        Soverom = model.Soverom,
-                        Bad = model.Bad,
-                        CreatedDateTime = DateTime.Now
-                    };
-
-
-                    _context.Eiendom.Add(eiendom);
-
-                        await _context.SaveChangesAsync();
-
-                 } catch(Exception ex)
+            try
             {
 
-                    _logger.LogError(ex, "An error occured while creating the property."); 
+                Eiendom eiendom = new Eiendom
+                {
+                    ApplicationUserId = userId,
+                    PrisPerNatt = model.PrisPerNatt,
+                    Tittel = model.Tittel,
+                    Beskrivelse = model.Beskrivelse,
+                    Street = model.Street,
+                    City = model.City,
+                    Country = model.Country,
+                    ZipCode = model.ZipCode,
+                    State = model.State,
+                    Soverom = model.Soverom,
+                    Bad = model.Bad,
+                    CreatedDateTime = DateTime.Now
+                };
+
+
+                _context.Eiendom.Add(eiendom);
+
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "An error occured while creating the property.");
                 //Need to return something here too. 
             }
 
-                return RedirectToAction("Index", "Hosting");
+            return RedirectToAction("Index", "Hosting");
 
         }
 
@@ -208,7 +210,7 @@ namespace RentHiveOblig.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> UploadImage(IFormFile? file1, IFormFile? file2, IFormFile? file3, int EiendomID)
+        public async Task<IActionResult> UploadImage(IFormFile? file1, IFormFile? file2, IFormFile? file3, int EiendomID)
         {
 
 
@@ -221,9 +223,9 @@ namespace RentHiveOblig.Controllers
 
 
             var eiendom = await _context.Eiendom.FindAsync(EiendomID);
-            if(eiendom == null)
+            if (eiendom == null)
             {
-                return NotFound("The property cannot be found."); 
+                return NotFound("The property cannot be found.");
 
             }
 
@@ -236,9 +238,9 @@ namespace RentHiveOblig.Controllers
 
             //We check if the input is null for each file with a if-statment
             //There are probably ways to do this better, but it works - and might not be so bad since it is only three images at max. 
-      
 
-            if(file1 != null)
+
+            if (file1 != null)
             {
                 var pathForwardSlash1 = "/Images/" + file1.FileName;
 
@@ -259,7 +261,7 @@ namespace RentHiveOblig.Controllers
                 _context.Update(eiendom);
 
             }
-            if(file2 != null)
+            if (file2 != null)
             {
                 var pathForwardSlash2 = "/Images/" + file2.FileName;
 
@@ -281,7 +283,7 @@ namespace RentHiveOblig.Controllers
 
             }
 
-            if(file3 != null)
+            if (file3 != null)
             {
 
                 var pathForwardSlash3 = "/Images/" + file3.FileName;
@@ -307,7 +309,7 @@ namespace RentHiveOblig.Controllers
 
             //Finally save the changes.
 
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
 
             //Not sure where to return yet. 
@@ -340,12 +342,13 @@ namespace RentHiveOblig.Controllers
             _logger.LogInformation("userId = " + userId);
             _logger.LogInformation("Property Application user Id = " + eiendom.ApplicationUserId);
 
-            if (userId == null || userId != eiendom.ApplicationUserId) {
+            if (userId == null || userId != eiendom.ApplicationUserId)
+            {
 
 
-                _logger.LogError("userId is not equal to 'eiendom.ApplicationUserId or is null'"); 
+                _logger.LogError("userId is not equal to 'eiendom.ApplicationUserId or is null'");
 
-                return Forbid(); 
+                return Forbid();
             }
 
 
@@ -437,8 +440,8 @@ namespace RentHiveOblig.Controllers
 
 
 
-                var eiendom = await _context.Eiendom
-                .FirstOrDefaultAsync(m => m.EiendomID == id);
+            var eiendom = await _context.Eiendom
+            .FirstOrDefaultAsync(m => m.EiendomID == id);
 
 
 
@@ -502,14 +505,14 @@ namespace RentHiveOblig.Controllers
             {
                 _context.Eiendom.Remove(eiendom);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EiendomExists(int id)
         {
-          return (_context.Eiendom?.Any(e => e.EiendomID == id)).GetValueOrDefault();
+            return (_context.Eiendom?.Any(e => e.EiendomID == id)).GetValueOrDefault();
         }
     }
 

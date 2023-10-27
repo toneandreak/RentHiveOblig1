@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace RentHiveOblig.Models
+﻿namespace RentHiveOblig.Models
 {
 
 
