@@ -22,8 +22,9 @@ namespace RentHiveOblig.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Booking.Include(b => b.ApplicationUser).Include(b => b.Eiendom);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.Booking != null ? 
+                          View(await _context.Booking.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Booking'  is null.");
         }
 
         // GET: Bookings/Details/5
@@ -35,8 +36,6 @@ namespace RentHiveOblig.Controllers
             }
 
             var booking = await _context.Booking
-                .Include(b => b.ApplicationUser)
-                .Include(b => b.Eiendom)
                 .FirstOrDefaultAsync(m => m.BookingId == id);
             if (booking == null)
             {
@@ -49,8 +48,6 @@ namespace RentHiveOblig.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
-            ViewData["GuestId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["EiendomId"] = new SelectList(_context.Eiendom, "EiendomID", "Tittel");
             return View();
         }
 
@@ -59,7 +56,7 @@ namespace RentHiveOblig.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingId,GuestId,EiendomId,StartDate,EndDate,TotalPrice,accepted")] Booking booking)
+        public async Task<IActionResult> Create([Bind("BookingId,GuestId,PropertyId,StartDate,EndDate,TotalPrice")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +64,6 @@ namespace RentHiveOblig.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuestId"] = new SelectList(_context.Users, "Id", "Id", booking.GuestId);
-            ViewData["EiendomId"] = new SelectList(_context.Eiendom, "EiendomID", "Tittel", booking.EiendomId);
             return View(booking);
         }
 
@@ -85,8 +80,6 @@ namespace RentHiveOblig.Controllers
             {
                 return NotFound();
             }
-            ViewData["GuestId"] = new SelectList(_context.Users, "Id", "Id", booking.GuestId);
-            ViewData["EiendomId"] = new SelectList(_context.Eiendom, "EiendomID", "Tittel", booking.EiendomId);
             return View(booking);
         }
 
@@ -95,7 +88,7 @@ namespace RentHiveOblig.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingId,GuestId,EiendomId,StartDate,EndDate,TotalPrice,accepted")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("BookingId,GuestId,PropertyId,StartDate,EndDate,TotalPrice")] Booking booking)
         {
             if (id != booking.BookingId)
             {
@@ -122,8 +115,6 @@ namespace RentHiveOblig.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GuestId"] = new SelectList(_context.Users, "Id", "Id", booking.GuestId);
-            ViewData["EiendomId"] = new SelectList(_context.Eiendom, "EiendomID", "Tittel", booking.EiendomId);
             return View(booking);
         }
 
@@ -136,8 +127,6 @@ namespace RentHiveOblig.Controllers
             }
 
             var booking = await _context.Booking
-                .Include(b => b.ApplicationUser)
-                .Include(b => b.Eiendom)
                 .FirstOrDefaultAsync(m => m.BookingId == id);
             if (booking == null)
             {
