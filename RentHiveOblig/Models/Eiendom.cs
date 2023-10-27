@@ -4,16 +4,30 @@ namespace RentHiveOblig.Models
 {
     public class Eiendom
     {
+
+        //Primary Key
         public int EiendomID { get; set; }
 
+
+        //Foreign Key from ApplicationUser
         public string ApplicationUserId { get; set; }
 
+
+        //Price per night.
         [Required(ErrorMessage = "Required to fill out the price of the listing")]
         public double PrisPerNatt { get; set; }
 
+
+
+        //Title for the property.
         [Required(ErrorMessage = "Required to fill out Title for the listing")]
         public string Tittel { get; set; }
+
+
+        //Description for the property. 
         public string? Beskrivelse { get; set; }
+
+
 
         //Address
         public string Street { get; set; }
@@ -23,35 +37,65 @@ namespace RentHiveOblig.Models
         public string? State { get; set; }
 
 
+        //Bedrooms
+
         [Required(ErrorMessage = "Required to fill out how many bedrooms")]
         public int Soverom { get; set; }
+<<<<<<< HEAD
         [Required(ErrorMessage = "Required to fill out how many bathrooms")]
+=======
+
+        //Bathrooms
+        [Required(ErrorMessage ="Required to fill out how many bathrooms")]
+>>>>>>> 0d84ef777933973ea7d67925e4c4d8ddcff5996c
         public int Bad { get; set; }
+
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
 
 
 
+        //Might add beds too.
+
+
 
         //Optional images - We should rather add a image class and make a one-to-many relationship.
-        //THIS IS A NON-SCALEABLE OPTION 
+        //Not a scaleable option. 
 
+<<<<<<< HEAD
         public string? Image1 { get; set; }
         public string? Image2 { get; set; }
         public string? Image3 { get; set; }
+=======
+        public string? Image1 { get; set; } = "/Images/PlaceholderApartmentImage"; //Adding a default image to the first image. 
+        public string? Image2 { get; set; } 
+        public string? Image3 { get; set; } 
+>>>>>>> 0d84ef777933973ea7d67925e4c4d8ddcff5996c
 
 
 
+
+        //NAV. PROP.
         public virtual ApplicationUser ApplicationUser { get; set; } //Enables lazyloading. 
 
         public ICollection<Review>? Reviews { get; set; }  //Allows Entity Frameowrk load related reviews. 
 
         public ICollection<WishlistEiendom>? WishlistEiendom { get; set; }//Allows Entity Frameowrk load related reviews. 
 
+
+        /// <summary>
+        /// The booking will be used to keep track of all bookings for the apartment. 
+        /// It will also be used to find Unavailable days for the calendar. 
+        /// </summary>
         public ICollection<Booking>? Bookings { get; set; }
 
 
 
 
+
+
+
+
+        
         public Eiendom() { }
 
     }
