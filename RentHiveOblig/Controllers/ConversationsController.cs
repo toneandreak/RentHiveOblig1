@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -22,8 +17,8 @@ namespace RentHiveOblig.Controllers
         // GET: Conversations/Create
         public IActionResult Create()
         {
-    //        ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
-    //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
+            //        ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
+            //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost");
             return View();
         }
 
@@ -40,8 +35,8 @@ namespace RentHiveOblig.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-     //       ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
-    //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
+            //       ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
+            //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
             return View(conversation);
         }
 
@@ -58,8 +53,8 @@ namespace RentHiveOblig.Controllers
             {
                 return NotFound();
             }
-   //         ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
-   //         ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
+            //         ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
+            //         ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
             return View(conversation);
         }
 
@@ -95,8 +90,8 @@ namespace RentHiveOblig.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-    //        ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
-    //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
+            //        ViewData["User1Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User1Id);
+            //        ViewData["User2Id"] = new SelectList(_context.Bruker, "BrukerID", "BrukerEpost", conversation.User2Id);
             return View(conversation);
         }
 
@@ -115,14 +110,14 @@ namespace RentHiveOblig.Controllers
             {
                 _context.Conversation.Remove(conversation);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ConversationExists(int id)
         {
-          return (_context.Conversation?.Any(e => e.ConversationId == id)).GetValueOrDefault();
+            return (_context.Conversation?.Any(e => e.ConversationId == id)).GetValueOrDefault();
         }
     }
 }

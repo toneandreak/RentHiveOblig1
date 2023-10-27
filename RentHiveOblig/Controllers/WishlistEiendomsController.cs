@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
@@ -161,14 +157,14 @@ namespace RentHiveOblig.Controllers
             {
                 _context.WishlistEiendom.Remove(wishlistEiendom);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool WishlistEiendomExists(int id)
         {
-          return (_context.WishlistEiendom?.Any(e => e.WishListEiendomId == id)).GetValueOrDefault();
+            return (_context.WishlistEiendom?.Any(e => e.WishListEiendomId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -22,9 +17,9 @@ namespace RentHiveOblig.Controllers
         // GET: Reviews
         public async Task<IActionResult> Index()
         {
-              return _context.Review != null ? 
-                          View(await _context.Review.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Review'  is null.");
+            return _context.Review != null ?
+                        View(await _context.Review.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Review'  is null.");
         }
 
         // GET: Reviews/Details/5
@@ -150,14 +145,14 @@ namespace RentHiveOblig.Controllers
             {
                 _context.Review.Remove(review);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReviewExists(int id)
         {
-          return (_context.Review?.Any(e => e.ReviewId == id)).GetValueOrDefault();
+            return (_context.Review?.Any(e => e.ReviewId == id)).GetValueOrDefault();
         }
     }
 }

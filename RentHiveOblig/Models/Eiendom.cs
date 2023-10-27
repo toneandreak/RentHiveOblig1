@@ -20,12 +20,12 @@ namespace RentHiveOblig.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string ZipCode { get; set; }
-        public string? State { get;set;}
+        public string? State { get; set; }
 
 
         [Required(ErrorMessage = "Required to fill out how many bedrooms")]
         public int Soverom { get; set; }
-        [Required(ErrorMessage ="Required to fill out how many bathrooms")]
+        [Required(ErrorMessage = "Required to fill out how many bathrooms")]
         public int Bad { get; set; }
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
 
@@ -36,8 +36,8 @@ namespace RentHiveOblig.Models
         //THIS IS A NON-SCALEABLE OPTION 
 
         public string? Image1 { get; set; }
-        public string? Image2 { get; set; } 
-        public string? Image3 { get; set; } 
+        public string? Image2 { get; set; }
+        public string? Image3 { get; set; }
 
 
 
@@ -49,10 +49,10 @@ namespace RentHiveOblig.Models
 
         public ICollection<Booking>? Bookings { get; set; }
 
-        
+
 
 
         public Eiendom() { }
-   
+
     }
 }

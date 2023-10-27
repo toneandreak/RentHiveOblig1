@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -22,9 +17,9 @@ namespace RentHiveOblig.Controllers
         // GET: Wishlists
         public async Task<IActionResult> Index()
         {
-              return _context.Wishlist != null ? 
-                          View(await _context.Wishlist.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Wishlist'  is null.");
+            return _context.Wishlist != null ?
+                        View(await _context.Wishlist.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Wishlist'  is null.");
         }
 
         // GET: Wishlists/Details/5
@@ -150,14 +145,14 @@ namespace RentHiveOblig.Controllers
             {
                 _context.Wishlist.Remove(wishlist);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool WishlistExists(int id)
         {
-          return (_context.Wishlist?.Any(e => e.WishlistId == id)).GetValueOrDefault();
+            return (_context.Wishlist?.Any(e => e.WishlistId == id)).GetValueOrDefault();
         }
     }
 }

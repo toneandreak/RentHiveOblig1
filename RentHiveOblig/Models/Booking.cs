@@ -7,20 +7,20 @@ namespace RentHiveOblig.Models
 
         [Key] public int BookingId { get; set; }
 
-        [Required(ErrorMessage ="GuestId is required.")]
+        [Required(ErrorMessage = "GuestId is required.")]
         public int GuestId { get; set; } //Foreign key
-        
+
         [Required(ErrorMessage = "PropertyId is required.")]
         public int PropertyId { get; set; } //Foreign key
-        
+
         [Required(ErrorMessage = "StartDate is required.")]
         public DateTime StartDate { get; set; }
-        
+
         [Required(ErrorMessage = "EndDate is required.")]
         public DateTime EndDate { get; set; }
-        
+
         [Required(ErrorMessage = "TotalPrice is required.")]
-        [Range(0, double.MaxValue, ErrorMessage =("The value of Totalprice must be positive."))]
+        [Range(0, double.MaxValue, ErrorMessage = ("The value of Totalprice must be positive."))]
         public double TotalPrice { get; set; }
 
 
