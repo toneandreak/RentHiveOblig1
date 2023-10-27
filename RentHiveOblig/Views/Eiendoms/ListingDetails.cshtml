@@ -43,7 +43,7 @@ Information about the property, bathroom, bedrooms and etc.
         <!--Title & Address--->
 
         <h1>@Model.Tittel</h1>
-        <p>@Model.City + ", " + @Model.Country</p>
+        <p>@Model.City, @Model.Country</p>
 
 
     </div>
@@ -77,6 +77,32 @@ Information about the property, bathroom, bedrooms and etc.
         <p>@Model.Beskrivelse</p>
 
     </div>
+
+
+
+
+
+    <!-----             TEMPORARILY DO NOT DELETE               ---->
+    <div>
+    
+        <p>@Model.PrisPerNatt NOK per night </p>
+        
+        <!--MAYBE CALENDER HERE-->
+        <p></p>
+
+        <!--Showing what the total price will be (PrisPerNatt x HowManyNights (gets it by calender)---->
+
+        <p>Total price @(Math.BigMul((int)Model.PrisPerNatt, 5))</p> <!--Just temp! showing total with 5 nights-->
+    
+
+        <!--Should be a form!--->
+
+        <button type="submit" class="btn btn-primary">Book now</button>
+
+    </div>
+
+
+
 
 </container>
 

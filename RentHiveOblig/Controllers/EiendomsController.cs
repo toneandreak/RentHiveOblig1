@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -237,16 +227,6 @@ namespace RentHiveOblig.Controllers
 
             }
 
-            /*
-
-            if(file1 == null && file2 == null && file3 == null)
-            {
-                _logger.LogWarning("No files has been selected -> Everything is null.");
-                
-                return (IActionResult) BadRequest();
-
-            }
-            */
 
 
             //We set the path where we want to store the file to wwwroot/Images
