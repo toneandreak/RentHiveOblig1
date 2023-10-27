@@ -5,11 +5,19 @@
     ViewData["Title"] = Model.Tittel; 
 }
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 
 <!---------
 
-                                Code Plan: 
+Code Plan: 
 
 How it will look: 
 
@@ -31,6 +39,43 @@ Information about the property, bathroom, bedrooms and etc.
 //Reviews mayube
 
 ----->
+<div class="ListingDetails">
+    <div class="DetailText">
+        <h1>Title</h1>
+        <p>Adress</p>
+        <img src="~/images/house_4_s1.jpg" alt="Listing Image">
+        <div class="descrptionText">
+            <p>Description</p>
+            <p>Ant gjester, soverom, ant seng</p>
+        </div>
+        <div class="facilities">
+            <h1>This place has following offers</h1>
+            <ul>
+                <li>Animals Allowed</li>
+                <li>Kitchen</li>
+                <li>Mountain view</li>
+            </ul>
+        </div>
+        <div class="abtHost">
+            <h1>Name of user</h1>
+            <p>This user is a superhost!</p>
+            <p>Ratings</p>
+        </div>
+        <div class="availabilty">
+            <h1> Your Hive is available for these dates, buzzz... </h1>
+            <label for="start">Start date:</label>
+
+            <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31"/>
+
+        </div>
+        
+        <div class="reviews">reviews</div>
+
+    </div>
+    
+    
+
+</div>
 
 
 
