@@ -41,13 +41,9 @@ namespace RentHiveOblig.Models
 
         [Required(ErrorMessage = "Required to fill out how many bedrooms")]
         public int Soverom { get; set; }
-<<<<<<< HEAD
-        [Required(ErrorMessage = "Required to fill out how many bathrooms")]
-=======
 
         //Bathrooms
         [Required(ErrorMessage ="Required to fill out how many bathrooms")]
->>>>>>> 0d84ef777933973ea7d67925e4c4d8ddcff5996c
         public int Bad { get; set; }
 
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
@@ -61,15 +57,9 @@ namespace RentHiveOblig.Models
         //Optional images - We should rather add a image class and make a one-to-many relationship.
         //Not a scaleable option. 
 
-<<<<<<< HEAD
-        public string? Image1 { get; set; }
-        public string? Image2 { get; set; }
-        public string? Image3 { get; set; }
-=======
         public string? Image1 { get; set; } = "/Images/PlaceholderApartmentImage"; //Adding a default image to the first image. 
         public string? Image2 { get; set; } 
         public string? Image3 { get; set; } 
->>>>>>> 0d84ef777933973ea7d67925e4c4d8ddcff5996c
 
 
 
