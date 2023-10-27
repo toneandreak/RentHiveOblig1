@@ -81,10 +81,6 @@ namespace RentHiveOblig.Models
         
 
 
-
-
-
-
         
         public Eiendom() { }
    

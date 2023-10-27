@@ -15,13 +15,13 @@
             <input type="hidden" asp-for="BookingId" />
             <div class="form-group">
                 <label asp-for="GuestId" class="control-label"></label>
-                <input asp-for="GuestId" class="form-control" />
+                <select asp-for="GuestId" class="form-control" asp-items="ViewBag.GuestId"></select>
                 <span asp-validation-for="GuestId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PropertyId" class="control-label"></label>
-                <input asp-for="PropertyId" class="form-control" />
-                <span asp-validation-for="PropertyId" class="text-danger"></span>
+                <label asp-for="EiendomId" class="control-label"></label>
+                <select asp-for="EiendomId" class="form-control" asp-items="ViewBag.EiendomId"></select>
+                <span asp-validation-for="EiendomId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
@@ -37,6 +37,11 @@
                 <label asp-for="TotalPrice" class="control-label"></label>
                 <input asp-for="TotalPrice" class="form-control" />
                 <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="accepted" /> @Html.DisplayNameFor(model => model.accepted)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -15,7 +15,7 @@ namespace RentHiveOblig.Models
 
         [ForeignKey("ApplicationUser")]
         [Required(ErrorMessage ="GuestId is required.")]
-        public int GuestId { get; set; } //Foreign key
+        public string GuestId { get; set; } //Foreign key
 
 
 
@@ -42,7 +42,6 @@ namespace RentHiveOblig.Models
         [Required(ErrorMessage = "TotalPrice is required.")]
         [Range(0, double.MaxValue, ErrorMessage =("The value of Totalprice must be positive."))]
         public double TotalPrice { get; set; }
-
 
 
         //This will change when the host accepts the booking.
