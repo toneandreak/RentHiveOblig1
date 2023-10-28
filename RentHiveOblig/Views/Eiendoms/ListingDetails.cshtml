@@ -70,48 +70,63 @@ Information about the property, bathroom, bedrooms and etc.
 <!-- /.container -->
 
 
-<container>
 
-    <!-----             TEMPORARILY DO NOT DELETE               ---->
+
+<br />
+<br />
+<br />
+
+
+    <!-----            DO NOT DELETE    !THIS IS THE FORM!           ---->
     <div>
 
-        <br />
-        <br />
-        <br />
 
-
-    <form id="sendToBooking">
-
-        <h2>THIS WILL BE THE FORM. TEMPORARILY TEXT. </h2>
 
         <p id="pricePerNight">@Model.PrisPerNatt NOK per night </p>
-        
-
-        <div class="availability">
-            <p>Date from</p>
-            <input type="date" id="startDate" />
-
-            <p>Date to</p>
-            <input type="date" id="endDate" />
-        </div>
 
 
-        <!--Showing what the total price will be (PrisPerNatt x HowManyNights (gets it by calender)---->
+        <form id="SendToBooking" method="post" asp-action="bookingRequest" asp-controller="Booking">
+
+            <input type="hidden" id="eiendomId" name="eiendomId"/>
 
 
+            <div class="form-group">
+                <label for="startDate">Date from</label>
+                <input type="date" name="startDate" id="startDate" />
+            </div>
 
-            <p>Total price <span id="totalPrice"> </span> NOK</p> <!--Just temp! showing total with 5 nights-->
+            <div class="form-group">
+                <label for="endDate">Date to</label>
+                <input type="date" name="endDate" id="endDate" />
+            </div>
 
+            <div>
+                <input type="hidden" id="totalPrice" name="totalPrice" />
+            </div>
 
+<<<<<<< HEAD
         <button type="submit" class="btn btn-primary">Book now</button>
     </form>
+=======
+            <!-- Showing what the total price will be (PrisPerNatt x HowManyNights (gets it by calendar) -->
+            <p>Total price <span id="totalPrice"> </span> NOK</p> <!-- Just temp! showing total with 5 nights -->
+
+            <button type="submit" class="btn btn-primary">Book now</button>
+    </form>
+
+>>>>>>> 9f8c74fe78fe2792821c6ba60b4857d1971dd8ec
 
     </div>
 
 
 
 
+<<<<<<< HEAD
 </container>
+=======
+
+
+>>>>>>> 9f8c74fe78fe2792821c6ba60b4857d1971dd8ec
 <script>
 
     //Calculating the total price, making it change dynamically by the date inputs.
