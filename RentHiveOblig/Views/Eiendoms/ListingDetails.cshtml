@@ -1,4 +1,5 @@
-﻿@model RentHiveOblig.Models.Eiendom
+﻿@using Microsoft.EntityFrameworkCore
+@model RentHiveOblig.Models.Eiendom
 
 
 @{
@@ -41,13 +42,18 @@ Information about the property, bathroom, bedrooms and etc.
 ----->
 <div class="ListingDetails">
     <div class="DetailText">
-        <h1>Title</h1>
-        <p>Adress</p>
-        <img src="~/images/house_4_s1.jpg" alt="Listing Image">
+
+        <h1>@Model.Tittel</h1>
+        <p>@Model.City, @Model.Country</p>
+        <img src="/@Model.Image1"/>
+        <img src="/@Model.Image2"/>
+        <img src="/@Model.Image3"/>
+
         <div class="descrptionText">
             <p>Description</p>
-            <p>Ant gjester, soverom, ant seng</p>
+            <p>@Model.Beskrivelse</p>
         </div>
+        <!-- This is possible to add, but commented out for now!
         <div class="facilities">
             <h1>This place has following offers</h1>
             <ul>
@@ -56,20 +62,24 @@ Information about the property, bathroom, bedrooms and etc.
                 <li>Mountain view</li>
             </ul>
         </div>
+        -->
         <div class="abtHost">
-            <h1>Name of user</h1>
-            <p>This user is a superhost!</p>
-            <p>Ratings</p>
+            <h1>This Hive is hosted By:@Model.ApplicationUser.Firstname</h1>
+            <h1>This is your host!</h1>
+            <h1>@Model.ApplicationUser.Firstname @Model.ApplicationUser.Lastname</h1>
+            <!--Maybe some information about the person listing the property?--->
+            <!--<p>@Model.ApplicationUser.Beskrivelse</p>-->
+            <p>@Model.Reviews</p>
         </div>
         <div class="availabilty">
-            <h1> Your Hive is available for these dates, buzzz... </h1>
+            <h1> This Hive is available for these dates, buzzz... </h1>
             <label for="start">Start date:</label>
-
-            <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31"/>
-
+            <form>
+                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"
+                <button type="submit" class="btn btn-primary">Book now</button>max="2018-12-31"/>
+            </form>
         </div>
-        
-        <div class="reviews">reviews</div>
+
 
     </div>
     
