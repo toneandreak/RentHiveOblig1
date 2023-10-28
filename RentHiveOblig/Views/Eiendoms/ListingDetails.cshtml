@@ -68,15 +68,13 @@ Information about the property, bathroom, bedrooms and etc.
             <h1>This is your host!</h1>
             <h1>@Model.ApplicationUser.Firstname @Model.ApplicationUser.Lastname</h1>
             <!--Maybe some information about the person listing the property?--->
-            <!--<p>@Model.ApplicationUser.Beskrivelse</p>-->
             <p>@Model.Reviews</p>
         </div>
         <div class="availabilty">
             <h1> This Hive is available for these dates, buzzz... </h1>
             <label for="start">Start date:</label>
             <form>
-                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"
-                <button type="submit" class="btn btn-primary">Book now</button>max="2018-12-31"/>
+                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
             </form>
         </div>
 
@@ -89,53 +87,7 @@ Information about the property, bathroom, bedrooms and etc.
 
 
 
-
-
 <container>
-
-
-    <div>
-        <!--Title & Address--->
-
-        <h1>@Model.Tittel</h1>
-        <p>@Model.City, @Model.Country</p>
-
-
-    </div>
-
-
-    <div>
-        <!-- Pictures --->
-       
-        <img src="/@Model.Image1"/>
-        <img src="/@Model.Image2" />
-        <img src="/@Model.Image3" />
-
-    </div>
-
-
-
-    <div>
-        <h4>Hosted by</h4>
-        <p>@Model.ApplicationUser.Firstname @Model.ApplicationUser.Lastname </p>
-       
-        <!--Maybe some information about the person listing the property?--->
-
-    </div>
-
-
-
-    <div>
-
-        <h4>More about the property</h4>
-
-        <p>@Model.Beskrivelse</p>
-
-    </div>
-
-
-
-
 
     <!-----             TEMPORARILY DO NOT DELETE               ---->
     <div>
