@@ -18,14 +18,35 @@
     </form>
     <a class="button-search" asp-action="Create">Create New</a>
 </h3>
+<div>
+    @using (Html.BeginForm("Index", "Eiendom", FormMethod.Get))
+    {
+        <table>
+            <tr>
+                <td>
+                    <span>
+                        Refine Search:
+                    </span>
+                    @Html.RadioButton("searchBy", "Bad", true)
+                    <textarea>Bad</textarea>
+                    @Html.RadioButton("searchBy", "Soverom", true)
+                    <textarea>Soverom</textarea>
+                    @Html.RadioButton("searchBy", "PrisPerNatt", true)
+                    <textarea>PrisPerNatt</textarea>
+                    
+                    
+                </td>
+            </tr>
+            
+        </table>
+    }
+</div>
 <br>
 <br>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Image1)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tittel)
             </th>
