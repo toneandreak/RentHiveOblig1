@@ -40,44 +40,34 @@ Information about the property, bathroom, bedrooms and etc.
 //Reviews mayube
 
 ----->
-<div class="ListingDetails">
-    <div class="DetailText">
 
-        <h1>@Model.Tittel</h1>
-        <p>@Model.City, @Model.Country</p>
-        <img src="/@Model.Image1"/>
-        <img src="/@Model.Image2"/>
-        <img src="/@Model.Image3"/>
+<!-- Page Content -->
+<div class="container shadow p-3 mb-5 bg-white rounded">
 
-        <div class="descrptionText">
-            <p>Description</p>
-            <p>@Model.Beskrivelse</p>
-        </div>
-        <!-- This is possible to add, but commented out for now!
-        <div class="facilities">
-            <h1>This place has following offers</h1>
-            <ul>
-                <li>Animals Allowed</li>
-                <li>Kitchen</li>
-                <li>Mountain view</li>
-            </ul>
-        </div>
-        -->
-        <div class="abtHost">
-            <h1>This Hive is hosted By:@Model.ApplicationUser.Firstname</h1>
-            <h1>This is your host!</h1>
-            <h1>@Model.ApplicationUser.Firstname @Model.ApplicationUser.Lastname</h1>
-            <!--Maybe some information about the person listing the property?--->
-            <p>@Model.Reviews</p>
-        </div>
-
-
-    </div>
-    
-    
-
+    <!-- Heading -->
+    <h1 class="my-4">@Model.Tittel
+        <small>@Model.City, @Model.Country</small>
+    </h1>
+<div class="image-grid">
+    <img class="image-grid-col-2 image-grid-row-2"  src="@Model.Image1" alt="">
+    <img class="img-fluid" src="@Model.Image1" alt="">
+    <img class="img-fluid" src="@Model.Image1" alt="">
 </div>
-
+    <!-- TEMP WILL DELETE SOON 
+        <div class="col-md-5">
+            <img class="img-fluid" src="@Model.Image1" alt="">
+        </div> -->
+        <div class="col-md-4">
+            <h3 class="my-3">Beehive description</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. 
+                Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+            <h3 class="my-3">Queen Bee Description</h3>
+            <small>@Model.ApplicationUser.Firstname</small>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
+                Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+        </div>
+</div>
+<!-- /.container -->
 
 
 <container>
@@ -114,10 +104,7 @@ Information about the property, bathroom, bedrooms and etc.
 
 
         <button type="submit" class="btn btn-primary">Book now</button>
-
-
     </form>
-
 
     </div>
 
@@ -125,10 +112,6 @@ Information about the property, bathroom, bedrooms and etc.
 
 
 </container>
-
-
-
-
 <script>
 
     //Calculating the total price, making it change dynamically by the date inputs.
