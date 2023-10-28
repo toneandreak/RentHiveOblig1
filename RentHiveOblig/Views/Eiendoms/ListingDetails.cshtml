@@ -88,18 +88,21 @@ Information about the property, bathroom, bedrooms and etc.
         <br />
         <br />
         <br />
-    <form>
+
+
+    <form id="sendToBooking">
 
         <h2>THIS WILL BE THE FORM. TEMPORARILY TEXT. </h2>
 
-        <p>@Model.PrisPerNatt NOK per night </p>
+        <p id="pricePerNight">@Model.PrisPerNatt NOK per night </p>
         
+
         <div class="availability">
             <p>Date from</p>
-            <input type="date" id="date" />
+            <input type="date" id="startDate" />
 
             <p>Date to</p>
-            <input type="date" />
+            <input type="date" id="endDate" />
         </div>
 
 
@@ -107,9 +110,8 @@ Information about the property, bathroom, bedrooms and etc.
 
 
 
-        <p>Total price @(Math.BigMul((int)Model.PrisPerNatt, 5)) NOK</p> <!--Just temp! showing total with 5 nights-->
-        <input type="hidden"  />
-    
+            <p>Total price <span id="totalPrice"> </span> NOK</p> <!--Just temp! showing total with 5 nights-->
+
 
         <button type="submit" class="btn btn-primary">Book now</button>
 
@@ -124,6 +126,62 @@ Information about the property, bathroom, bedrooms and etc.
 
 </container>
 
+
+
+
+<script>
+
+    //Calculating the total price, making it change dynamically by the date inputs.
+
+
+
+
+    function calculateDayDifference() {
+
+        //Getting the value of start and end date.
+        var startDate = new Date(document.getElementById("startDate").value);
+        var endDate = new Date(document.getElementById("endDate").value);
+
+        //Caluclating difference
+        //Inspired by: https://stackoverflow.com/questions/3224834/get-difference-between-2-dates-in-javascript
+
+        var timeDifference = endDate.getTime() - startDate.getTime();
+        var diffDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+
+        return diffDays;
+    }
+
+    
+    function calculateTotalPrice() {
+
+        var diffDays = calculateDayDifference(); 
+
+        console.log("DiffDays chosen is ", diffDays);
+        const pricePerNight = parseInt(document.getElementById("pricePerNight").textContent);
+        var totalPrice = diffDays * pricePerNight;
+
+        //If check-in and check-out are the same day.
+        if (diffDays === 0) {
+            totalPrice = pricePerNight;
+            document.getElementById("totalPrice").textContent = totalPrice;
+        }
+        else if (diffDays > 0) {
+            document.getElementById("totalPrice").textContent = totalPrice;
+        }
+
+        //If startDate > enddate
+        else {
+            document.getElementById("totalPrice").textContent = "Invalid";
+        }
+    }
+
+
+    document.getElementById("startDate").addEventListener("change", calculateTotalPrice);
+    document.getElementById("endDate").addEventListener("change", calculateTotalPrice);
+
+
+</script>
 
 
 
