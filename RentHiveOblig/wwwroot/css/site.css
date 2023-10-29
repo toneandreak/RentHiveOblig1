@@ -1,8 +1,22 @@
-ody {
+body {
+    margin-bottom: 60px;
+    background-color: #fff;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
+
+h1 {
+    font-family: "Comfortaa";
+}
+
+h2 {
+    font-family: "Comfortaa";
+}
+p {
+    font-family: "Comfortaa";
+}
+
 header {
     text-align: center;
     padding: 20px 20px;
@@ -50,24 +64,7 @@ html {
     background-image: url('/images/hamburger-menu.ico')
 }
 
-
-
-body {
-    margin-bottom: 60px;
-    background-color: #fff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-h1 {
-    font-family: "Comfortaa";
-}
-h2 {
-    font-family: "Comfortaa";
-}
-
-
-
+/* Image Carousel 
 .mainCarousel {
     top: 0px;
     left: 0px;
@@ -99,8 +96,7 @@ h2 {
     width: 30%;
     border-radius: 30px;
 }
-
-
+*/
 
 .button-search {
     align-items: center;
@@ -296,6 +292,10 @@ h2 {
         animation-duration: 1.5s;
     }
 
+
+/* Start of ListingDetails site*/
+
+/*Creating a grid for the pictures*/
 .image-grid {
     --gap: 16px;
     --num-cols: 3;
@@ -308,12 +308,14 @@ h2 {
     gap: var(--gap);
 }
 
+/*choosing size for columns*/
 .image-grid > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/*Placements for images*/
 .image-grid-col-2 {
     grid-column: span 2;
 }
@@ -335,6 +337,6 @@ h2 {
             font-size: 1.2em;
         }
     }
-
+/*End of ListingDetails site*/
 
 
