@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
+using RentHiveOblig.ViewModels;
+using System.Security.Claims;
 
 namespace RentHiveOblig.Controllers
 {
@@ -10,12 +13,12 @@ namespace RentHiveOblig.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<BookingsController> _logger;
-        private readonly ApplicationUser _user;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public BookingsController(ApplicationDbContext context, ApplicationUser applicationUser, ILogger<BookingsController> logger)
+        public BookingsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<BookingsController> logger)
         {
             _context = context;
-            _user = applicationUser; 
+            _userManager = userManager; 
             _logger = logger;
         }
 
@@ -24,41 +27,60 @@ namespace RentHiveOblig.Controllers
         [Authorize]
         public async Task<IActionResult> SendToBooking(DateTime startTime, DateTime endTime, int eiendomId, double totalPrice)
         {
-
             var Booking = new Booking()
             {
-                GuestId = _user.Id,
+                GuestId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 StartDate = startTime,
                 EndDate = endTime,
                 PropertyId = eiendomId,
                 TotalPrice = totalPrice,
                 BookingAccepted = false
-
             };
 
-            return View("BookingRequest", Booking); 
+            var Eiendom = _context.Eiendom.Find(eiendomId);
 
+            var viewModel = new BookingRequestViewModel
+            {
+                Booking = Booking,
+                Eiendom = Eiendom
+            };
+
+            return View("BookingRequest", viewModel);
         }
 
+        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> BookingRequest(DateTime startTime, DateTime endTime, int eiendomId, double totalPrice, string guestId)
+        public async Task<IActionResult> SendBookingRequest(Booking model)
         {
 
-            _logger.LogInformation($"GuestID {guestId} is requesting a booking.");
-            _logger.LogInformation($"UserId is {_user.Id}");
+            _logger.LogInformation($"UserId is {model.GuestId}");
+            _logger.LogInformation($"Booking request: {model}");
 
-            if(guestId != _user.Id || guestId == null)
-            {
-                _logger.LogError($"GuestID is the same like user_id or is null.");
-                return Forbid(); 
+
+
+            if (ModelState.IsValid) {
+                
+                
+                try
+                {
+
+                    model.BookingAccepted = false; 
+                    _context.Booking.Add(model);
+                    await _context.SaveChangesAsync();
+                  _logger.LogInformation($"Booking request confirmed, saved to DB");
+
+
+                }catch(Exception ex)
+                {
+                    _logger.LogError(ex, "An error occured while creating the booking.");
+
+                }
+
+                _logger.LogInformation("Booking created"); 
             }
+            return RedirectToAction("SuccessPage"); //Temporarily, need to change to redirect somewhere else.
 
-
-
-            return View();
         }
-
-
 
     }
 }

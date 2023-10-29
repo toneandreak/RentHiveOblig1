@@ -84,31 +84,28 @@ Information about the property, bathroom, bedrooms and etc.
         <br />
 
 
-        <form id="sendToBooking">
-
+        <form asp-action="SendToBooking" asp-controller="Bookings" id="SendToBooking">
             <h2>THIS WILL BE THE FORM. TEMPORARILY TEXT. </h2>
 
+
             <p id="pricePerNight">@Model.PrisPerNatt NOK per night </p>
-
-
+           
             <div class="availability">
                 <p>Date from</p>
-                <input type="date" id="startDate" />
-
+                <input type="date" id="startDate" name="startTime" />
                 <p>Date to</p>
-                <input type="date" id="endDate" />
+                <input type="date" id="endDate" name="endTime" />
+
             </div>
 
+            <!-- Add hidden fields for eiendomId and totalPrice -->
+            <input type="hidden" name="eiendomId" value="@Model.EiendomID" />
+            <input type="hidden" name="totalPrice" id="totalPriceHiddenField" />
 
-            <!--Showing what the total price will be (PrisPerNatt x HowManyNights (gets it by calender)---->
-
-
-
-            <p>Total price <span id="totalPrice"> </span> NOK</p> <!--Just temp! showing total with 5 nights-->
-
-
+            <p>Total price <span id="totalPrice"> </span> NOK</p>
             <button type="submit" class="btn btn-primary">Book now</button>
         </form>
+
 
     </div>
 
@@ -152,9 +149,12 @@ Information about the property, bathroom, bedrooms and etc.
         if (diffDays === 0) {
             totalPrice = pricePerNight;
             document.getElementById("totalPrice").textContent = totalPrice;
+            document.getElementById("totalPriceHiddenField").value = totalPrice;
+
         }
         else if (diffDays > 0) {
             document.getElementById("totalPrice").textContent = totalPrice;
+            document.getElementById("totalPriceHiddenField").value = totalPrice;
         }
 
         //If startDate > enddate

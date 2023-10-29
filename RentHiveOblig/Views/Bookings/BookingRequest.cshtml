@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model RentHiveOblig.Models.Booking;
+@model RentHiveOblig.ViewModels.BookingRequestViewModel;
 @inject UserManager<ApplicationUser> UserManager
 
 @*
@@ -60,7 +60,7 @@ A button to send the booking request to the host.
 
 
 
-<form asp-action="Book" method="post">
+<form asp-action="SendBookingRequest" method="post">
 
         <div class="row">
 
@@ -71,7 +71,7 @@ A button to send the booking request to the host.
                 <h2>Trip Details</h2>
 
                 <p>Dates</p>
-                <p>@Model.StartDate - @Model.EndDate</p>
+                <p>@Model.Booking.EndDate - @Model.Booking.StartDate</p>
 
 
 
@@ -92,11 +92,11 @@ A button to send the booking request to the host.
                 <p>@Model.Eiendom.Tittel</p>
                 <hr />
                 <h3>Price</h3>
-                <p>@Model.Eiendom.PrisPerNatt NOK  X  (QuantityNightFormula) nights</p>
+                <p>@Model.Eiendom.PrisPerNatt  X  (QuantityNightFormula) nights</p>
 
                 <hr />
 
-                <p>Total (NOK) @Model.TotalPrice</p>
+                <p>Total (NOK) @Model.Booking.TotalPrice</p>
 
 
                 <button type="submit" class="btn btn-primary">Request Booking</button>
