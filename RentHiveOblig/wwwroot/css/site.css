@@ -1,8 +1,22 @@
-ody {
+body {
+    margin-bottom: 60px;
+    background-color: #fff;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
+
+h1 {
+    font-family: "Comfortaa";
+}
+
+h2 {
+    font-family: "Comfortaa";
+}
+p {
+    font-family: "Comfortaa";
+}
+
 header {
     text-align: center;
     padding: 20px 20px;
@@ -31,14 +45,11 @@ html {
 }
 
 
-.nav-link {
-    color: #000 !important;
-}
-
 /* Changing the link color to a lighter shade when hovered */
 .nav-link:hover {
     color: #ddd !important;
 }
+
 
 /* Styling the navbar brand (website name/logo) */
 .navbar-brand {
@@ -46,29 +57,14 @@ html {
     font-weight: bold;
 }
 
+
+
 /* Changing the color of the navbar-toggler icon (for mobile view) */
 .navbar-toggler-icon {
-    filter: invert(100%) !important; /* Inverting the colors to make it white */
+    background-image: url('/images/hamburger-menu.ico')
 }
 
-
-
-body {
-    margin-bottom: 60px;
-    background-color: #fff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-h1 {
-    font-family: "Comfortaa";
-}
-h2 {
-    font-family: "Comfortaa";
-}
-
-
-
+/* Image Carousel 
 .mainCarousel {
     top: 0px;
     left: 0px;
@@ -95,13 +91,12 @@ h2 {
 }
 
 .listingCarousel {
-    margin-top: 200px;
+    margin-top: 200px; 
     height: 30%;
     width: 30%;
     border-radius: 30px;
 }
-
-
+*/
 
 .button-search {
     align-items: center;
@@ -172,7 +167,7 @@ h2 {
 }
 
 
-/* Delete this soon if not used
+
     .bee-container {
         height: 15em;
         width: 15em;
@@ -204,7 +199,7 @@ h2 {
         box-shadow: inset 0 -1.56em rgba(0, 0, 0, 0.15);
     }
 
-        .bee:before {
+    .bee:before {
             position: absolute;
             content: "";
             height: 0.87em;
@@ -215,7 +210,7 @@ h2 {
             left: 1.25em;
         }
 
-        .bee:after {
+    .bee:after {
             position: absolute;
             content: "";
             height: 0.31em;
@@ -224,7 +219,7 @@ h2 {
             border-radius: 0.31em;
             top: 3.43em;
             left: 11.87em;
-        }
+        }        
 
     .wings {
         position: absolute;
@@ -236,7 +231,7 @@ h2 {
         left: 11.25em;
     }
 
-        .wings:before {
+    .wings:before {
             position: absolute;
             content: "";
             height: 5em;
@@ -244,9 +239,9 @@ h2 {
             background-color: #ea92b9;
             border-radius: 5em 5em 5em 0;
             left: 4.68em;
-        }
+        }  
 
-        .wings:after {
+    .wings:after {
             height: 3.75em;
             width: 3.75em;
             position: absolute;
@@ -255,8 +250,8 @@ h2 {
             border-radius: 50%;
             top: 1.12em;
             left: 1.12em;
-        }
-
+        }  
+    
     .shine {
         position: absolute;
         height: 1.25em;
@@ -273,7 +268,7 @@ h2 {
         font-size:4.25em;
     }
 
-        .shine:before {
+    .shine:before {
             position: absolute;
             content: "";
             height: 3.12em;
@@ -284,8 +279,8 @@ h2 {
             top: 4.68em;
             left: 1.87em;
             box-shadow: 2.5em 1.25em #0b2b35;
-        }
-     */
+        }    
+     
     .slideshow-container {
         max-width: 1000px;
         position: relative;
@@ -297,11 +292,51 @@ h2 {
         animation-duration: 1.5s;
     }
 
+
+/* Start of ListingDetails site*/
+
+/*Creating a grid for the pictures*/
+.image-grid {
+    --gap: 16px;
+    --num-cols: 3;
+    --row-height: 300px;
+    box-sizing: border-box;
+    padding: var(--gap);
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+}
+
+/*choosing size for columns*/
+.image-grid > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Placements for images*/
+.image-grid-col-2 {
+    grid-column: span 2;
+}
+
+.image-grid-row-2 {
+    grid-row: span 2;
+}
+
+/* Anything udner 1024px */
+@media screen and (max-width: 1024px) {
+    .image-grid {
+        --num-cols: 2;
+        --row-height: 200px;
+    }
+}
+
     @media screen and (min-width: 700px) {
         .container {
             font-size: 1.2em;
         }
     }
-
+/*End of ListingDetails site*/
 
 

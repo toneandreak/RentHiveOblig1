@@ -61,18 +61,18 @@
         width: 200px;
     }
 
-   
 
-        #featured-listings .listing {
-            border: 1px solid #e0e0e0;
-            padding: 10px;
-            margin: 10px;
-            height: 400px;
-            width: 250px;
-            float: left; /* This allows horizontal scrolling */
-        }
 
-        #featured-listings .listing-description { 
+    #featured-listings .listing {
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        margin: 10px;
+        height: 400px;
+        width: 250px;
+        float: left; /* This allows horizontal scrolling */
+    }
+
+    #featured-listings .listing-description { 
             font-size: 16px;
             overflow: hidden;
             display: -webkit-box;
@@ -80,12 +80,12 @@
             -webkit-box-orient: vertical;
         }
 
-        #featured-listings .listing-price { 
-            font-size: 18px;
-        }
+    #featured-listings .listing-price {
+        font-size: 18px;
+    }
 
 
-        #featured-listings .listing img {
+    #featured-listings .listing img {
             height: 195px;
             width: 225px;
             object-fit: cover;
@@ -130,7 +130,7 @@
 @section CustomHeader {
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3 ">
 
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RentHive</a>
@@ -165,7 +165,7 @@
                 <!--Search button inspired by : https://getcssscan.com/css-buttons-examples-->
                 <input type="text" id="destination" placeholder="Your destination" />
                 <input type="datetime-local" id="date" placeholder="Select date">
-                <button class="button-search" role="button"> SEARCH</button>
+                <button class="btn btn-primary btn-default" input type="submit" value="Search">Search!</button>
 
                 <!-- Prøver å få searchen til å searche riktig, WORK IN PROGRESS
                     <form id="frmsearch" action="~/Catalog/Search" method="get">

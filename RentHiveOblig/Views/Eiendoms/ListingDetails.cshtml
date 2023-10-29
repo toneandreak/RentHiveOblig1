@@ -3,7 +3,7 @@
 
 
 @{
-    ViewData["Title"] = Model.Tittel; 
+    ViewData["Title"] = Model.Tittel;
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -18,9 +18,9 @@
 
 <!---------
 
-Code Plan: 
+Code Plan:
 
-How it will look: 
+How it will look:
 
 Title
 Address
@@ -32,79 +32,83 @@ Name and some information about the host?
 
 The property description.
 
-Information about the property, bathroom, bedrooms and etc. 
+Information about the property, bathroom, bedrooms and etc.
 
 
-//Calender maybe? 
+//Calender maybe?
 
 //Reviews mayube
 
 ----->
-<div class="ListingDetails">
-    <div class="DetailText">
+<!-- Page Content -->
+<div class="container shadow p-3 mb-5 bg-white rounded">
 
-        <h1>@Model.Tittel</h1>
-        <p>@Model.City, @Model.Country</p>
-        <img src="/@Model.Image1"/>
-        <img src="/@Model.Image2"/>
-        <img src="/@Model.Image3"/>
-
-        <div class="descrptionText">
-            <p>Description</p>
-            <p>@Model.Beskrivelse</p>
-        </div>
-        <!-- This is possible to add, but commented out for now!
-        <div class="facilities">
-            <h1>This place has following offers</h1>
-            <ul>
-                <li>Animals Allowed</li>
-                <li>Kitchen</li>
-                <li>Mountain view</li>
-            </ul>
-        </div>
-        -->
-        <div class="abtHost">
-            <h1>This Hive is hosted By:@Model.ApplicationUser.Firstname</h1>
-            <h1>This is your host!</h1>
-            <h1>@Model.ApplicationUser.Firstname @Model.ApplicationUser.Lastname</h1>
-            <!--Maybe some information about the person listing the property?--->
-            <p>@Model.Reviews</p>
-        </div>
-        <div class="availabilty">
-            <h1> This Hive is available for these dates, buzzz... </h1>
-            <label for="start">Start date:</label>
-            <form>
-                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
-            </form>
-        </div>
-
-
+    <!-- Heading -->
+    <h1 class="my-4">
+        @Model.Tittel
+        <small>@Model.City, @Model.Country</small>
+    </h1>
+    <div class="image-grid">
+        <img class="image-grid-col-2 image-grid-row-2" src="@Model.Image1" alt="">
+        <img class="img-fluid" src="@Model.Image1" alt="">
+        <img class="img-fluid" src="@Model.Image1" alt="">
     </div>
-    
-    
-
+    <!-- TEMP WILL DELETE SOON
+        <div class="col-md-5">
+            <img class="img-fluid" src="@Model.Image1" alt="">
+        </div> -->
+    <div class="col-md-4">
+        <h3 class="my-3">Beehive description</h3>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
+            Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
+        </p>
+        <h3 class="my-3">Queen Bee Description</h3>
+        <small>@Model.ApplicationUser.Firstname</small>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
+            Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
+        </p>
+    </div>
 </div>
-
+<!-- /.container -->
 
 
 <container>
 
     <!-----             TEMPORARILY DO NOT DELETE               ---->
     <div>
-    
-        <p>@Model.PrisPerNatt NOK per night </p>
-        
-        <!--MAYBE CALENDER HERE-->
-        <p></p>
 
-        <!--Showing what the total price will be (PrisPerNatt x HowManyNights (gets it by calender)---->
+        <br />
+        <br />
+        <br />
 
-        <p>Total price @(Math.BigMul((int)Model.PrisPerNatt, 5))</p> <!--Just temp! showing total with 5 nights-->
-    
 
-        <!--Should be a form!--->
+        <form id="sendToBooking">
 
-        <button type="submit" class="btn btn-primary">Book now</button>
+            <h2>THIS WILL BE THE FORM. TEMPORARILY TEXT. </h2>
+
+            <p id="pricePerNight">@Model.PrisPerNatt NOK per night </p>
+
+
+            <div class="availability">
+                <p>Date from</p>
+                <input type="date" id="startDate" />
+
+                <p>Date to</p>
+                <input type="date" id="endDate" />
+            </div>
+
+
+            <!--Showing what the total price will be (PrisPerNatt x HowManyNights (gets it by calender)---->
+
+
+
+            <p>Total price <span id="totalPrice"> </span> NOK</p> <!--Just temp! showing total with 5 nights-->
+
+
+            <button type="submit" class="btn btn-primary">Book now</button>
+        </form>
 
     </div>
 
@@ -112,10 +116,56 @@ Information about the property, bathroom, bedrooms and etc.
 
 
 </container>
+<script>
+
+    //Calculating the total price, making it change dynamically by the date inputs.
 
 
 
 
+    function calculateDayDifference() {
+
+        //Getting the value of start and end date.
+        var startDate = new Date(document.getElementById("startDate").value);
+        var endDate = new Date(document.getElementById("endDate").value);
+
+        //Caluclating difference
+        //Inspired by: https://stackoverflow.com/questions/3224834/get-difference-between-2-dates-in-javascript
+
+        var timeDifference = endDate.getTime() - startDate.getTime();
+        var diffDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
 
 
+        return diffDays;
+    }
 
+
+    function calculateTotalPrice() {
+
+        var diffDays = calculateDayDifference();
+
+        console.log("DiffDays chosen is ", diffDays);
+        const pricePerNight = parseInt(document.getElementById("pricePerNight").textContent);
+        var totalPrice = diffDays * pricePerNight;
+
+        //If check-in and check-out are the same day.
+        if (diffDays === 0) {
+            totalPrice = pricePerNight;
+            document.getElementById("totalPrice").textContent = totalPrice;
+        }
+        else if (diffDays > 0) {
+            document.getElementById("totalPrice").textContent = totalPrice;
+        }
+
+        //If startDate > enddate
+        else {
+            document.getElementById("totalPrice").textContent = "Invalid";
+        }
+    }
+
+
+    document.getElementById("startDate").addEventListener("change", calculateTotalPrice);
+    document.getElementById("endDate").addEventListener("change", calculateTotalPrice);
+
+
+</script>
