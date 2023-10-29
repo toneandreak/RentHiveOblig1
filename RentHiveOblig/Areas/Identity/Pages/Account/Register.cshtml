@@ -4,6 +4,108 @@
     ViewData["Title"] = "Register";
 }
 
+<!--NEW DESIGN-->
+<section class="vh-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 text-black">
+
+                <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <h1 style="margin-top: 5%; font-size: 2.4em;">Welcome to RentHive</h1>
+                        <h2>Create a new account.</h2>
+                        <hr/>
+
+
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-floating" style="margin-bottom: 5%;">
+                            <input asp-for="Input.Firstname" class="form-control" autocomplete="firstname" aria-required="true"/>
+                            <label asp-for="Input.Firstname"></label>
+                            <span asp-validation-for="Input.Firstname" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating" style="margin-bottom: 5%;">
+                            <input asp-for="Input.Lastname" class="form-control" autocomplete="surname" aria-required="true"/>
+                            <label asp-for="Input.Lastname"></label>
+                            <span asp-validation-for="Input.Lastname" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating" style="margin-bottom: 5%;">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
+                            <label asp-for="Input.Email"></label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-floating" style="margin-bottom: 5%;">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
+                            <label asp-for="Input.Password"></label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating" style="margin-bottom: 5%;">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"/>
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="background-color: black; border-color: black;">Register</button>
+                        
+                        <div class="col col-lg-9">
+                            <section>
+                                <h3>Use another service to register.</h3>
+                                <hr />
+                                @{
+                                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                    {
+                                        <div>
+                                            <p>
+                                                There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                                                    about setting up this ASP.NET application to support logging in via external services</a>.
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                            <div>
+                                                <p>
+                                                    @foreach (var provider in Model.ExternalLogins!)
+                                                    {
+                                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                    }
+                                                </p>
+                                            </div>
+                                        </form>
+                                    }
+                                }
+                            </section>
+                        </div>
+
+                    </form>
+                    
+                       
+
+                </div>
+
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+                <img src="~/images/Bees.jpg"
+                     alt="Registration page" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!--NEW DESIGN-->
+
+
+<!--ORIGINAL DESIGN, TEMP!! DELETE SOON
 <h1 style="margin-top: 5%; font-size: 2.4em;">Welcome to RentHive</h1>
 
 <div class="row">
@@ -48,38 +150,5 @@
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="background-color: black; border-color: black;">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+-->
+    
