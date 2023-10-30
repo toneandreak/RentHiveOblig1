@@ -2,9 +2,7 @@
 @model RentHiveOblig.ViewModels.BookingRequestViewModel;
 @inject UserManager<ApplicationUser> UserManager
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
 @{
     ViewData["Title"] = "Confirm Booking";
 
@@ -12,27 +10,6 @@
     var user = UserManager.FindByIdAsync(userId).Result;
 }
 
-
-
-<!------         PAGE OVERVIEW
-
-To come to this form: You have to fill out the dates in Eiendoms > ListingDetails and then click a submit button for booking.
-
-
-A form to request the booking for the selected property
-
-
-Should consist of:
-
-The property title. A small image
-
-Days selected for the booking. Should also be able to change it from here.
-
-
-
-A button to send the booking request to the host.
-
--------->
 
 <div class="container">
     <h1>Request Booking</h1>
@@ -48,7 +25,6 @@ A button to send the booking request to the host.
                 <h2>Trip Details</h2>
                 <p>Dates chosen</p>
 
-                <!---HIDDEN UNTIL SOMEONE CLICKS changeDates-->
                 <div id="dateInputs">
                     <input type="date" asp-for="Booking.StartDate" />
                     <input type="date" asp-for="Booking.EndDate" />
@@ -69,8 +45,21 @@ A button to send the booking request to the host.
                 <hr />
                 <p>Total @Model.Booking.TotalPrice.ToString("# ##0") NOK</p>
 
+
+
+                <input type="hidden" name="PropertyId" value="@Model.Booking.EiendomId" />
+                <input type="hidden" asp-for="Booking.GuestId" />
+                <input type="hidden" asp-for="Booking.EiendomId" />
+                <input type="hidden" asp-for="Booking.TotalPrice" />
+                <input type="hidden" asp-for="Booking.BookingStatus" />
+                <input type="hidden" asp-for="Booking.QuantityDays" />
+                
+                <div>@Model.Booking.EiendomId</div>
+
                 <button type="submit" class="btn btn-primary">Request Booking</button>
+
             </div>
+    </form>
 
             <!----  Right column ---->
             <div class="col-md-4" id="imageDetails">
@@ -78,6 +67,5 @@ A button to send the booking request to the host.
                     <img class="img-responsive" src="@Model.Eiendom.Image1" />
                 </div>
             </div>
-        </div>
-    </form>
 </div>
+       

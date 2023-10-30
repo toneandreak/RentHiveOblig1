@@ -63,20 +63,20 @@ namespace RentHiveOblig.Controllers
             }
 
 
-            var Booking = new Booking()
+            var booking = new Booking()
             {
                 GuestId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 StartDate = startTime,
                 EndDate = endTime,
-                PropertyId = eiendomId,
+                EiendomId = eiendomId,
                 TotalPrice = totalPrice,
-                BookingAccepted = false,
+                BookingStatus = BookingStatus.Pending,
                 QuantityDays = diffDays
             };
 
             var viewModel = new BookingRequestViewModel
             {
-                Booking = Booking,
+                Booking = booking,
                 Eiendom = eiendom
             };
 
@@ -87,61 +87,96 @@ namespace RentHiveOblig.Controllers
 
 
         //This will actually create the booking. 
+        //I know there are redundancies, but I made it work. Might fix it later. 
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> SendBookingRequest(Booking model)
+        public async Task<IActionResult> SendBookingRequest(BookingRequestViewModel model)
         {
-            _logger.LogInformation($"UserId is {model.GuestId}");
-            _logger.LogInformation($"Booking request: {model}");
+            //For some reason GuestId is not getting populated into the model, so I have to do it here too. 
+            var guestId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            
+            //A lot of loggers for debugging...
+            _logger.LogInformation($"UserId is {guestId}");
+            _logger.LogInformation($"PropertyId is {model.Booking.EiendomId}");
+            _logger.LogInformation($"Checking model startDate: {model.Booking.StartDate}");
+            _logger.LogInformation($"Checking model endDate: {model.Booking.EndDate}");
+            _logger.LogInformation($"Checking model guestId: {model.Booking.GuestId}");
+            _logger.LogInformation($"Checking model bookingstatus: {model.Booking.BookingStatus}");
+            _logger.LogInformation($"Checking model QuantityDays: {model.Booking.QuantityDays}");
+            _logger.LogInformation($"Checking model TotalPrice: {model.Booking.TotalPrice}");
+
+            var eiendom = await _context.Eiendom.FindAsync(model.Booking.EiendomId);
+
+            if (eiendom == null)
+            {
+                _logger.LogError($"Property with ID {model.Booking.EiendomId} not found.");
+                ModelState.AddModelError("PropertyId", "Invalid Property ID");
+                return View("EiendomNotFound"); 
+            }
+
+
+            var viewModel = new BookingRequestViewModel
+            {
+                Booking = model.Booking,
+                Eiendom = eiendom,
+            };
+
+            //For some reason, the ApplicationUser is invalid in Modelstate, so I had to remove it from the modelState, however I am doing the control manually. 
+            //https://www.appsloveworld.com/entity-framework/100/61/modelstate-errors-for-all-navigation-properties?expand_article=1
+            ModelState.Remove("Booking.ApplicationUser");
+            ModelState.Remove("Booking.Eiendom");
+            ModelState.Remove("Eiendom");
+            ModelState.Remove("GuestId"); 
 
 
             if (ModelState.IsValid)
             {
+                // Validation for the dates: start and end date
 
-                //Validation for the dates, starty- ande nddate
 
-
-                //checking if startdate is in the past, does not make sense
-                if (model.StartDate < DateTime.Now.Date)
+                // Checking if start date is in the past
+                if (viewModel.Booking.StartDate < DateTime.Now.Date)
                 {
                     _logger.LogWarning("Start date is in the past.");
                     ModelState.AddModelError("StartDate", "Start date cannot be in the past.");
-                    return View(model);
+                    return View("BookingRequest", viewModel);
                 }
 
-                if (model.EndDate <= model.StartDate)
+                // Checking if end date is earlier or the same as start date
+                if (viewModel.Booking.EndDate <= model.Booking.StartDate)
                 {
                     _logger.LogWarning("End date must be after start date.");
                     ModelState.AddModelError("EndDate", "End date must be after start date.");
-                    return View(model);
+                    return View("BookingRequest", viewModel);
                 }
 
+                // If the property doesn't exist
+                if (eiendom == null)
+                {
+                    _logger.LogError($"Property with ID {model.Booking.EiendomId} not found.");
+                    ModelState.AddModelError("PropertyId", "Invalid Property ID");
+                    return View("BookingRequest", viewModel);
+                }
 
                 try
                 {
+                    // Calculating the diffDays in server-side for extra security
+                    int diffDays = (model.Booking.EndDate - model.Booking.StartDate).Days;
+                    model.Booking.QuantityDays = diffDays;
 
-
-                    //Calculating the diffDays in serverside for extra security
-                    int diffDays = (model.EndDate - model.StartDate).Days;
-                    model.QuantityDays = diffDays;
-
- 
-                    //Getting pricePerNIght
-                    var eiendom = await _context.Eiendom.FindAsync(model.PropertyId);
-                    model.TotalPrice = diffDays * eiendom.PrisPerNatt;
-
-
+                    // Getting pricePerNight
+                    model.Booking.TotalPrice = diffDays * eiendom.PrisPerNatt;
 
                     var newBooking = new Booking
                     {
-                        StartDate = model.StartDate,
-                        EndDate = model.EndDate,
-                        GuestId = model.GuestId,
-                        PropertyId = model.PropertyId,
-                        BookingAccepted = false, 
-                        TotalPrice = model.TotalPrice,
-                        QuantityDays = model.QuantityDays
+                        StartDate = model.Booking.StartDate,
+                        EndDate = model.Booking.EndDate,
+                        GuestId = guestId,
+                        EiendomId = model.Booking.EiendomId,
+                        BookingStatus = BookingStatus.Pending,
+                        TotalPrice = model.Booking.TotalPrice,
+                        QuantityDays = model.Booking.QuantityDays
                     };
 
                     _context.Booking.Add(newBooking);
@@ -151,25 +186,19 @@ namespace RentHiveOblig.Controllers
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "An error occurred while creating the booking.");
+                    return View("BookingRequest", viewModel); 
                 }
 
                 _logger.LogInformation("Booking created");
                 return RedirectToAction("SuccessPage"); // Temporarily, need to change to redirect somewhere else.
             }
+            else
+            {
+ }
 
-
-            return View(model); // Something went wrong
+                return View("BookingRequest", viewModel); // Something went wrong
+            }
         }
 
-
-
-
-
-
-
-
-
-
-
     }
-}
+

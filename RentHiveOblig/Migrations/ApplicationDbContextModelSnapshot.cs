@@ -3,23 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentHiveOblig.DAL;
 
 #nullable disable
 
-namespace RentHiveOblig.Data.Migrations
+namespace RentHiveOblig.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231013103407_OppdatertBruker")]
-    partial class OppdatertBruker
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.21")
+                .HasAnnotation("ProductVersion", "6.0.23")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -241,16 +239,20 @@ namespace RentHiveOblig.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 1L, 1);
 
-                    b.Property<int>("EiendomID")
+                    b.Property<int>("BookingStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EiendomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GuestId")
-                        .HasColumnType("int");
+                    b.Property<string>("GuestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PropertyId")
+                    b.Property<int>("QuantityDays")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -261,7 +263,9 @@ namespace RentHiveOblig.Data.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("EiendomID");
+                    b.HasIndex("EiendomId");
+
+                    b.HasIndex("GuestId");
 
                     b.ToTable("Booking");
                 });
@@ -273,6 +277,9 @@ namespace RentHiveOblig.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrukerConversationId"), 1L, 1);
+
+                    b.Property<int>("BrukerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
@@ -317,10 +324,22 @@ namespace RentHiveOblig.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EiendomID"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Bad")
                         .HasColumnType("int");
 
                     b.Property<string>("Beskrivelse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDateTime")
@@ -341,7 +360,10 @@ namespace RentHiveOblig.Data.Migrations
                     b.Property<int>("Soverom")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sted")
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -349,7 +371,13 @@ namespace RentHiveOblig.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("EiendomID");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Eiendom");
                 });
@@ -526,9 +554,17 @@ namespace RentHiveOblig.Data.Migrations
                 {
                     b.HasOne("RentHiveOblig.Models.Eiendom", "Eiendom")
                         .WithMany("Bookings")
-                        .HasForeignKey("EiendomID")
+                        .HasForeignKey("EiendomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RentHiveOblig.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Bookings")
+                        .HasForeignKey("GuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Eiendom");
                 });
@@ -542,6 +578,17 @@ namespace RentHiveOblig.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Conversation");
+                });
+
+            modelBuilder.Entity("RentHiveOblig.Models.Eiendom", b =>
+                {
+                    b.HasOne("RentHiveOblig.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Eiendoms")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("RentHiveOblig.Models.Message", b =>
@@ -583,6 +630,13 @@ namespace RentHiveOblig.Data.Migrations
                     b.Navigation("Eiendom");
 
                     b.Navigation("Wishlist");
+                });
+
+            modelBuilder.Entity("RentHiveOblig.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("Eiendoms");
                 });
 
             modelBuilder.Entity("RentHiveOblig.Models.Conversation", b =>

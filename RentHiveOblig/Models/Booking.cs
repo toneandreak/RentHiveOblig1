@@ -14,7 +14,6 @@ namespace RentHiveOblig.Models
 
 
         [ForeignKey("ApplicationUser")]
-        [Required(ErrorMessage ="GuestId is required.")]
         public string GuestId { get; set; } //Foreign key
 
 
@@ -22,20 +21,19 @@ namespace RentHiveOblig.Models
         //The propertyId
 
         [ForeignKey("Eiendom")]
-        [Required(ErrorMessage = "EiendomID is required.")]
-        public int PropertyId { get; set; } //Foreign key
-        
+        public int EiendomId { get; set; } //Foreign key
+
 
 
 
         [Required(ErrorMessage = "StartDate is required.")]
         public DateTime StartDate { get; set; }
-        
+
 
 
         [Required(ErrorMessage = "EndDate is required.")]
         public DateTime EndDate { get; set; }
-        
+
 
 
 
@@ -45,8 +43,9 @@ namespace RentHiveOblig.Models
 
 
 
-        //This will change when the host accepts the booking.
-        public Boolean BookingAccepted { get; set; } = false;
+        //This will change when the host accepts or declines the booking.
+        public BookingStatus BookingStatus { get; set; } = BookingStatus.Pending;
+
 
         //Difference between the days
         public int QuantityDays { get; set; }
@@ -58,5 +57,12 @@ namespace RentHiveOblig.Models
         public virtual Eiendom Eiendom { get; set; }
 
 
+    }
+
+    public enum BookingStatus
+    {
+        Pending,
+        Accepted,
+        Declined
     }
 }

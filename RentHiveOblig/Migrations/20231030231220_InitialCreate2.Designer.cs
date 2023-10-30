@@ -9,11 +9,11 @@ using RentHiveOblig.DAL;
 
 #nullable disable
 
-namespace RentHiveOblig.Data.Migrations
+namespace RentHiveOblig.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231016120126_ApplicationUserAndMore")]
-    partial class ApplicationUserAndMore
+    [Migration("20231030231220_InitialCreate2")]
+    partial class InitialCreate2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -241,16 +241,20 @@ namespace RentHiveOblig.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 1L, 1);
 
-                    b.Property<int>("EiendomID")
+                    b.Property<int>("BookingStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EiendomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GuestId")
-                        .HasColumnType("int");
+                    b.Property<string>("GuestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PropertyId")
+                    b.Property<int>("QuantityDays")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -261,7 +265,9 @@ namespace RentHiveOblig.Data.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("EiendomID");
+                    b.HasIndex("EiendomId");
+
+                    b.HasIndex("GuestId");
 
                     b.ToTable("Booking");
                 });
@@ -550,9 +556,17 @@ namespace RentHiveOblig.Data.Migrations
                 {
                     b.HasOne("RentHiveOblig.Models.Eiendom", "Eiendom")
                         .WithMany("Bookings")
-                        .HasForeignKey("EiendomID")
+                        .HasForeignKey("EiendomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RentHiveOblig.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Bookings")
+                        .HasForeignKey("GuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Eiendom");
                 });
@@ -622,6 +636,8 @@ namespace RentHiveOblig.Data.Migrations
 
             modelBuilder.Entity("RentHiveOblig.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Bookings");
+
                     b.Navigation("Eiendoms");
                 });
 
