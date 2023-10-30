@@ -17,7 +17,7 @@ namespace RentHiveOblig.ViewModels
         public string? Beskrivelse { get; set; }
 
         [Required(ErrorMessage = "Street address is required.")]
-        public string Street { get; set; }
+        public string? Street { get; set; }
 
         [Required(ErrorMessage = "City is required.")]
         public string? City { get; set; }
@@ -26,7 +26,7 @@ namespace RentHiveOblig.ViewModels
         public string? Country { get; set; }
 
         [Required(ErrorMessage = "ZipCode is required.")]
-        public string ZipCode { get; set; }
+        public string? ZipCode { get; set; }
 
         public string? State { get; set; }
 
@@ -41,7 +41,7 @@ namespace RentHiveOblig.ViewModels
 
         public string? SearchString { get; set; }
 
-        public SelectList? testList { get; set; }
+        public SelectList? TestList { get; set; }
 
         
 
