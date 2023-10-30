@@ -6,6 +6,14 @@
     ViewData["Title"] = Model.Tittel;
 }
 
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
@@ -101,6 +109,7 @@ Information about the property, bathroom, bedrooms and etc.
             <!-- Add hidden fields for eiendomId and totalPrice -->
             <input type="hidden" name="eiendomId" value="@Model.EiendomID" />
             <input type="hidden" name="totalPrice" id="totalPriceHiddenField" />
+            <input type="hidden" name="diffDays" id="diffDays" />
 
             <p>Total price <span id="totalPrice"> </span> NOK</p>
             <button type="submit" class="btn btn-primary">Book now</button>
@@ -150,16 +159,19 @@ Information about the property, bathroom, bedrooms and etc.
             totalPrice = pricePerNight;
             document.getElementById("totalPrice").textContent = totalPrice;
             document.getElementById("totalPriceHiddenField").value = totalPrice;
+            document.getElementById("diffDays").value = diffDays;
 
         }
         else if (diffDays > 0) {
             document.getElementById("totalPrice").textContent = totalPrice;
             document.getElementById("totalPriceHiddenField").value = totalPrice;
+            document.getElementById("diffDays").value = diffDays;
         }
 
         //If startDate > enddate
         else {
             document.getElementById("totalPrice").textContent = "Invalid";
+            
         }
     }
 
