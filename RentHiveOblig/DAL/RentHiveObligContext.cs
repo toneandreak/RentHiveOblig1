@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace RentHiveOblig.Data;
+namespace RentHiveOblig.DAL;
 
 public class RentHiveObligContext : IdentityDbContext<IdentityUser>
 {
@@ -11,7 +11,7 @@ public class RentHiveObligContext : IdentityDbContext<IdentityUser>
     {
 
     }
-    public DbSet<RentHiveOblig.Models.Eiendom> Eiendom { get; set; }
+    public DbSet<Models.Eiendom> Eiendom { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

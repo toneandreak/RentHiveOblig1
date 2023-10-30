@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using RentHiveOblig.Data;
+using RentHiveOblig.DAL;
 using RentHiveOblig.Models;
 using RentHiveOblig.ViewModels;
 using System.Security.Claims;
