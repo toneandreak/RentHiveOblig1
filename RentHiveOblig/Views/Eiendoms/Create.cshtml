@@ -69,8 +69,8 @@
 
 
         .wrapper{
-            height: 60px;
-            min-width: 60px; 
+            height: 12vh;
+            min-width: 100%; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,7 +84,7 @@
             width: 100%;
             text-align: center;
             font-size:58px; 
-            font weight: 550; 
+            /*font weight: 550; Kommenterer bort pga feilmelding.*/ 
             cursor: pointer; 
 
         }
@@ -139,7 +139,7 @@
 
         <div class="form-group">
             <label for="Beskrivelse">Description</label>
-            <textarea asp-for="Beskrivelse" class="form-control" id="Beskrivelse" placeholder="Describe your apartment" title="The description provides potential renters with more details about your apartment." rows="6" cols="7"></textarea>
+                <textarea asp-for="Beskrivelse" class="form-control" id="Beskrivelse" placeholder="Describe your apartment" title="The description provides potential renters with more details about your apartment." rows="6" cols="7" style="margin-bottom: 5%;"></textarea>
             <span asp-validation-for="Beskrivelse" class="text-danger"></span>
         </div>
 
@@ -177,7 +177,7 @@
 
         <div class="form-group">
             <label for="State">State (Optional)</label>
-            <input asp-for="State" class="form-control" data-optional="true" id="State">
+                <input asp-for="State" class="form-control" data-optional="true" id="State" style="margin-bottom: 5%;">
             <span asp-validation-for="State" class="text-danger"></span>
         </div>
 
@@ -187,17 +187,17 @@
 
         <h3>How many bathrooms does your apartment have?</h3>
 
-        <img src="~/icons/bathroom_icon.svg"/>
+        <img src="~/icons/bathroom_icon.svg" style="width: 50%; height: 20%;"/>
 
 
         <div class="form-group">
 
             <input asp-for="Bad" type="hidden" class="form-control" id="BathroomHidden" value="1">
 
-        <div class="wrapper">
-            <span class="minus-bathroom">-</span>
-                <span class="number-bathroom" id="Bad">1</span>
-                <span class="plus-bathroom">+</span>
+                <div class="wrapper" style="height: 3.5em; margin-bottom: 5%; margin-bottom: 5%; flex-direction: row; flex-wrap: nowrap;">
+                    <span class="minus-bathroom" style="width:100000%">-</span>
+                    <span class="number-bathroom" id="Bad" style="width:100000%">1</span>
+                    <span class="plus-bathroom" style="width:100000%">+</span>
             <span asp-validation-for="Bad" class="text-danger"></span>
         </div>
 
@@ -212,12 +212,12 @@
 
             <h3>How many bedrooms does your apartment have?</h3>
 
-            <img src="/Icons/bedroom.svg" alt="Bedroom icon"/>
+            <img src="/Icons/bedroom.svg" alt="Bedroom icon" style="height: 20%; width: 50%; max-height: 20%;"/>
 
-            <div class="wrapper">
-                <span class="minus-bedroom">-</span>
-                <span class="number-bedroom" id="Soverom">1</span>
-                <span class="plus-bedroom">+</span>
+                <div class="wrapper" style="height: 3.5em; margin-bottom: 5%; margin-bottom: 5%; flex-direction: row; flex-wrap: nowrap;">
+                    <span class="minus-bedroom" style="width:100000%">-</span>
+                    <span class="number-bedroom" id="Soverom" style="width:100000%">1</span>
+                    <span class="plus-bedroom" style="width:100000%">+</span>
                 <span asp-validation-for="Soverom" class="text-danger"></span>
             </div>
             <input asp-for="Soverom" type="hidden" class="form-control" id="BedroomHidden" value="1">
@@ -231,7 +231,7 @@
         <h3>Finally, how much would you charge for a stay in your apartment?</h3>
 
         <div class="form-group">
-            <input asp-for="PrisPerNatt" class="form-control" placeholder="Enter price per night" title="It might be a good idea to check what other renters are charging for similar properties." id="PrisPerNatt">
+                <input asp-for="PrisPerNatt" class="form-control" placeholder="Enter price per night" title="It might be a good idea to check what other renters are charging for similar properties." id="PrisPerNatt" style="margin-bottom: 5%;">
             <span asp-validation-for="PrisPerNatt" class="text-danger"></span>
         </div>
 

@@ -16,12 +16,12 @@ namespace RentHiveOblig.Models
         public int User2Id { get; set; }
 
 
-        public ICollection<BrukerConversation> BrukerConversations { get; set; }
+        public ICollection<BrukerConversation>? BrukerConversations { get; set; }
 
 
         // Navigation property for the messages in this conversation
 
-        public ICollection<Message> Messages { get; set; }
+        public ICollection<Message>? Messages { get; set; }
 
 
         //Time

@@ -21,13 +21,13 @@ namespace RentHiveOblig.Models
         //Navigation property for the sender
 
         // Navigation property for the conversation
-        public Conversation Conversation { get; set; }
+        public Conversation? Conversation { get; set; }
 
 
         // The text of the message.
         [MaxLength(500, ErrorMessage = "Content cannot exceed 500 characters.")]
         [Required(ErrorMessage = "Content is required to send a message.")]
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
         public DateTime Timestamp { get; set; } = DateTime.Now;  // Sets the default timestamp. 
     }

@@ -10,7 +10,7 @@ namespace RentHiveOblig.Models
 
 
         //Foreign Key from ApplicationUser
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
 
 
         //Price per night.
@@ -21,7 +21,7 @@ namespace RentHiveOblig.Models
 
         //Title for the property.
         [Required(ErrorMessage = "Required to fill out Title for the listing")]
-        public string Tittel { get; set; }
+        public string? Tittel { get; set; }
 
 
         //Description for the property. 
@@ -30,10 +30,10 @@ namespace RentHiveOblig.Models
 
 
         //Address
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string ZipCode { get; set; }
+        public string? Street { get; set; }
+        public string? City { get; set; }
+        public string? Country { get; set; }
+        public string? ZipCode { get; set; }
         public string? State { get; set; }
 
 
@@ -43,7 +43,7 @@ namespace RentHiveOblig.Models
         public int Soverom { get; set; }
 
         //Bathrooms
-        [Required(ErrorMessage ="Required to fill out how many bathrooms")]
+        [Required(ErrorMessage = "Required to fill out how many bathrooms")]
         public int Bad { get; set; }
 
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
@@ -58,14 +58,14 @@ namespace RentHiveOblig.Models
         //Not a scaleable option. 
 
         public string? Image1 { get; set; } = "/Images/PlaceholderApartmentImage.png"; //Adding a default image to the first image. 
-        public string? Image2 { get; set; } 
-        public string? Image3 { get; set; } 
+        public string? Image2 { get; set; }
+        public string? Image3 { get; set; }
 
 
 
 
         //NAV. PROP.
-        public virtual ApplicationUser ApplicationUser { get; set; } //Enables lazyloading. 
+        public virtual ApplicationUser? ApplicationUser { get; set; } //Enables lazyloading. 
 
         public ICollection<Review>? Reviews { get; set; }  //Allows Entity Frameowrk load related reviews. 
 
@@ -85,8 +85,8 @@ namespace RentHiveOblig.Models
 
 
 
-        
-        public Eiendom() { }
+
+
 
     }
 }
