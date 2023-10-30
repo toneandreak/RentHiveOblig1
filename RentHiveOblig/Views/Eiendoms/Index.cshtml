@@ -12,10 +12,7 @@
 
 <h1>Properties</h1>
 
-<h3>
 
-    
-</h3>
 
 @{
     ViewData["Title"] = "Index";
@@ -34,7 +31,7 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
-<table class="table">
+
 
 
 
@@ -64,9 +61,9 @@
 @foreach (var item in Model) {
         <tr>
                     <td>
-                        <img src="@item.Image1" alt="image Empty" height: 195px;
-                             width: 225px;
-                             object-fit: cover;>
+                    <img src="@item.Image1" style="height: 100px; width: auto;" alt="image Empty" href="@Url.Content(Path)"
+                       >
+                             
                     </td>
                      <td>
                          @Html.DisplayFor(modelItem => item.Tittel)
