@@ -13,13 +13,13 @@ var configuration = builder.Configuration;
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-
+/*
 services.AddAuthentication().AddGoogle(options => //Adds Google Authentication
 {
     options.ClientId = configuration["App:GoogleClientId"];
     options.ClientSecret = configuration["App:GoogleClientSecret"];
 });
-
+*/
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>()
