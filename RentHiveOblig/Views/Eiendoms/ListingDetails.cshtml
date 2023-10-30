@@ -7,6 +7,7 @@
 }
 
 
+
 @if (ViewBag.ErrorMessage != null)
 {
     <div class="alert alert-danger">
@@ -68,8 +69,7 @@ Information about the property, bathroom, bedrooms and etc.
     <div class="row">
         <h2 class="col-sm">Beehive description</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
-            Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
+            @Model.Beskrivelse.
         </p>
         <h2 class="col-sm">Queen Bee Description</h2>
         <h2>@Model.ApplicationUser.Firstname</h2>
