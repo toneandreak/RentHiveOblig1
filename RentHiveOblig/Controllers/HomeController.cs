@@ -2,6 +2,7 @@
 using RentHiveOblig.Models;
 using System.Diagnostics;
 
+
 namespace RentHiveOblig.Controllers
 {
     public class HomeController : Controller

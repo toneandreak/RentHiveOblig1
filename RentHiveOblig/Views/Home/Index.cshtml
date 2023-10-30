@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
@@ -151,14 +152,24 @@
             <h2>Buzz off to your next destination.</h2>
         </div>
 
+        
+
 
         <section id="search-section">
+
+            
             <form>
                 <!--Using a form for inputs-->
                 <!--Search button inspired by : https://getcssscan.com/css-buttons-examples-->
-                <input type="text" id="destination" placeholder="Your destination" />
-                <input type="datetime-local" id="date" placeholder="Select date">
-                <button class="btn btn-primary btn-default" input type="submit" value="Search">Search!</button>
+                @using (Html.BeginForm("ViewResult", "EiendomsController", FormMethod.Get))
+                {
+                    <p>
+                        @Html.TextBox("SearchString")
+                        <input type="submit" value="Search" placeholder="Your destination" />
+                    </p>
+                }
+                
+                
 
                
             </form>

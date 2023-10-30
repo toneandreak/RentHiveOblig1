@@ -13,11 +13,6 @@
 <h1>Properties</h1>
 
 
-
-@{
-    ViewData["Title"] = "Index";
-}
-
 <p>
     <form>
         <button asp-controller="Category" asp-action="Create" type="submit" class="button-search">Create</button>
@@ -25,12 +20,16 @@
     
 </p>
 
-<form asp-controller="" asp-action="Index" method="get">
+@using (Html.BeginForm())
+{
     <p>
-        Where do you want to go?: <input type="text" name="SearchString" />
-        <input type="submit" value="Filter" />
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Search" placeholder="Your destination" />
     </p>
-</form>
+}
+
+
+
 
 
 
@@ -52,7 +51,7 @@
                         @Html.DisplayNameFor(model => model.Country)
                 </th>
                 <th>
-                        @Html.DisplayNameFor(model => model.PrisPerNatt)
+                    @Html.ActionLink("PrisPerNatt", "Index", new { sortOrder = ViewBag.IntSortParm })
                 </th>
                 <th></th>
             </tr>

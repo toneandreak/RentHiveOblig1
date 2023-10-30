@@ -27,28 +27,36 @@ namespace RentHiveOblig.Controllers
         }
 
 
-        // GET: Eiendoms
+        // POST: Search
 
 
-        public async Task<IActionResult> Index(string searchString)
+        public ViewResult Index(string sortOrder, string searchString)
         {
-            if (_context.Eiendom == null)
-            {
-                return Problem("ApplicationDbContext.Eiendom'  is null.");
-            }
 
-            var eiendoms = from m in _context.Eiendom
-                         select m;
-
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Prispernatt" ? "price_desc" : "Price";
+            var eiendom = from s in _context.Eiendom
+                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                eiendoms = eiendoms.Where(s => s.Beskrivelse!.Contains(searchString));
+                eiendom = eiendom.Where(s => s.Tittel.Contains(searchString)
+                                       || s.Beskrivelse.Contains(searchString)
+                                       || s.Country.Contains(searchString)
+                                         || s.City.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+
+                case "Price":
+                    eiendom = eiendom.OrderBy(s => s.PrisPerNatt);
+                    break;
+                
             }
 
-            return View(await eiendoms.ToListAsync());
+            return View(eiendom.ToList());
         }
 
-        
+
 
 
 
