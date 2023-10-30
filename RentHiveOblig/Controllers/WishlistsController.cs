@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RentHiveOblig.Data;
+using RentHiveOblig.DAL;
 using RentHiveOblig.Models;
 
 namespace RentHiveOblig.Controllers

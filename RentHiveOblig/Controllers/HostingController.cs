@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RentHiveOblig.Data;
+using RentHiveOblig.DAL;
 using System.Security.Claims;
 
 namespace RentHiveOblig.Controllers

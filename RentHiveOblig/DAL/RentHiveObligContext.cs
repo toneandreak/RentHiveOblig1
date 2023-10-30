@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace RentHiveOblig.Data;
+namespace RentHiveOblig.DAL;
 
 public class RentHiveObligContext : IdentityDbContext<IdentityUser>
 {
     public RentHiveObligContext(DbContextOptions<RentHiveObligContext> options)
         : base(options)
     {
+
     }
+    public DbSet<Models.Eiendom> Eiendom { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

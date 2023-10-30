@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentHiveOblig.ViewModels
 {
@@ -19,10 +20,10 @@ namespace RentHiveOblig.ViewModels
         public string Street { get; set; }
 
         [Required(ErrorMessage = "City is required.")]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [Required(ErrorMessage = "Country is required.")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         [Required(ErrorMessage = "ZipCode is required.")]
         public string ZipCode { get; set; }
@@ -37,5 +38,14 @@ namespace RentHiveOblig.ViewModels
         [Required(ErrorMessage = "Filling out number of bedrooms is required.")]
         [Range(0, 30)]
         public int Soverom { get; set; }
+
+        public string? SearchString { get; set; }
+
+        public SelectList? testList { get; set; }
+
+        
+
+        
+   
     }
 }

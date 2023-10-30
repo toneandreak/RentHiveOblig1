@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RentHiveOblig.Data;
+using RentHiveOblig.DAL;
 using RentHiveOblig.Models;
 using Serilog;
 using Serilog.Events;
