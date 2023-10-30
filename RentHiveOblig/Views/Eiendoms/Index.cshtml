@@ -13,34 +13,33 @@
 <h1>Properties</h1>
 
 <h3>
+
+    
+</h3>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
     <form>
         <button asp-controller="Category" asp-action="Create" type="submit" class="button-search">Create</button>
     </form>
     <a class="button-search" asp-action="Create">Create New</a>
-</h3>
-<div>
-    @using (Html.BeginForm("Index", "Eiendom", FormMethod.Get))
-    {
-        <table>
-            <tr>
-                <td>
-                    <span>
-                        Refine Search:
-                    </span>
-                    @Html.RadioButton("searchBy", "Bad", true)
-                    <textarea>Bad</textarea>
-                    @Html.RadioButton("searchBy", "Soverom", true)
-                    <textarea>Soverom</textarea>
-                    @Html.RadioButton("searchBy", "PrisPerNatt", true)
-                    <textarea>PrisPerNatt</textarea>
-                    
-                    
-                </td>
-            </tr>
-            
-        </table>
-    }
-</div>
+</p>
+
+<form asp-controller="" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+
+
+
 <br>
 <br>
 <table class="table">

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.Data;
 using RentHiveOblig.Models;
@@ -27,54 +28,27 @@ namespace RentHiveOblig.Controllers
 
 
         // GET: Eiendoms
-        public async Task<IActionResult> Index()
+
+
+        public async Task<IActionResult> Index(string searchString)
         {
-            return _context.Eiendom != null ?
-                        View(await _context.Eiendom.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
-        }
-
-        // GET: Eiendoms/Search
-        public async Task<IActionResult> ShowSearchForm()
-        {
-            return View();
-        }
-
-        // PoST: Eiendoms/ShowSearchResults
-
-        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
-        {
-            return _context.Eiendom != null ?
-                          View("Index", await _context.Eiendom.Where(j => j.Tittel.Contains(SearchPhrase)).ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
-        }
-
-
-
-
-        // SEARCH (returns double controller error)
-        /* public async Task<IActionResult> ShowSearchResults(string searchString)
-          {
             if (_context.Eiendom == null)
-          {
-            return Problem("Entity set 'ApplicationDbContext.Eiendom'  is null.");
-               }
-
-          var eiendom = from m in _context.Eiendom
-          select m;
-
-             if (!String.IsNullOrEmpty(searchString))
             {
-          eiendom = eiendom.Where(s => s.Tittel!.Contains(searchString));
-                 eiendom = eiendom.Where(s => s.Country!.Contains(searchString));
-                 eiendom = eiendom.Where(s => s.Beskrivelse!.Contains(searchString));
-                 eiendom = eiendom.Where(s => s.City!.Contains(searchString));
-                 eiendom = eiendom.Where(s => s.ZipCode!.Contains(searchString));
-             }
+                return Problem("ApplicationDbContext.Eiendom'  is null.");
+            }
 
-             return View(await eiendom.ToListAsync());
-          }
-         */
+            var eiendoms = from m in _context.Eiendom
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                eiendoms = eiendoms.Where(s => s.Beskrivelse!.Contains(searchString));
+            }
+
+            return View(await eiendoms.ToListAsync());
+        }
+
+        
 
 
 

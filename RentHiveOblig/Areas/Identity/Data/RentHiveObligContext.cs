@@ -9,7 +9,9 @@ public class RentHiveObligContext : IdentityDbContext<IdentityUser>
     public RentHiveObligContext(DbContextOptions<RentHiveObligContext> options)
         : base(options)
     {
+
     }
+    public DbSet<RentHiveOblig.Models.Eiendom> Eiendom { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
