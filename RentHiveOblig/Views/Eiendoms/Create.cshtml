@@ -106,7 +106,7 @@
 
 <!---Code for MultiStep-form inspired from W3Schools: https://www.w3schools.com/howto/howto_js_form_steps.asp?-->
 
-
+<div class="container shadow p-3 mb-5 bg-white rounded">
 
 <div style="text-align:center;margin-bottom:15px">
     <span class="step"></span>
@@ -115,6 +115,7 @@
     <span class="step"></span>
     <span class="step"></span>
 </div>
+
 
 
 <form asp-action="Create" method="post" id="regForm">
@@ -176,7 +177,7 @@
 
         <div class="form-group">
             <label for="State">State (Optional)</label>
-            <input asp-for="State" class="form-control" id="State">
+            <input asp-for="State" class="form-control" data-optional="true" id="State">
             <span asp-validation-for="State" class="text-danger"></span>
         </div>
 
@@ -250,7 +251,7 @@
 
 </form>
 
-
+</div>
 
 <script>
 
@@ -372,12 +373,11 @@
         // A loop that checks every input field in the current tab:
         for (i = 0; i < y.length; i++) {
             // If a field is empty...
-            if (y[i].value == "") {
-                // add an "invalid" class to the field:
+            if (y[i].value == "" && !y[i].dataset.optional) {
                 y[i].className += " invalid";
-                // and set the current valid status to false:
                 valid = false;
             }
+
         }
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
