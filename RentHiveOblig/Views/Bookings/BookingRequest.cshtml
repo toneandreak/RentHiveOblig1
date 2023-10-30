@@ -14,7 +14,7 @@
 
 
 
-<!------         PAGE OVERVIEW     
+<!------         PAGE OVERVIEW
 
 To come to this form: You have to fill out the dates in Eiendoms > ListingDetails and then click a submit button for booking.
 
@@ -22,106 +22,62 @@ To come to this form: You have to fill out the dates in Eiendoms > ListingDetail
 A form to request the booking for the selected property
 
 
-Should consist of: 
+Should consist of:
 
 The property title. A small image
 
-Days selected for the booking. Should also be able to change it from here. 
+Days selected for the booking. Should also be able to change it from here.
 
 
 
-A button to send the booking request to the host. 
+A button to send the booking request to the host.
 
 -------->
 
-<style>
-
-    #tripDetails{
-        border: 2px solid #1e1e1e; 
-    }
-
-
-    #listDetails{
-        border: 2px solid red;
-    }
-
-
-
-</style>
-
-
 <div class="container">
-
-
     <h1>Request Booking</h1>
 
     <p>Confirm your selection below. The booking request will be sent to your host.</p>
     <p>Once the host confirms the booking and payment is finished, then you are allowed to stay at their home!</p>
 
-
-
-<form asp-action="SendBookingRequest" method="post">
-
+    <form asp-action="SendBookingRequest" method="post">
         <div class="row">
-
-
+            <hr />
             <!------------  Left column ----------->
             <div class="col-md-4" id="tripDetails">
-
                 <h2>Trip Details</h2>
-
                 <p>Dates chosen</p>
 
-
                 <!---HIDDEN UNTIL SOMEONE CLICKS changeDates-->
-
                 <div id="dateInputs">
-                    <input type="date"  asp-for="Booking.StartDate" />
-                    <input type="date"  asp-for="Booking.EndDate" />
+                    <input type="date" asp-for="Booking.StartDate" />
+                    <input type="date" asp-for="Booking.EndDate" />
                 </div>
-
-
                 <hr />
-
                 <p>Information about you </p>
-
                 <p>Name: @(user.Firstname + " " + user.Lastname) </p>
                 <p>Email: @user.Email</p>
-
             </div>
 
-
-            <!-----------  Right column ------------->
+            <!----  Middle column ---->
             <div class="col-md-4" id="listDetails">
-
-                <img src="@Model.Eiendom.Image1"/>
                 <p>@Model.Eiendom.Tittel</p>
                 <p>@Model.Eiendom.Country, @Model.Eiendom.City</p>
                 <hr />
                 <h3>Price</h3>
                 <p>@Model.Eiendom.PrisPerNatt.ToString("# ##0") NOK  X  @Model.Booking.QuantityDays nights</p>
-
                 <hr />
-
                 <p>Total @Model.Booking.TotalPrice.ToString("# ##0") NOK</p>
 
-
                 <button type="submit" class="btn btn-primary">Request Booking</button>
-
             </div>
 
+            <!----  Right column ---->
+            <div class="col-md-4" id="imageDetails">
+                <div class="row" id="listDetails">
+                    <img class="img-responsive" src="@Model.Eiendom.Image1" />
+                </div>
+            </div>
         </div>
-
-</form>
-
-
+    </form>
 </div>
-
-
-
-<script>
-
-
-
-
-</script>
