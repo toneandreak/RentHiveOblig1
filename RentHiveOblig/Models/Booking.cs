@@ -46,8 +46,10 @@ namespace RentHiveOblig.Models
 
 
         //This will change when the host accepts the booking.
+        public Boolean BookingAccepted { get; set; } = false;
 
-        public Boolean BookingAccepted { get; set; } = false; 
+        //Difference between the days
+        public int QuantityDays { get; set; }
 
 
         //NAV. PROP.

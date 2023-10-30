@@ -65,38 +65,45 @@ A button to send the booking request to the host.
         <div class="row">
 
 
-            <!----  Left column ---->
+            <!------------  Left column ----------->
             <div class="col-md-4" id="tripDetails">
 
                 <h2>Trip Details</h2>
 
-                <p>Dates</p>
-                <p>@Model.Booking.EndDate - @Model.Booking.StartDate</p>
+                <p>Dates chosen</p>
 
 
+                <!---HIDDEN UNTIL SOMEONE CLICKS changeDates-->
+
+                <div id="dateInputs">
+                    <input type="date"  asp-for="Booking.StartDate" />
+                    <input type="date"  asp-for="Booking.EndDate" />
+                </div>
+
+
+                <hr />
 
                 <p>Information about you </p>
 
-                <p>Name: @(user.Firstname + user.Lastname) </p>
+                <p>Name: @(user.Firstname + " " + user.Lastname) </p>
                 <p>Email: @user.Email</p>
-
 
             </div>
 
 
-            <!----  Right column ---->
+            <!-----------  Right column ------------->
             <div class="col-md-4" id="listDetails">
-
 
                 <img src="@Model.Eiendom.Image1"/>
                 <p>@Model.Eiendom.Tittel</p>
+                <p>@Model.Eiendom.Country, @Model.Eiendom.City</p>
                 <hr />
                 <h3>Price</h3>
-                <p>@Model.Eiendom.PrisPerNatt  X  (QuantityNightFormula) nights</p>
+                <p>@Model.Eiendom.PrisPerNatt.ToString("# ##0") NOK  X  @Model.Booking.QuantityDays nights</p>
 
                 <hr />
 
-                <p>Total (NOK) @Model.Booking.TotalPrice</p>
+                <p>Total @Model.Booking.TotalPrice.ToString("# ##0") NOK</p>
 
 
                 <button type="submit" class="btn btn-primary">Request Booking</button>
@@ -109,3 +116,12 @@ A button to send the booking request to the host.
 
 
 </div>
+
+
+
+<script>
+
+
+
+
+</script>

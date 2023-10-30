@@ -75,30 +75,18 @@ namespace RentHiveOblig.Controllers
             }
 
 
+            //Showing errormessages
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
+
+
             _logger.LogInformation($"Access to ListingDetails with {id} is successfull.");
             return View(eiendom);
         }
 
 
-
-
-        // GET: Eiendoms/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Eiendom == null)
-            {
-                return NotFound();
-            }
-
-            var eiendom = await _context.Eiendom
-                .FirstOrDefaultAsync(m => m.EiendomID == id);
-            if (eiendom == null)
-            {
-                return NotFound();
-            }
-
-            return View(eiendom);
-        }
 
         // GET: Eiendoms/Create
 
@@ -488,6 +476,17 @@ namespace RentHiveOblig.Controllers
         {
             return (_context.Eiendom?.Any(e => e.EiendomID == id)).GetValueOrDefault();
         }
+
+
+
+
+        public IActionResult EiendomNotFound()
+        {
+            return View();
+        }
+
+
+
     }
 
 }

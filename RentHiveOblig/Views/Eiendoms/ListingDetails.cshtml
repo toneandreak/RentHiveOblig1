@@ -6,6 +6,14 @@
     ViewData["Title"] = Model.Tittel;
 }
 
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/RentHiveOblig.styles.css" asp-append-version="true" />
@@ -50,8 +58,8 @@ Information about the property, bathroom, bedrooms and etc.
     </h1>
     <div class="image-grid">
         <img class="image-grid-col-2 image-grid-row-2" src="@Model.Image1" alt="">
-        <img class="img-fluid" src="@Model.Image1" alt="">
-        <img class="img-fluid" src="@Model.Image1" alt="">
+        <img class="img-fluid" src="@Model.Image2" alt="">
+        <img class="img-fluid" src="@Model.Image3" alt="">
     </div>
     <!-- TEMP WILL DELETE SOON
         <div class="col-md-5">
@@ -70,26 +78,18 @@ Information about the property, bathroom, bedrooms and etc.
             Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
         </p>
     </div>
-</div>
-<!-- /.container -->
 
-
-<container>
-
-    <!-----             TEMPORARILY DO NOT DELETE               ---->
     <div>
 
         <br />
-        <br />
+        <hr />
         <br />
 
+        <h2>Book your trip</h2>
 
         <form asp-action="SendToBooking" asp-controller="Bookings" id="SendToBooking">
-            <h2>THIS WILL BE THE FORM. TEMPORARILY TEXT. </h2>
-
-
             <p id="pricePerNight">@Model.PrisPerNatt NOK per night </p>
-           
+
             <div class="availability">
                 <p>Date from</p>
                 <input type="date" id="startDate" name="startTime" />
@@ -101,6 +101,7 @@ Information about the property, bathroom, bedrooms and etc.
             <!-- Add hidden fields for eiendomId and totalPrice -->
             <input type="hidden" name="eiendomId" value="@Model.EiendomID" />
             <input type="hidden" name="totalPrice" id="totalPriceHiddenField" />
+            <input type="hidden" name="diffDays" id="diffDays" />
 
             <p>Total price <span id="totalPrice"> </span> NOK</p>
             <button type="submit" class="btn btn-primary">Book now</button>
@@ -109,10 +110,10 @@ Information about the property, bathroom, bedrooms and etc.
 
     </div>
 
+</div>
 
 
 
-</container>
 <script>
 
     //Calculating the total price, making it change dynamically by the date inputs.
@@ -150,16 +151,19 @@ Information about the property, bathroom, bedrooms and etc.
             totalPrice = pricePerNight;
             document.getElementById("totalPrice").textContent = totalPrice;
             document.getElementById("totalPriceHiddenField").value = totalPrice;
+            document.getElementById("diffDays").value = diffDays;
 
         }
         else if (diffDays > 0) {
             document.getElementById("totalPrice").textContent = totalPrice;
             document.getElementById("totalPriceHiddenField").value = totalPrice;
+            document.getElementById("diffDays").value = diffDays;
         }
 
         //If startDate > enddate
         else {
             document.getElementById("totalPrice").textContent = "Invalid";
+            
         }
     }
 
