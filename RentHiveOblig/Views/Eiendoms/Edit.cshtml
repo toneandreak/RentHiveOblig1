@@ -11,9 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 
-<h1>Edit your listing</h1>
-<br />
-<hr />
+
 
 
 
@@ -62,29 +60,44 @@
             cursor: pointer;
         }
 
-
+        .btn-dark{
+            margin-left: auto;
+            margin: 5px;
+            
+        }
 
 
 </style>
 
+<div>
+    <a asp-controller="Hosting" asp-action="Index" class="btn btn-dark">Back to list</a>
+</div>
+
+<br/>
 
 
-<div class="container">
+<div class="container shadow-sm p-3 mb-5 bg-white rounded">
+    
+   
+    <br/>
+    <h1>Edit your listing</h1>
+    <br/>
+    <hr/>
 
     <div class="row">
 
         <div class="col-md-4">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-                <input type="hidden" asp-for="EiendomID" />
-                <input asp-for="ApplicationUserId" type="hidden" class="form-control" />
-               
+
+                <input type="hidden" asp-for="EiendomID"/>
+                <input asp-for="ApplicationUserId" type="hidden" class="form-control"/>
+
 
 
                 <div class="form-group">
                     <label asp-for="Tittel" class="control-label">Title</label>
-                    <input asp-for="Tittel" class="form-control" />
+                    <input asp-for="Tittel" class="form-control"/>
                     <span asp-validation-for="Tittel" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -93,62 +106,61 @@
                     <span asp-validation-for="Beskrivelse" class="text-danger"></span>
                 </div>
 
-                    <div class="form-group">
-                        <label asp-for="PrisPerNatt" class="control-label">Price per night </label>
-                        <input asp-for="PrisPerNatt" class="form-control"></>
-                        <span asp-validation-for="PrisPerNatt" class="text-danger"></span>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="PrisPerNatt" class="control-label">Price per night </label>
+                    <input asp-for="PrisPerNatt" class="form-control"></>
+                    <span asp-validation-for="PrisPerNatt" class="text-danger"></span>
+                </div>
 
                 <div class="form-group">
                     <label asp-for="Street" class="control-label"></label>
-                    <input asp-for="Street" class="form-control" />
+                    <input asp-for="Street" class="form-control"/>
                     <span asp-validation-for="Street" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="City" class="control-label"></label>
-                    <input asp-for="City" class="form-control" />
+                    <input asp-for="City" class="form-control"/>
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Country" class="control-label"></label>
-                    <input asp-for="Country" class="form-control" />
+                    <input asp-for="Country" class="form-control"/>
                     <span asp-validation-for="Country" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="ZipCode" class="control-label"></label>
-                    <input asp-for="ZipCode" class="form-control" />
+                    <input asp-for="ZipCode" class="form-control"/>
                     <span asp-validation-for="ZipCode" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="State" class="control-label"></label>
-                    <input asp-for="State" class="form-control" />
+                    <input asp-for="State" class="form-control"/>
                     <span asp-validation-for="State" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Soverom" class="control-label">Bedrooms</label>
-                    <input asp-for="Soverom" type="number" class="form-control" />
+                    <input asp-for="Soverom" type="number" class="form-control"/>
                     <span asp-validation-for="Soverom" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Bad" class="control-label">Bathrooms</label>
-                    <input asp-for="Bad" type="number" class="form-control" />
+                    <input asp-for="Bad" type="number" class="form-control"/>
                     <span asp-validation-for="Bad" class="text-danger"></span>
                 </div>
 
+                <br/>
+                <hr/>
 
-                <div class="form-group">
-
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
+                <input type="submit" value="Save changes" class="btn btn-dark"/>
             </form>
 
-         </div>
+        </div>
 
 
 
@@ -158,9 +170,9 @@
         <!---------FILE INPUT-------------->
         <!--CODE (IMAGE UPLOAD) INSPIRED FROM https://www.codaffection.com/asp-net-core-article/asp-net-core-mvc-image-upload-and-retrieve/-->
         <div class="col-md-6">
-            <h3>Upload photos of your property</h3>
-            <br />
-            <h4>Three points on why good photos matter</h4>
+            <h2>Upload photos of your property</h2>
+            <br/>
+            <h3>Three points on why good photos matter</h3>
 
             <ul>
                 <li>First Impressions</li>
@@ -169,37 +181,37 @@
             </ul>
 
 
-            <br />
-            <br />
+            <br/>
+            <br/>
 
 
-            <p>Click or drag the images here</p>
+            <h2>Click or drag the images here</h2>
 
             <form enctype="multipart/form-data" method="post" asp-controller="Eiendoms" asp-action="UploadImage">
                 <div class="image-upload-wrapper">
                     <div class="image-box">
-                        <img id="preview1" src="@Model.Image1"  />
-                        <input type="file" name="file1" id="file1" accept="image/*"  onchange="previewImage(this, 'preview1');" />
+                        <img id="preview1" src="@Model.Image1"/>
+                        <input type="file" name="file1" id="file1" accept="image/*" onchange="previewImage(this, 'preview1');"/>
 
                     </div>
                     <div class="image-box">
-                        <img id="preview2" src="@Model.Image2" />
-                        <input type="file" name="file2" id="file2" accept="image/*"  onchange="previewImage(this, 'preview2');" />
-                        
+                        <img id="preview2" src="@Model.Image2"/>
+                        <input type="file" name="file2" id="file2" accept="image/*" onchange="previewImage(this, 'preview2');"/>
+
                     </div>
                     <div class="image-box">
-                        <img id="preview3" src="@Model.Image3" />
-                        <input type="file" name="file3" id="file3" accept="image/*"  onchange="previewImage(this, 'preview3');" />
+                        <img id="preview3" src="@Model.Image3"/>
+                        <input type="file" name="file3" id="file3" accept="image/*" onchange="previewImage(this, 'preview3');"/>
 
                     </div>
                 </div>
 
-                <input type="hidden" name="EiendomID" value="@Model.EiendomID" />
-                <button class="btn btn-primary" type="submit">Upload Images</button>
+                <input type="hidden" name="EiendomID" value="@Model.EiendomID"/>
+                <button class="btn btn-dark" type="submit">Upload Images</button>
             </form>
 
             <!---Warns the user if there are no images uploaded--->
-            @if(Model.Image1 == null && Model.Image2 == null && Model.Image3 != null)
+            @if (Model.Image1 == null && Model.Image2 == null && Model.Image3 != null)
             {
 
                 <p class="text-danger">There are no images uploaded for your listing yet.</p>
@@ -214,13 +226,6 @@
 
 
 </div>
-
-
-
-<div>
-    <a asp-controller="Hosting" asp-action="Index">Back to List</a>
-</div>
-
 
 
 <!----Inspired preview from Codepen: https://codepen.io/mobifreaks/pen/AMjEKw---->
