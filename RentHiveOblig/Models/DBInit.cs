@@ -63,7 +63,7 @@ namespace RentHiveOblig.Models
 
                 foreach (var user in users)
                 {
-                    await userManager.CreateAsync(user, "Ann-123");
+                    await userManager.CreateAsync(user, "Admin@123456");
 
                 }
 
