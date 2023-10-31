@@ -8,12 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\**" />
     <Compile Remove="Views\Conversations\**" />
     <Compile Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="Data\**" />
     <Content Remove="Views\Conversations\**" />
     <Content Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Views\Conversations\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <None Remove="Data\**" />
     <None Remove="Views\Conversations\**" />
     <None Remove="wwwroot\NewFolder1\**" />
   </ItemGroup>
@@ -24,6 +28,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.23" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.23">
@@ -36,7 +41,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="Data\Migrations\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
