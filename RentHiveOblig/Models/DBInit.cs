@@ -71,7 +71,7 @@ namespace RentHiveOblig.Models
                 context.SaveChanges();
             }
 
-            var createdUsers = context.ApplicationUsers.ToList(); 
+            var createdUsers = context.ApplicationUsers.ToList();
 
 
             if (!context.Eiendom.Any())
@@ -161,6 +161,52 @@ namespace RentHiveOblig.Models
                         Image1 = "/images/house_4_s1.jpg",
                         Image2 = "/images/house_4_s2.jpg",
                         Image3 = "/images/house_4_s3.jpg",
+                    },
+                    new Eiendom
+                    {
+                        ApplicationUserId = createdUsers[3].Id,
+                        PrisPerNatt = 1,
+                        Tittel = "Cozy small sized cabin",
+                        Beskrivelse = "The mini-house have an area-efficient and rich floor plan. " +
+                                      "The 1st floor comprises a hall with stairs, bathroom, storage room, technical room, one bedroom, " +
+                                      "and a living room/kitchen in an open layout. The 2nd floor has a practical loft. " +
+                                      "In connection with the entrance, a decking will be built with space for garden furniture. " +
+                                      "The house comes with a sports storage room, as well as a parking space.",
+                        Street = "Torvvegen",
+                        City = "Reinsvoll",
+                        Country = "Norway",
+                        ZipCode = "2840",
+                        State = "Innlandet",
+                        Soverom = 1,
+                        Bad = 1,
+                        CreatedDateTime = DateTime.Now,
+                        Image1 = "/images/house_5_s1.jpg",
+                        Image2 = "/images/house_5_s2.jpg",
+                        Image3 = "/images/house_5_s3.jpg",
+                    },
+                    new Eiendom
+                    {
+                        ApplicationUserId = createdUsers[4].Id,
+                        PrisPerNatt = 1,
+                        Tittel = "Medium sized modern cabin",
+                        Beskrivelse = "Modern home where emphasis has been placed on quality. " +
+                                      "Turnkey homes with no index regulation or additional costs. " +
+                                      "Attractive area in Resahagen which is starting to take shape with schools, kindergarten, and sports field nearby. " +
+                                      "3 low-maintenance detached houses with a sheltered outdoor area where one can enjoy the afternoon and evening sun directly from the kitchen/living room. " +
+                                      "Practical home with 3 bedrooms, 2 living rooms, 2 bathrooms, laundry room, storage rooms. Carport with storage. " +
+                                      "Upgraded kitchen with appliances from Sigdal. Separate kitchen island. Single plank laminate throughout the home on all floors except tiles in the bathrooms, " +
+                                      "ensuring a consistent profile.",
+                        Street = "Gaupevegen",
+                        City = "Jørpeland",
+                        Country = "Norway",
+                        ZipCode = "4103",
+                        State = "Rogaland",
+                        Soverom = 3,
+                        Bad = 1,
+                        CreatedDateTime = DateTime.Now,
+                        Image1 = "/images/house_6_s1.jpg",
+                        Image2 = "/images/house_6_s2.jpg",
+                        Image3 = "/images/house_6_s3.jpg",
                     },
                 };
                 context.AddRange(eiendoms);
