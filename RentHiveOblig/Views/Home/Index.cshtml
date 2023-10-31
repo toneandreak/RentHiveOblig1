@@ -156,23 +156,15 @@
 
 
         <section id="search-section">
+             @using (Html.BeginForm("", "Eiendoms", FormMethod.Post))
+            {
 
-            
-            <form>
-                <!--Using a form for inputs-->
-                <!--Search button inspired by : https://getcssscan.com/css-buttons-examples-->
-                @using (Html.BeginForm("ViewResult", "EiendomsController", FormMethod.Get))
-                {
-                    <p>
-                        @Html.TextBox("SearchString")
-                        <input type="submit" value="Search" placeholder="Your destination" />
-                    </p>
-                }
-                
-                
+                @Html.TextBox("SearchString")
+                <input type="submit" value="Search" placeholder="Your destination" />
 
-               
-            </form>
+            }
+
+        
         </section>
 
     </header>
