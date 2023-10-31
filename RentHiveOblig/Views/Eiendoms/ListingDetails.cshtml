@@ -57,15 +57,14 @@ Information about the property, bathroom, bedrooms and etc.
         @Model.Tittel
         <small>@Model.City, @Model.Country</small>
     </h1>
+    
+    <!--Image grid-->
     <div class="image-grid">
         <img class="image-grid-col-2 image-grid-row-2" src="@Model.Image1" alt="">
         <img class="img-fluid" src="@Model.Image2" alt="">
         <img class="img-fluid" src="@Model.Image3" alt="">
     </div>
-    <!-- TEMP WILL DELETE SOON
-        <div class="col-md-5">
-            <img class="img-fluid" src="@Model.Image1" alt="">
-        </div> -->
+    <!--Description-->
     <div class="row">
         <h2 class="col-sm">Beehive description</h2>
         <p>
@@ -73,10 +72,6 @@ Information about the property, bathroom, bedrooms and etc.
         </p>
         <h2 class="col-sm">Queen Bee Description</h2>
         <h2>@Model.ApplicationUser.Firstname</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.
-            Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.
-        </p>
     </div>
 
     <div>
