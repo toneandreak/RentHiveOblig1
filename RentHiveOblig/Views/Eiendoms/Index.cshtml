@@ -10,6 +10,44 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 
+
+<style>
+
+
+    #showListings .listing {
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        margin: 10px;
+        height: 400px;
+        width: 250px;
+        float: left; /* This allows horizontal scrolling */
+    }
+
+    #showListings .listing-description {
+        font-size: 16px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+
+    #showListings .listing-price {
+        font-size: 18px;
+    }
+
+
+    #showListings .listing img {
+        height: 195px;
+        width: 225px;
+        object-fit: cover;
+    }
+
+
+
+</style>
+
+
+
 <h1>
     Properties @using (Html.BeginForm())
     {
@@ -22,63 +60,18 @@
 
 
 
+<div class="container" id="showListings">
 
 
-
-
-
-
-
-
-
-<br>
-<br>
-<table class="table">
-    <thead>
-            <tr>
-                <th>
-
-                <th>
-                        @Html.DisplayNameFor(model => model.Tittel)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.Country)
-                </th>
-                <th>
-                    @Html.ActionLink("PrisPerNatt", "Index", new { sortOrder = ViewBag.IntSortParm })
-                </th>
-                <th></th>
-            </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                    <td>
-                    <img src="@item.Image1" style="height: 100px; width: auto;" alt="image Empty" href="@Url.Content(Path)"
-                       >
-                             
-                    </td>
-                     <td>
-                         @Html.DisplayFor(modelItem => item.Tittel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PrisPerNatt)
-                    </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EiendomID">Edit</a> 
-                <a asp-action="ListingDetails" asp-route-id="@item.EiendomID">Details</a> 
-                <a asp-action="Delete" asp-route-id="@item.EiendomID">Delete</a>
-            </td>
-        </tr>
+@foreach(var item in Model)
+{
+    <div class="listing">
+        <img src="@item.Image1" alt="Listing Image">
+        <p class="listing-title">@item.Tittel</p>
+        <p class="listing-description">@item.Beskrivelse</p>
+        <p class="listing-price">@item.PrisPerNatt.ToString("# ##0") NOK</p>
+    </div>
 }
-    </tbody>
-</table>
+
+
+</div>
