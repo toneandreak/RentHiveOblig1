@@ -1,18 +1,30 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
+using RentHiveOblig.Controllers;
 using RentHiveOblig.DAL;
+using RentHiveOblig.Models;
+using SQLitePCL;
 
 namespace RentHiveOblig.Models
 {
     public class DBInit
     {
+        private readonly ApplicationDbContext _context;
+
+        public DBInit(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
         public static async Task Seed(IApplicationBuilder app)
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
             ApplicationDbContext context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())
@@ -58,13 +70,17 @@ namespace RentHiveOblig.Models
                 context.AddRange(users);
                 context.SaveChanges();
             }
+
+            var createdUsers = context.ApplicationUsers.ToList(); 
+
+
             if (!context.Eiendom.Any())
             {
                 var eiendoms = new List<Eiendom>
                 {
                     new Eiendom
                     {
-                        ApplicationUserId = "28031234-34af-44e4-9c67-4b693980e296",
+                        ApplicationUserId = createdUsers[0].Id,
                         PrisPerNatt = 1,
                         Tittel = "Cozy cabin, newly buildt near Oslo",
                         Beskrivelse = "Here lies a remarkable house of outstanding quality, " +
@@ -77,14 +93,14 @@ namespace RentHiveOblig.Models
                         State = "Oslo",
                         Soverom = 3,
                         Bad = 1,
-                        //CreatedDateTime = ,
+                        CreatedDateTime = DateTime.Now,
                         Image1 = "/images/house_1_s1",
                         Image2 = "/images/house_1_s2",
                         Image3 = "/images/house_1_s3",
                     },
                     new Eiendom
                     {
-                        ApplicationUserId = "7604fae4-da63-4dd0-ba61-dade5e9098af",
+                        ApplicationUserId = createdUsers[0].Id,
                         PrisPerNatt = 1,
                         Tittel = "Cozy modern apartment",
                         Beskrivelse = "Welcome to this property, which is nicely located and very secluded at the end of a cul-de-sac. " +
@@ -98,14 +114,14 @@ namespace RentHiveOblig.Models
                         State = "Innlandet",
                         Soverom = 3,
                         Bad = 1,
-                        //CreatedDateTime = ,
+                        CreatedDateTime = DateTime.Now,
                         Image1 = "/images/house_2_s1.jpg",
                         Image2 = "/images/house_2_s2.jpg",
                         Image3 = "/images/house_2_s3.jpg",
                     },
                     new Eiendom
                     {
-                        ApplicationUserId = "7ef206d8-f316-4903-ae4b-2938cb8ceb3c",
+                        ApplicationUserId = createdUsers[1].Id,
                         PrisPerNatt = 1,
                         Tittel = "Modern apartment near Tromsø",
                         Beskrivelse = "Here is a beautiful home that are to be built in the lovely Tromsdalen. " +
@@ -120,14 +136,14 @@ namespace RentHiveOblig.Models
                         State = "Troms og Finnmark",
                         Soverom = 4,
                         Bad = 1,
-                        //CreatedDateTime = 1,
+                        CreatedDateTime = DateTime.Now,
                         Image1 = "/images/house_3_s1.jpg",
                         Image2 = "/images/house_3_s2.jpg",
                         Image3 = "/images/house_3_s3.jpg",
                     },
                     new Eiendom
                     {
-                        ApplicationUserId = "c924d597-24d6-4715-aa78-3db9c78b28de",
+                        ApplicationUserId = createdUsers[2].Id,
                         PrisPerNatt = 1,
                         Tittel = "Cozy large sized cabin",
                         Beskrivelse = "Detached turnkey single-family homes from Nordbohus Modum, with a lifetime standard, " +
@@ -141,7 +157,7 @@ namespace RentHiveOblig.Models
                         State = "Viken",
                         Soverom = 2,
                         Bad = 1,
-                        //CreatedDateTime = 1,
+                        CreatedDateTime = DateTime.Now,
                         Image1 = "/images/house_4_s1.jpg",
                         Image2 = "/images/house_4_s2.jpg",
                         Image3 = "/images/house_4_s3.jpg",

@@ -18,6 +18,8 @@ namespace RentHiveOblig.DAL
         public DbSet<WishlistEiendom>? WishlistEiendom { get; set; }
         public DbSet<Booking>? Booking { get; set; }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
