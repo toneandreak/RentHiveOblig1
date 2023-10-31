@@ -178,6 +178,7 @@ namespace RentHiveOblig.Controllers
 
         // CODE (IMAGE UPLOAD) INSPIRED FROM https://www.codaffection.com/asp-net-core-article/asp-net-core-mvc-image-upload-and-retrieve/
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadImage(IFormFile? file1, IFormFile? file2, IFormFile? file3, int EiendomID)

@@ -8,6 +8,8 @@ namespace RentHiveOblig.ViewModels
 
         public IEnumerable<Booking> ApprovedBookings { get; set; }
 
+        public IEnumerable<Booking> EarlierBookings { get; set; }
+
         public IEnumerable<Eiendom> Eiendoms { get; set; }
     }
 }

@@ -122,7 +122,7 @@ namespace RentHiveOblig.Controllers
                 Eiendom = eiendom,
             };
 
-            //For some reason, the ApplicationUser is invalid in Modelstate, so I had to remove it from the modelState, however I am doing the control manually. 
+            //For some reason, the ApplicationUser is invalid in Modelstate, so I had to remove it from the modelState.
             //https://www.appsloveworld.com/entity-framework/100/61/modelstate-errors-for-all-navigation-properties?expand_article=1
             ModelState.Remove("Booking.ApplicationUser");
             ModelState.Remove("Booking.Eiendom");
@@ -192,13 +192,116 @@ namespace RentHiveOblig.Controllers
                 _logger.LogInformation("Booking created");
                 return RedirectToAction("SuccessPage"); // Temporarily, need to change to redirect somewhere else.
             }
-            else
-            {
- }
-
                 return View("BookingRequest", viewModel); // Something went wrong
             }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AcceptBooking(int bookingId)
+        {
+            _logger.LogInformation($"Attempting to accept booking with id {bookingId}.");
+
+            //Finding the booking related to the id.
+            var booking = await _context.Booking.FindAsync(bookingId); 
+
+
+            if(booking == null)
+            {
+                _logger.LogError($"Booking with ID {bookingId} was not found."); 
+                return NotFound("The booking was not found.");
+            }
+
+            var eiendom = await _context.Eiendom.FindAsync(booking.EiendomId);
+            _logger.LogInformation($"Found eiendomId {eiendom.EiendomID}"); 
+
+            if(eiendom == null)
+            {
+                _logger.LogError($"EiendomID with ID {eiendom.EiendomID} is null"); 
+            }
+
+            //Extra control to prevent other users to accept booking on other's behalf. 
+            var userId = _userManager.GetUserId(User);
+
+            if (userId == null || userId != eiendom.ApplicationUserId)
+            {
+                _logger.LogError($"Not-Authorized user tried to Accept Booking ID {bookingId}. The user was: {userId}. The user for the listing is: {eiendom.ApplicationUserId}");
+                return Forbid();
+            }
+
+            //Updating the bookingStatus
+            _logger.LogInformation("Attempting to update the BookingStatus"); 
+            try
+            {
+                booking.BookingStatus = BookingStatus.Accepted;
+                _context.Booking.Update(booking);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation($"Bookingstatus changed to {booking.BookingStatus}."); 
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Updating the bookinstatus failed. The booking status is {booking.BookingStatus}");
+                return RedirectToAction("Index", "Hosting");
+            }
+
+            //Redirecting back to the hosting dashboard
+            return RedirectToAction("Index", "Hosting"); 
         }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeclineBooking(int bookingId)
+        {
+            _logger.LogInformation($"Attempting to decline booking with id {bookingId}.");
+
+            //Finding the booking related to the id.
+            var booking = await _context.Booking.FindAsync(bookingId);
+
+
+            if (booking == null)
+            {
+                _logger.LogError($"Booking with ID {bookingId} was not found.");
+                return NotFound("The booking was not found.");
+            }
+
+            var eiendom = await _context.Eiendom.FindAsync(booking.EiendomId);
+            _logger.LogInformation($"Found eiendomId {eiendom.EiendomID}");
+
+            if (eiendom == null)
+            {
+                _logger.LogError($"EiendomID with ID {eiendom.EiendomID} is null");
+            }
+
+            //Extra control to prevent other users to accept booking on other's behalf. 
+            var userId = _userManager.GetUserId(User);
+
+            if (userId == null || userId != eiendom.ApplicationUserId)
+            {
+                _logger.LogError($"Not-Authorized user tried to Decline Booking ID {bookingId}. The user was: {userId}. The user for the listing is: {eiendom.ApplicationUserId}");
+                return Forbid();
+            }
+
+            //Updating the bookingStatus
+            _logger.LogInformation("Attempting to update the BookingStatus");
+            try
+            {
+                booking.BookingStatus = BookingStatus.Declined;
+                _context.Booking.Update(booking);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation($"Bookingstatus changed to {booking.BookingStatus}.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Updating the bookinstatus failed. The booking status is {booking.BookingStatus}");
+                return RedirectToAction("Index", "Hosting");
+            }
+
+            //Redirecting back to the hosting dashboard
+            return RedirectToAction("Index", "Hosting");
+        }
+
+    }
 
     }
 

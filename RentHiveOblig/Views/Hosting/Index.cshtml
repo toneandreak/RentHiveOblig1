@@ -81,8 +81,8 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Booking ID</th>
-                <th>Property ID</th>
+                <th>Guest</th>
+                <th>Listing</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Total Price</th>
@@ -93,14 +93,23 @@
             @foreach (var booking in Model.PendingBookings)
             {
                 <tr>
-                    <td>@booking.BookingId</td>
-                    <td>@booking.EiendomId</td>
-                    <td>@booking.StartDate</td>
-                    <td>@booking.EndDate</td>
+                    <td>@booking.ApplicationUser.Firstname @booking.ApplicationUser.Lastname</td>
+                    <td>@booking.Eiendom.Tittel</td>
+                    <td>@booking.StartDate.ToShortDateString()</td>
+                    <td>@booking.EndDate.Date.ToShortDateString()</td>
                     <td>@booking.TotalPrice</td>
                     <td>
-                        <button class="btn btn-primary">Accept</button>
-                        <button class="btn btn-danger">Decline</button>
+
+                        <form method="post" asp-action="AcceptBooking" asp-controller="Bookings">
+                            <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                            <button type="submit" class="btn btn-primary">Accept</button>
+                        </form>
+
+                        <form method="post" asp-action="DeclineBooking" asp-controller="Bookings">
+                            <input type="hidden" name="bookingId" value="@booking.BookingId" />
+                            <button type="submit" class="btn btn-danger">Decline</button>
+                        </form>
+
                     </td>
                 </tr>
             }
@@ -117,8 +126,8 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Booking ID</th>
-                <th>Property ID</th>
+                <th>Guest</th>
+                <th>Listing</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Total Price</th>
@@ -128,10 +137,40 @@
             @foreach (var booking in Model.ApprovedBookings)
             {
                 <tr>
-                    <td>@booking.BookingId</td>
-                    <td>@booking.EiendomId</td>
-                    <td>@booking.StartDate</td>
-                    <td>@booking.EndDate</td>
+                    <td>@booking.ApplicationUser.Firstname @booking.ApplicationUser.Lastname</td>
+                    <td>@booking.Eiendom.Tittel</td>
+                    <td>@booking.StartDate.ToShortDateString()</td>
+                    <td>@booking.EndDate.ToShortDateString()</td>
+                    <td>@booking.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<!--Show earlier reservations, approved but endDate has past-->
+
+<div id="earlierRes" class="shadow p-3 mb-5 bg-white rounded">
+    <h2>Past Reservations:</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Guest</th>
+                <th>Listing</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.EarlierBookings)
+            {
+                <tr>
+                    <td>@booking.ApplicationUser.Firstname @booking.ApplicationUser.Lastname</td>
+                    <td>@booking.Eiendom.Tittel</td>
+                    <td>@booking.StartDate.ToShortDateString()</td>
+                    <td>@booking.EndDate.ToShortDateString()</td>
                     <td>@booking.TotalPrice</td>
                 </tr>
             }
