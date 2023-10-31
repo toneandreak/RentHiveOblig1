@@ -5,9 +5,21 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Hosting" asp-action="index" title="Hosting">Switch to Host</a>
-    </li>
+        //Inspired from: https://stackoverflow.com/questions/2111748/how-can-i-tell-what-page-i-am-on-in-a-asp-net-mvc-application to see which page/controller user is in. 
+        string currentController = null;
+
+        if (ViewContext.RouteData.Values.ContainsKey("controller"))
+        {
+            currentController = ViewContext.RouteData.Values["controller"].ToString();
+        }
+
+        if (currentController == null || !currentController.Equals("Hosting"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Hosting" asp-action="index" title="Hosting">Switch to Host</a>
+            </li>
+        }
+
 
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>

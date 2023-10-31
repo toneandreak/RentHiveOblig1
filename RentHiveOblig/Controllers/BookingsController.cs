@@ -240,7 +240,7 @@ namespace RentHiveOblig.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Updating the bookinstatus failed. The booking status is {booking.BookingStatus}");
+                _logger.LogError(ex, $"Updating the bookinstatus failed. The booking status is {booking.BookingStatus}");
                 return RedirectToAction("Index", "Hosting");
             }
 
@@ -293,7 +293,7 @@ namespace RentHiveOblig.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Updating the bookinstatus failed. The booking status is {booking.BookingStatus}");
+                _logger.LogError(ex, $"Updating the bookinstatus failed. The booking status is {booking.BookingStatus}");
                 return RedirectToAction("Index", "Hosting");
             }
 
