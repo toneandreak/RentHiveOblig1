@@ -471,6 +471,15 @@ namespace RentHiveOblig.Controllers
                 return Forbid();
             }
 
+            var checkEiendom = await _context.Eiendom.Include(l => l.Bookings).FirstOrDefaultAsync(l => l.EiendomID == id);
+
+
+            //If the eiendom has a booking it should not possible to delete.
+            if (checkEiendom.Bookings.Any())
+            {
+                return View("ListingHasBookingsError");
+            }
+
 
             if (eiendom != null)
             {
@@ -478,8 +487,10 @@ namespace RentHiveOblig.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("index", "hosting");
         }
+
+
 
         private bool EiendomExists(int id)
         {
