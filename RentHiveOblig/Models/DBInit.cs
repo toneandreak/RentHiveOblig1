@@ -24,7 +24,7 @@ namespace RentHiveOblig.Models
             ApplicationDbContext context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())
@@ -63,7 +63,7 @@ namespace RentHiveOblig.Models
 
                 foreach (var user in users)
                 {
-                    await userManager.CreateAsync(user, "Ann-123");
+                    await userManager.CreateAsync(user, "Admin@123456");
 
                 }
 
