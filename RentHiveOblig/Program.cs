@@ -100,6 +100,9 @@ e.MessageTemplate.Text.Contains("Executed DbCommand"));
 
 var app = builder.Build();
 
+// DB seeding
+DBInit.Seed(app);
+
 app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
@@ -126,5 +129,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
 
 app.Run();

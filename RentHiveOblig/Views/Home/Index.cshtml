@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Eiendom>
+
+@{
     ViewData["UseCustomHeader"] = true;
     ViewData["Title"] = "Home Page";
 }
@@ -13,21 +15,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<!-----
-
-                        OLD CODE - GETS REMOVED VERY SOON.
-
-
-<div id="carouselImages" class="carousel slide mainCarousel" data-bs-ride="true" style="">
-    <div class="carousel-inner mainCarousel">
-        <div class="carousel-item active mainCarouselImage">
-            <img src="~/images/house_2_s1.jpg" class="d-block w-100" alt="Fried Chicken Leg" style="height:100%;">
-        </div>
-    </div>
-</div>
-
------>
-<!----- This CSS is outside the stylesheet for a reason ---->
 
 <style>
     body {
@@ -177,78 +164,18 @@
     --->
 
     <section id="featured-listings">
-        <!--NEED TO ADD FOR LOOP HERE!-->
-        <!--THIS IS JUST FOR TEST--->
-        <!-----NEED TO IMPLEMENT HOW MANY LISTINGS TO SHOW PER VIEWPORT.----->
 
-        <div class="listing">
-            <img src="~/images/house_1_s1.jpg" alt="Listing Image">
-            <p class="listing-description">Short title Lorum Ipsum Short title Lorum IpsumShort title Lorum IpsumShort title Lorum Ipsum</p>
-            <p class="listing-price">$100/night</p>
-            <p class="listing-rating">⭐⭐</p>
-        </div>
-
-        <div class="listing">
-            <img src="~/images/house_2_s1.jpg" alt="Listing Image">
-            <p class="listing-description">Short title Lorum Ipsume</p>
-            <p class="listing-price">$100/night</p>
-            <p class="listing-rating">⭐⭐⭐</p>
-        </div>
-
-        <div class="listing">
-            <img src="~/images/house_4_s1.jpg" alt="Listing Image">
-            <p class="listing-description">Short title Lorum Ipsum</p>
-            <p class="listing-price">$100/night</p>
-            <p class="listing-rating">⭐⭐⭐⭐</p>
-        </div>
-
-        <div class="listing">
-            <img src="~/images/house_5_s1.jpg" alt="Listing Image">
-            <p class="listing-description">Short title Lorum Ipsum</p>
-            <p class="listing-price">$100/night</p>
-            <p class="listing-rating">⭐⭐⭐⭐</p>
-        </div>
+        @foreach (var item in Model)
+        {
+            <div class="listing">
+                <img src="@item.Image1" alt="Listing Image">
+                <p class="listing-title">@item.Tittel</p>
+                <p class="listing-description">@item.Beskrivelse</p>
+                <p class="listing-price">@item.PrisPerNatt.ToString("# ##0") NOK</p>
+            </div>
+        }
 
     </section>
 
 </div>
 
-
-
-<!----
-
-                            THE OLD CODE. Gets removed very soon.
-
-
-
-
-<div id="carouselImages" class="carousel slide listingCarousel" data-bs-ride="true" style="">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item listingImage">
-            <img src="~/images/house_1_s1.jpg" class="d-block w-100" alt="Pizza">
-        </div>
-        <div class="carousel-item active listingImage">
-            <img src="~/images/house_2_s1.jpg" class="d-block w-100" alt="Fried Chicken Leg">
-        </div>
-        <div class="carousel-item listingImage">
-            <img src="~/images/house_3_s1.jpg" class="d-block w-100" alt="Tacos">
-        </div>
-    </div>
-</div>
-
------>
-<!--Div classes for "Bee animation" using css-->
-<!--------
-
-<div class="bee-container">
-    <div class="bee">
-    <div class="shine">
-    </div>
-    </div>
-</div>
---->
