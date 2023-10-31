@@ -9,40 +9,35 @@ namespace RentHiveOblig.Models
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
             ApplicationDbContext context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())
             {
-                var users = new List<User>
+                var users = new List<ApplicationUser>
                 {
-                    new User
+                    new ApplicationUser
                     {
                         Firstname = "Pål",
                         Lastname = "Mikkelson",
                         Email = "Pål@oslomet.no",
-                        Password = "Ann-123",
                     },
-                    new User
+                    new ApplicationUser
                     {
                         Firstname = "Andreas",
                         Lastname = "Anderson",
                         Email = "Andreas@oslomet.no",
-                        Password = "Ann-123",
                     },
-                    new User
+                    new ApplicationUser
                     {
                         Firstname = "Linea",
                         Lastname = "Mørk",
                         Email = "Linea@oslomet.no",
-                        Password = "Ann-123",
                     },
-                    new User
+                    new ApplicationUser
                     {
                         Firstname = "Lars",
                         Lastname = "Petterson",
                         Email = "Lars@oslomet.no",
-                        Password = "Ann-123",
                     },
                 };
                 context.AddRange(users);
@@ -54,8 +49,7 @@ namespace RentHiveOblig.Models
                 {
                     new Eiendom
                     {
-                        EiendomID = 1,
-                        ApplicationUserId = "",
+                        ApplicationUserId = "28031234-34af-44e4-9c67-4b693980e296",
                         PrisPerNatt = 1,
                         Tittel = "Cozy cabin, newly buildt near Oslo",
                         Beskrivelse = "Here lies a remarkable house of outstanding quality, " +
@@ -75,8 +69,7 @@ namespace RentHiveOblig.Models
                     },
                     new Eiendom
                     {
-                        EiendomID = 2,
-                        ApplicationUserId = "",
+                        ApplicationUserId = "7604fae4-da63-4dd0-ba61-dade5e9098af",
                         PrisPerNatt = 1,
                         Tittel = "Cozy modern apartment",
                         Beskrivelse = "Welcome to this property, which is nicely located and very secluded at the end of a cul-de-sac. " +
@@ -97,8 +90,7 @@ namespace RentHiveOblig.Models
                     },
                     new Eiendom
                     {
-                        EiendomID = 3,
-                        ApplicationUserId = "",
+                        ApplicationUserId = "7ef206d8-f316-4903-ae4b-2938cb8ceb3c",
                         PrisPerNatt = 1,
                         Tittel = "Modern apartment near Tromsø",
                         Beskrivelse = "Here is a beautiful home that are to be built in the lovely Tromsdalen. " +
@@ -120,8 +112,7 @@ namespace RentHiveOblig.Models
                     },
                     new Eiendom
                     {
-                        EiendomID = 4,
-                        ApplicationUserId = "",
+                        ApplicationUserId = "c924d597-24d6-4715-aa78-3db9c78b28de",
                         PrisPerNatt = 1,
                         Tittel = "Cozy large sized cabin",
                         Beskrivelse = "Detached turnkey single-family homes from Nordbohus Modum, with a lifetime standard, " +

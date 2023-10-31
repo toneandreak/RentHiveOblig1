@@ -100,6 +100,9 @@ e.MessageTemplate.Text.Contains("Executed DbCommand"));
 
 var app = builder.Build();
 
+// DB seeding
+DBInit.Seed(app);
+
 app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
