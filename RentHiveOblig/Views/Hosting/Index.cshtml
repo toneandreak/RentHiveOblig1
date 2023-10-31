@@ -53,8 +53,8 @@
 
 
                     <!--Buttons to edit/delete the listing-->
-                    <td><a asp-action="Edit" asp-controller="Eiendoms" asp-route-id="@item.EiendomID">Edit</a></td>
-                    <td><a asp-action="Delete" asp-controller="Eiendoms" asp-route-id="@item.EiendomID">Delete</a></td>
+                    <td><a asp-action="Edit" asp-controller="Eiendoms" asp-route-id="@item.EiendomID" class="btn btn-secondary">Edit</a></td>
+                    <td><a asp-action="Delete" asp-controller="Eiendoms" asp-route-id="@item.EiendomID" class="btn btn-danger">Delete</a></td>
 
                 </tr>
             }
@@ -97,7 +97,7 @@
                     <td>@booking.Eiendom.Tittel</td>
                     <td>@booking.StartDate.ToShortDateString()</td>
                     <td>@booking.EndDate.Date.ToShortDateString()</td>
-                    <td>@booking.TotalPrice</td>
+                    <td>@booking.TotalPrice.ToString("# ##0")</td>
                     <td>
 
                         <form method="post" asp-action="AcceptBooking" asp-controller="Bookings">
@@ -141,7 +141,7 @@
                     <td>@booking.Eiendom.Tittel</td>
                     <td>@booking.StartDate.ToShortDateString()</td>
                     <td>@booking.EndDate.ToShortDateString()</td>
-                    <td>@booking.TotalPrice</td>
+                    <td>@booking.TotalPrice.ToString("# ##0")</td>
                 </tr>
             }
         </tbody>
@@ -171,7 +171,7 @@
                     <td>@booking.Eiendom.Tittel</td>
                     <td>@booking.StartDate.ToShortDateString()</td>
                     <td>@booking.EndDate.ToShortDateString()</td>
-                    <td>@booking.TotalPrice</td>
+                    <td>@booking.TotalPrice.ToString("# ##0")</td>
                 </tr>
             }
         </tbody>
