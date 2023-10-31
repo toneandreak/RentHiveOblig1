@@ -10,7 +10,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 
-<h1>Properties</h1>
+<h1>
+    Properties @using (Html.BeginForm())
+    {
+        
+            @Html.TextBox("SearchString")
+            <input type="submit" value="Search" placeholder="Your destination" />
+        
+    }
+</h1>
 
 
 <p>
@@ -20,13 +28,7 @@
     
 </p>
 
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.TextBox("SearchString")
-        <input type="submit" value="Search" placeholder="Your destination" />
-    </p>
-}
+
 
 
 
