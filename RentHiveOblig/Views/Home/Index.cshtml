@@ -164,17 +164,22 @@
     --->
 
     <section id="featured-listings">
-
-        @foreach (var item in Model)
+        @if (Model != null && Model.Any())
         {
-            <div class="listing">
-                <img src="@item.Image1" alt="Listing Image">
-                <p class="listing-title">@item.Tittel</p>
-                <p class="listing-description">@item.Beskrivelse</p>
-                <p class="listing-price">@item.PrisPerNatt.ToString("# ##0") NOK</p>
-            </div>
+            @foreach (var item in Model)
+            {
+                <div class="listing">
+                    <img src="@item.Image1" alt="Listing Image">
+                    <p class="listing-title">@item.Tittel</p>
+                    <p class="listing-description">@item.Beskrivelse</p>
+                    <p class="listing-price">@item.PrisPerNatt.ToString("# ##0") NOK</p>
+                </div>
+            }
         }
-
+        else
+        {
+            <h2 style="margin-top: 5%;">No items available for carousel.</h2>
+        }
     </section>
 
 </div>
