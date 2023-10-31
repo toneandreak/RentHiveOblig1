@@ -173,6 +173,7 @@
                     <p class="listing-title">@item.Tittel</p>
                     <p class="listing-description">@item.Beskrivelse</p>
                     <p class="listing-price">@item.PrisPerNatt.ToString("# ##0") NOK</p>
+                    <a asp-action="listingDetails" asp-controller="Eiendoms" asp-route-id="@item.EiendomID"> More</a>
                 </div>
             }
         }
