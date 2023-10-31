@@ -190,7 +190,7 @@ namespace RentHiveOblig.Controllers
                 }
 
                 _logger.LogInformation("Booking created");
-                return RedirectToAction("SuccessPage"); // Temporarily, need to change to redirect somewhere else.
+                return RedirectToAction("BookingCreated"); // Temporarily, need to change to redirect somewhere else.
             }
                 return View("BookingRequest", viewModel); // Something went wrong
             }

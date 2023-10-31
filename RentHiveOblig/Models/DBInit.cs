@@ -1,14 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.EntityFrameworkCore;
 using RentHiveOblig.DAL;
 
 namespace RentHiveOblig.Models
 {
     public class DBInit
     {
-        public static void Seed(IApplicationBuilder app)
+        public static async Task Seed(IApplicationBuilder app)
         {
             using var serviceScope = app.ApplicationServices.CreateScope();
             ApplicationDbContext context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())
@@ -17,29 +21,40 @@ namespace RentHiveOblig.Models
                 {
                     new ApplicationUser
                     {
+                        UserName = "Pål@oslomet.no",
                         Firstname = "Pål",
                         Lastname = "Mikkelson",
                         Email = "Pål@oslomet.no",
                     },
                     new ApplicationUser
                     {
+                        UserName = "Andreas@oslomet.no",
                         Firstname = "Andreas",
                         Lastname = "Anderson",
                         Email = "Andreas@oslomet.no",
                     },
                     new ApplicationUser
                     {
+                        UserName = "Linea@oslomet.no",
                         Firstname = "Linea",
                         Lastname = "Mørk",
                         Email = "Linea@oslomet.no",
                     },
                     new ApplicationUser
                     {
+                        UserName = "Lars@oslomet.no",
                         Firstname = "Lars",
                         Lastname = "Petterson",
                         Email = "Lars@oslomet.no",
                     },
                 };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Ann-123");
+
+                }
+
                 context.AddRange(users);
                 context.SaveChanges();
             }
