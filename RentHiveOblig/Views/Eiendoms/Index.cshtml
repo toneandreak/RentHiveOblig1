@@ -23,7 +23,7 @@
 
 <p>
     <form>
-        <button asp-controller="Category" asp-action="Create" type="submit" class="button-search">Create</button>
+        <button asp-controller="Category" asp-action="Create" type="submit" class="btn btn-dark">Create</button>
     </form>
     
 </p>
@@ -81,7 +81,7 @@
                     </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EiendomID">Edit</a> 
-                <a asp-action="Details" asp-route-id="@item.EiendomID">Details</a> 
+                <a asp-action="ListingDetails" asp-route-id="@item.EiendomID">Details</a> 
                 <a asp-action="Delete" asp-route-id="@item.EiendomID">Delete</a>
             </td>
         </tr>
