@@ -98,9 +98,10 @@ loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceCont
 e.Level == LogEventLevel.Information &&
 e.MessageTemplate.Text.Contains("Executed DbCommand"));
 
-var app = builder.Build(); 
+var app = builder.Build();
 
-
+// DB seeding
+DBInit.Seed(app);
 
 app.UseStaticFiles();
 
